@@ -1,17 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ORFpred - © Damian Bolwerk, Jonathan Feenstra, Fini De Gruyter, Lotte Houwen 
+ * & Alex Janse.
+ * Functie: Open Reading Frames voorspellen in DNA sequenties.
+ * 
  */
 package orfpred;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import org.biojava.nbio.core.sequence.DNASequence;
 
 /**
  *
@@ -242,15 +235,7 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-        try {
-            File fasta = FileHandler.selectFile();
-            LinkedHashMap<String, DNASequence> data = FileHandler.getData(fasta);
-            headerComboBox.setModel(new DefaultComboBoxModel(data.keySet().toArray()));
-            headerComboBox.setEnabled(true);
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "FileNotFoundException", JOptionPane.ERROR_MESSAGE);
-        }
-        
+        FileHandler.loadFile(headerComboBox);
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
