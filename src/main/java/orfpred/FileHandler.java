@@ -1,8 +1,8 @@
 /*
  * ORFpred - © Damian Bolwerk, Jonathan Feenstra, Fini De Gruyter, Lotte Houwen 
- * & Alex Janse.
+ * & Alex Janse 2018.
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
- * 
+ * Release datum: 28 maart 2018
  */
 package orfpred;
 
@@ -10,7 +10,6 @@ import javax.swing.JFileChooser;
 import java.io.*;
 import java.util.LinkedHashMap;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.biojava.nbio.core.sequence.DNASequence;
@@ -66,15 +65,16 @@ public class FileHandler {
     
     /**
      * Procedure om FASTA-bestanden in te laden.
-     * 
-     * @param headerComboBox 
+     *
+     * @param gui
      */
-    public static void loadFile(JComboBox headerComboBox) {
+    public static void loadFile(GUI gui) {
         try {
             File fasta = FileHandler.selectFile();
             LinkedHashMap<String, DNASequence> data = FileHandler.getData(fasta);
-            headerComboBox.setModel(new DefaultComboBoxModel(data.keySet().toArray()));
-            headerComboBox.setEnabled(true);
+            gui.getHeaderComboBox().setModel(new DefaultComboBoxModel(data.keySet().toArray()));
+            gui.getHeaderComboBox().setEnabled(true);
+            gui.getZoekButton().setEnabled(true);         
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
         }
