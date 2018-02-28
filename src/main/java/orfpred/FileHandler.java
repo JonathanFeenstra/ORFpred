@@ -1,6 +1,6 @@
 /*
- * ORFpred - © Damian Bolwerk, Jonathan Feenstra, Fini De Gruyter, Lotte Houwen 
- * & Alex Janse 2018.
+ * ORFpred - © Projectgroep 10: Damian Bolwerk, Jonathan Feenstra, 
+ * Fini De Gruyter, Lotte Houwen & Alex Janse 2018.
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
@@ -16,10 +16,9 @@ import org.biojava.nbio.core.sequence.DNASequence;
 import org.biojava.nbio.core.sequence.io.FastaReaderHelper;
 
 /**
- *
+ * Class voor het beheren van bestanden.
  * 
- * @author Damian Bolwerk, Jonathan Feenstra, Fini De Gruyter, Lotte Houwen 
- * & Alex Janse
+ * @author Projectgroep 10
  * @since JDK 1.8
  * @version 1.0
  */
@@ -33,7 +32,7 @@ public class FileHandler {
      */
     public static File selectFile() throws FileNotFoundException {
         JFileChooser chooser = new JFileChooser();
-        chooser.setFileFilter(new FileNameExtensionFilter("FASTA file", "fasta", "fa"));
+        chooser.setFileFilter(new FileNameExtensionFilter("FASTA file", "fasta", "fna", "ffn", "fa"));
         int returnVal = chooser.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             if (chooser.getSelectedFile().exists()) {
@@ -54,6 +53,7 @@ public class FileHandler {
      * als values of null bij exceptions
      */
     public static LinkedHashMap<String, DNASequence> getData(File fasta) {
+        // TODO: Andere bestandsformaten inlezen.
         try {
             if (fasta != null)
                 return FastaReaderHelper.readFastaDNASequence(fasta);
@@ -64,7 +64,7 @@ public class FileHandler {
     }
     
     /**
-     * Procedure om FASTA-bestanden in te laden.
+     * Procedure om bestanden in te laden.
      *
      * @param gui
      */
@@ -74,7 +74,8 @@ public class FileHandler {
             LinkedHashMap<String, DNASequence> data = FileHandler.getData(fasta);
             gui.getHeaderComboBox().setModel(new DefaultComboBoxModel(data.keySet().toArray()));
             gui.getHeaderComboBox().setEnabled(true);
-            gui.getZoekButton().setEnabled(true);         
+            gui.getZoekButton().setEnabled(true);
+            gui.getSeqEditorPane().setText(data.entrySet().iterator().next().getValue().toString());
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
         }

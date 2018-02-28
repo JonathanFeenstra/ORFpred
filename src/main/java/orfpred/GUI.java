@@ -1,6 +1,6 @@
 /*
- * ORFpred - © Damian Bolwerk, Jonathan Feenstra, Fini De Gruyter, Lotte Houwen 
- * & Alex Janse 2018.
+ * ORFpred - © Projectgroep 10: Damian Bolwerk, Jonathan Feenstra, 
+ * Fini De Gruyter, Lotte Houwen & Alex Janse 2018.
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
@@ -11,9 +11,9 @@ import java.awt.event.*;
 import javax.swing.*;
 
 /**
+ * GUI class met actionlistener voor de aanroep van methoden.
  *
- * @author Damian Bolwerk, Jonathan Feenstra, Fini De Gruyter, Lotte Houwen &
- * Alex Janse.
+ * @author Projectgroep 10
  * @since JDK 1.8
  * @version 1.0
  */
@@ -33,6 +33,7 @@ public class GUI extends JFrame implements ActionListener {
     private JButton zoekButton;
     private JLabel headerLabel, seqLabel, blastLabel;
     private JScrollPane seqScrollPane, blastScrollPane;
+    private JEditorPane seqEditorPane;
     private final Font LABEL_FONT = new Font("Arial", Font.BOLD, 12);
 
     /**
@@ -44,7 +45,7 @@ public class GUI extends JFrame implements ActionListener {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
-            ex.printStackTrace();
+            ex.printStackTrace(); // TODO: Adequate exception handling
         }
 
         GUI frame = new GUI();
@@ -67,6 +68,7 @@ public class GUI extends JFrame implements ActionListener {
 
         menuBar = new JMenuBar();
 
+        //<editor-fold defaultstate="collapsed" desc="Bestandmenu aanmaken">
         bestandMenu = new JMenu("Bestand");
         openMenuItem = new JMenuItem("Open...", new ImageIcon(getClass().getResource("/open.png")));
         openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
@@ -83,7 +85,9 @@ public class GUI extends JFrame implements ActionListener {
         bestandMenu.add(dbSaveMenuItem);
         bestandMenu.add(bestandMenuSeparator);
         bestandMenu.add(exitMenuItem);
+        //</editor-fold>
 
+        //<editor-fold defaultstate="collapsed" desc="Weergave menu aanmaken">
         weergaveMenu = new JMenu("Weergave");
         seqMenu = new JMenu("Type sequentie...");
         eiwitMenuItem = new JRadioButtonMenuItem("Eiwit", true);
@@ -100,7 +104,9 @@ public class GUI extends JFrame implements ActionListener {
 
         weergaveMenu.add(seqMenu);
         weergaveMenu.add(highlightMenuItem);
+        //</editor-fold>
 
+        //<editor-fold defaultstate="collapsed" desc="Toolsmenu aanmaken">
         toolsMenu = new JMenu("Tools");
         blastMenuItem = new JMenuItem("BLAST hele sequentie", new ImageIcon(getClass().getResource("/blast.png")));
         blastMenuItem.addActionListener(this);
@@ -109,6 +115,7 @@ public class GUI extends JFrame implements ActionListener {
 
         toolsMenu.add(blastMenuItem);
         toolsMenu.add(orfLengteMenuItem);
+//</editor-fold>
 
         menuBar.add(bestandMenu);
         menuBar.add(weergaveMenu);
@@ -123,6 +130,7 @@ public class GUI extends JFrame implements ActionListener {
         mainPanelLayout = new GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
 
+        //<editor-fold defaultstate="collapsed" desc="Mainpanel componenten aanmaken">
         seqLabel = new JLabel("Sequentie");
         seqLabel.setFont(LABEL_FONT);
         headerComboBox = new JComboBox();
@@ -131,11 +139,17 @@ public class GUI extends JFrame implements ActionListener {
         zoekButton = new JButton("Voorspel ORF's", new ImageIcon(getClass().getResource("/search.png")));
         zoekButton.setEnabled(false);
         zoekButton.addActionListener(this);
-        seqScrollPane = new JScrollPane();
+
+        seqEditorPane = new JEditorPane();
+        seqEditorPane.setEditable(false);
+        seqScrollPane = new JScrollPane(seqEditorPane);
+
         blastLabel = new JLabel("BLAST resultaten");
         blastLabel.setFont(LABEL_FONT);
         blastScrollPane = new JScrollPane();
+        //</editor-fold>
 
+        //<editor-fold defaultstate="collapsed" desc="Layout, overgenomen uit GUI builder">
         mainPanelLayout.setHorizontalGroup(
                 mainPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
@@ -170,6 +184,7 @@ public class GUI extends JFrame implements ActionListener {
                                 .addComponent(blastScrollPane, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        //</editor-fold>
 
         window.add(mainPanel);
     }
@@ -187,11 +202,12 @@ public class GUI extends JFrame implements ActionListener {
         } else if (evt.getSource() == dnaMenuItem) {
             // TODO: Zet sequentiemodus op DNA
         } else if (evt.getSource() == highlightMenuItem) {
-            // TODO: Open colorchooser om highlightkleur te selecteren
+            // TODO: Sla de gekozen highlightkleur op en zorg dat deze wordt gebruikt
+            JColorChooser.showDialog(null, "Highlight kleur", Color.CYAN);
         } else if (evt.getSource() == blastMenuItem) {
             // TODO: Toon pop-up met BLAST settings
         } else if (evt.getSource() == orfLengteMenuItem) {
-            // TODO: Toon pop-up waar ORF lengte kan worden ingesteld
+            // TODO: Toon pop-up waar ORF lengte kan worden ingesteld https://stackoverflow.com/questions/11093326/restricting-jtextfield-input-to-integers#11093360
         } else if (evt.getSource() == zoekButton) {
             // TODO: Zoek en highlight ORF's in sequentie
         }
@@ -209,5 +225,12 @@ public class GUI extends JFrame implements ActionListener {
      */
     public JButton getZoekButton() {
         return zoekButton;
+    }
+
+    /**
+     * @return seqEditorPane
+     */
+    public JEditorPane getSeqEditorPane() {
+        return seqEditorPane;
     }
 }
