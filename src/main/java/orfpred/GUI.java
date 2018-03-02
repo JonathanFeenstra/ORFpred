@@ -49,7 +49,7 @@ public class GUI extends JFrame implements ActionListener {
         }
 
         GUI frame = new GUI();
-        frame.setSize(720, 490);
+        frame.setSize(720, 505);
         frame.setResizable(false);
         frame.setTitle("ORFpred - Open Reading Frame predictie tool");
         frame.createGUI();
@@ -115,7 +115,7 @@ public class GUI extends JFrame implements ActionListener {
 
         toolsMenu.add(blastMenuItem);
         toolsMenu.add(orfLengteMenuItem);
-//</editor-fold>
+        //</editor-fold>
 
         menuBar.add(bestandMenu);
         menuBar.add(weergaveMenu);
@@ -143,6 +143,7 @@ public class GUI extends JFrame implements ActionListener {
         seqEditorPane = new JEditorPane();
         seqEditorPane.setEditable(false);
         seqScrollPane = new JScrollPane(seqEditorPane);
+        seqScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         blastLabel = new JLabel("BLAST resultaten");
         blastLabel.setFont(LABEL_FONT);
@@ -202,8 +203,7 @@ public class GUI extends JFrame implements ActionListener {
         } else if (evt.getSource() == dnaMenuItem) {
             // TODO: Zet sequentiemodus op DNA
         } else if (evt.getSource() == highlightMenuItem) {
-            // TODO: Sla de gekozen highlightkleur op en zorg dat deze wordt gebruikt
-            JColorChooser.showDialog(null, "Highlight kleur", Color.CYAN);
+            ORFHighlighter.setHighlightKleur(JColorChooser.showDialog(null, "Highlight kleur", ORFHighlighter.getHighlightKleur()));
         } else if (evt.getSource() == blastMenuItem) {
             // TODO: Toon pop-up met BLAST settings
         } else if (evt.getSource() == orfLengteMenuItem) {

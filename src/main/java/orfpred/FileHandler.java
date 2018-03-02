@@ -66,7 +66,7 @@ public class FileHandler {
     /**
      * Procedure om bestanden in te laden.
      *
-     * @param gui
+     * @param gui de betreffende GUI
      */
     public static void loadFile(GUI gui) {
         try {
@@ -75,7 +75,7 @@ public class FileHandler {
             gui.getHeaderComboBox().setModel(new DefaultComboBoxModel(data.keySet().toArray()));
             gui.getHeaderComboBox().setEnabled(true);
             gui.getZoekButton().setEnabled(true);
-            gui.getSeqEditorPane().setText(data.entrySet().iterator().next().getValue().toString());
+            gui.getSeqEditorPane().setText(data.entrySet().iterator().next().getValue().toString().toUpperCase());
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
         }
