@@ -6,63 +6,55 @@
  */
 package orfpred;
 
-import javax.swing.JFileChooser;
+import java.awt.Component;
 import java.io.*;
+import javax.swing.JFileChooser;
 import java.util.LinkedHashMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.sequence.DNASequence;
-import org.biojava.nbio.core.sequence.io.FastaReaderHelper;
+import org.biojava.nbio.core.sequence.io.*;
+import org.biojava.nbio.sequencing.io.fastq.*;
 
 /**
  * Class voor het beheren van bestanden.
- * 
+ *
  * @author Projectgroep 10
  * @since JDK 1.8
  * @version 1.0
  */
 public class FileHandler {
 
+    private static FileFilter selectedFileFilter;
+
+    private static LinkedHashMap<String, DNASequence> headerToSeq;
+
     /**
      * Opent een JFileChooser om een bestand te selecteren.
      *
+     * @param parent de parent voor de JFileChooser opendialog
      * @return het geselecteerde bestand of null
      * @throws FileNotFoundException als het bestand niet gevonden is
      */
-    public static File selectFile() throws FileNotFoundException {
+    public static File selectFile(Component parent) throws FileNotFoundException {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter(new FileNameExtensionFilter("FASTA file", "fasta", "fna", "ffn", "fa"));
-        int returnVal = chooser.showOpenDialog(null);
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("FASTQ file", "fastq", "fq"));
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("GenBank file", "gb", "gbk"));
+        int returnVal = chooser.showOpenDialog(parent);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
+            selectedFileFilter = chooser.getFileFilter();
             if (chooser.getSelectedFile().exists()) {
                 return chooser.getSelectedFile();
-            } else {
-                throw new FileNotFoundException();
             }
+            throw new FileNotFoundException();
         }
         return null;
     }
 
-    /**
-     * Leest een FASTA bestand metd DNA-sequenteie(s) en stopt data in een
-     * LinkedHashMap.
-     *
-     * @param fasta een FASTA bestand met DNA-sequentie(s)
-     * @return een LinkedHashMap met de FASTA headers als keys en de sequenties
-     * als values of null bij exceptions
-     */
-    public static LinkedHashMap<String, DNASequence> getData(File fasta) {
-        // TODO: Andere bestandsformaten inlezen.
-        try {
-            if (fasta != null)
-                return FastaReaderHelper.readFastaDNASequence(fasta);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "IOExeption", JOptionPane.ERROR_MESSAGE);
-        }
-        return null;
-    }
-    
     /**
      * Procedure om bestanden in te laden.
      *
@@ -70,14 +62,72 @@ public class FileHandler {
      */
     public static void loadFile(GUI gui) {
         try {
-            File fasta = FileHandler.selectFile();
-            LinkedHashMap<String, DNASequence> data = FileHandler.getData(fasta);
-            gui.getHeaderComboBox().setModel(new DefaultComboBoxModel(data.keySet().toArray()));
-            gui.getHeaderComboBox().setEnabled(true);
-            gui.getZoekButton().setEnabled(true);
-            gui.getSeqEditorPane().setText(data.entrySet().iterator().next().getValue().toString().toUpperCase());
+            File selectedFile = FileHandler.selectFile(gui.getFrame());
+            if (selectedFile != null) {
+                FileHandler.setHeaderToSeq(selectedFile);
+                gui.getHeaderComboBox().setModel(new DefaultComboBoxModel(headerToSeq.keySet().toArray()));
+                gui.getHeaderComboBox().setEnabled(true);
+                gui.getZoekButton().setEnabled(true);
+                gui.getSeqTextPane().setText(headerToSeq.entrySet().iterator().next().getValue().toString().toUpperCase());
+            }
         } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(gui.getFrame(), ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Leest een bestand met DNA-sequenteie(s) en stopt data in headerToSeq.
+     *
+     * @param file een bestand met DNA-sequentie(s)
+     */
+    public static void setHeaderToSeq(File file) {
+        try {
+            switch (selectedFileFilter.getDescription()) {
+                case "FASTA file":
+                    headerToSeq = FastaReaderHelper.readFastaDNASequence(file);
+                    break;
+                case "FASTQ file":
+                    headerToSeq = readFastqDNASequence(file);
+                    break;
+                case "GenBank file":
+                    headerToSeq = GenbankReaderHelper.readGenbankDNASequence(file);
+                    break;
+                default:
+                    // TODO: File type bepalen op een andere manier
+                    break;
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "IOExeption", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    /**
+     * @return headerToSeq
+     */
+    public static LinkedHashMap<String, DNASequence> getHeaderToSeq() {
+        return headerToSeq;
+    }
+
+    /**
+     * Maakt LinkedHashMap van FASTQ header(s) en DNA sequentie(s).
+     *
+     * @param file FASTQ bestand
+     * @return LinkedHashMap van FASTQ header(s) en DNA sequentie(s)
+     * @throws IOException bij problemen met het bestand openen
+     */
+    public static LinkedHashMap<String, DNASequence> readFastqDNASequence(File file) throws IOException {
+        FastqReader fastqReader = new SangerFastqReader();
+        LinkedHashMap<String, DNASequence> fastqHeaderToSeq = new LinkedHashMap<>();
+        for (Fastq fastq : fastqReader.read(file)) {
+            try {
+                fastqHeaderToSeq.put(fastq.getDescription(), new DNASequence(fastq.getSequence()));
+            } catch (CompoundNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
+                break;
+            }
+        }
+        return fastqHeaderToSeq;
     }
 }

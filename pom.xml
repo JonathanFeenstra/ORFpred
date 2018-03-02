@@ -6,14 +6,16 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <dependencies>
-                 <!-- This imports the latest version of BioJava core module -->
-                <dependency>
-
-                        <groupId>org.biojava</groupId>
-                        <artifactId>biojava-core</artifactId>
-                        <version>4.0.0</version>
-                </dependency>
-                <!-- other biojava jars as needed -->
+        <dependency>
+            <groupId>org.biojava</groupId>
+            <artifactId>biojava-core</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.biojava</groupId>
+            <artifactId>biojava-sequencing</artifactId>
+            <version>4.0.0</version>
+        </dependency>
     </dependencies> 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

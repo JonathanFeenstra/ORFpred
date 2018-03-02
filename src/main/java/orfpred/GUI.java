@@ -11,29 +11,27 @@ import java.awt.event.*;
 import javax.swing.*;
 
 /**
- * GUI class met actionlistener voor de aanroep van methoden.
+ * Class voor het weergeven van de GUI.
  *
  * @author Projectgroep 10
  * @since JDK 1.8
  * @version 1.0
  */
-public class GUI extends JFrame implements ActionListener {
+public class GUI implements Runnable {
 
-    private JMenuBar menuBar;
-    private JMenu bestandMenu, weergaveMenu, toolsMenu, seqMenu;
+    private JFrame frame;
+
     private JMenuItem openMenuItem, dbSaveMenuItem, exitMenuItem,
             highlightMenuItem, blastMenuItem,
             orfLengteMenuItem;
     private JRadioButtonMenuItem eiwitMenuItem, dnaMenuItem;
-    private JSeparator bestandMenuSeparator;
     private ButtonGroup seqTypeGroup;
-    private JPanel mainPanel;
-    private GroupLayout mainPanelLayout;
     private JComboBox headerComboBox;
     private JButton zoekButton;
     private JLabel headerLabel, seqLabel, blastLabel;
     private JScrollPane seqScrollPane, blastScrollPane;
-    private JEditorPane seqEditorPane;
+    private JEditorPane seqTextPane;
+
     private final Font LABEL_FONT = new Font("Arial", Font.BOLD, 12);
 
     /**
@@ -45,41 +43,38 @@ public class GUI extends JFrame implements ActionListener {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
-            ex.printStackTrace(); // TODO: Adequate exception handling
+            JOptionPane.showMessageDialog(null, ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
         }
-
-        GUI frame = new GUI();
-        frame.setSize(720, 505);
-        frame.setResizable(false);
-        frame.setTitle("ORFpred - Open Reading Frame predictie tool");
-        frame.createGUI();
-        frame.setVisible(true);
+        EventQueue.invokeLater(new GUI());
     }
 
-    /**
-     * Creëert de GUI.
-     */
-    private void createGUI() {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationByPlatform(true);
-        setIconImage(new ImageIcon(getClass().getResource("/orfpred.png")).getImage());
+    @Override
+    public void run() {
+        frame = new JFrame("ORFpred - Open Reading Frame predictie tool");
+        ActionHandler actionHandler = new ActionHandler();
+        frame.setSize(720, 505);
+        frame.setResizable(false);
 
-        Container window = getContentPane();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationByPlatform(true);
+        frame.setIconImage(new ImageIcon(getClass().getResource("/orfpred.png")).getImage());
 
-        menuBar = new JMenuBar();
+        Container window = frame.getContentPane();
+
+        JMenuBar menuBar = new JMenuBar();
 
         //<editor-fold defaultstate="collapsed" desc="Bestandmenu aanmaken">
-        bestandMenu = new JMenu("Bestand");
+        JMenu bestandMenu = new JMenu("Bestand");
         openMenuItem = new JMenuItem("Open...", new ImageIcon(getClass().getResource("/open.png")));
         openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
-        openMenuItem.addActionListener(this);
+        openMenuItem.addActionListener(actionHandler);
         dbSaveMenuItem = new JMenuItem("Opslaan in database", new ImageIcon(getClass().getResource("/database.png")));
         dbSaveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-        dbSaveMenuItem.addActionListener(this);
-        bestandMenuSeparator = new JSeparator();
+        dbSaveMenuItem.addActionListener(actionHandler);
+        JSeparator bestandMenuSeparator = new JSeparator();
         exitMenuItem = new JMenuItem("Afsluiten", new ImageIcon(getClass().getResource("/exit.png")));
         exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
-        exitMenuItem.addActionListener(this);
+        exitMenuItem.addActionListener(actionHandler);
 
         bestandMenu.add(openMenuItem);
         bestandMenu.add(dbSaveMenuItem);
@@ -88,12 +83,11 @@ public class GUI extends JFrame implements ActionListener {
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Weergave menu aanmaken">
-        weergaveMenu = new JMenu("Weergave");
-        seqMenu = new JMenu("Type sequentie...");
+        JMenu weergaveMenu = new JMenu("Weergave"), seqMenu = new JMenu("Type sequentie...");
         eiwitMenuItem = new JRadioButtonMenuItem("Eiwit", true);
         dnaMenuItem = new JRadioButtonMenuItem("DNA");
         highlightMenuItem = new JMenuItem("Highlight kleur", new ImageIcon(getClass().getResource("/highlight.png")));
-        highlightMenuItem.addActionListener(this);
+        highlightMenuItem.addActionListener(actionHandler);
 
         seqTypeGroup = new ButtonGroup();
         seqTypeGroup.add(eiwitMenuItem);
@@ -107,11 +101,11 @@ public class GUI extends JFrame implements ActionListener {
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Toolsmenu aanmaken">
-        toolsMenu = new JMenu("Tools");
+        JMenu toolsMenu = new JMenu("Tools");
         blastMenuItem = new JMenuItem("BLAST hele sequentie", new ImageIcon(getClass().getResource("/blast.png")));
-        blastMenuItem.addActionListener(this);
+        blastMenuItem.addActionListener(actionHandler);
         orfLengteMenuItem = new JMenuItem("Stel minimale ORF lengte in...");
-        orfLengteMenuItem.addActionListener(this);
+        orfLengteMenuItem.addActionListener(actionHandler);
 
         toolsMenu.add(blastMenuItem);
         toolsMenu.add(orfLengteMenuItem);
@@ -121,13 +115,13 @@ public class GUI extends JFrame implements ActionListener {
         menuBar.add(weergaveMenu);
         menuBar.add(toolsMenu);
 
-        setJMenuBar(menuBar);
+        frame.setJMenuBar(menuBar);
 
         headerLabel = new JLabel(new ImageIcon(getClass().getResource("/header.png")));
         window.add(headerLabel, BorderLayout.NORTH);
 
-        mainPanel = new JPanel();
-        mainPanelLayout = new GroupLayout(mainPanel);
+        JPanel mainPanel = new JPanel();
+        GroupLayout mainPanelLayout = new GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
 
         //<editor-fold defaultstate="collapsed" desc="Mainpanel componenten aanmaken">
@@ -136,13 +130,22 @@ public class GUI extends JFrame implements ActionListener {
         headerComboBox = new JComboBox();
         headerComboBox.setModel(new DefaultComboBoxModel(new String[]{"Open een bestand..."}));
         headerComboBox.setEnabled(false);
+        headerComboBox.addItemListener(actionHandler);
+        
         zoekButton = new JButton("Voorspel ORF's", new ImageIcon(getClass().getResource("/search.png")));
         zoekButton.setEnabled(false);
-        zoekButton.addActionListener(this);
+        zoekButton.addActionListener(actionHandler);
 
-        seqEditorPane = new JEditorPane();
-        seqEditorPane.setEditable(false);
-        seqScrollPane = new JScrollPane(seqEditorPane);
+        seqTextPane = new JTextPane() {
+            @Override
+            public boolean getScrollableTracksViewportWidth() {
+                return getUI().getPreferredSize(this).width
+                        < getParent().getWidth();
+            }
+        };
+
+        seqTextPane.setEditable(false);
+        seqScrollPane = new JScrollPane(seqTextPane);
         seqScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         blastLabel = new JLabel("BLAST resultaten");
@@ -188,29 +191,51 @@ public class GUI extends JFrame implements ActionListener {
         //</editor-fold>
 
         window.add(mainPanel);
+
+        frame.setVisible(true);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent evt) {
-        if (evt.getSource() == openMenuItem) {
-            FileHandler.loadFile(this);
-        } else if (evt.getSource() == dbSaveMenuItem) {
-            // TODO: Opslaan in database
-        } else if (evt.getSource() == exitMenuItem) {
-            System.exit(0);
-        } else if (evt.getSource() == eiwitMenuItem) {
-            // TODO: Zet sequentiemodus op eiwit
-        } else if (evt.getSource() == dnaMenuItem) {
-            // TODO: Zet sequentiemodus op DNA
-        } else if (evt.getSource() == highlightMenuItem) {
-            ORFHighlighter.setHighlightKleur(JColorChooser.showDialog(null, "Highlight kleur", ORFHighlighter.getHighlightKleur()));
-        } else if (evt.getSource() == blastMenuItem) {
-            // TODO: Toon pop-up met BLAST settings
-        } else if (evt.getSource() == orfLengteMenuItem) {
-            // TODO: Toon pop-up waar ORF lengte kan worden ingesteld https://stackoverflow.com/questions/11093326/restricting-jtextfield-input-to-integers#11093360
-        } else if (evt.getSource() == zoekButton) {
-            // TODO: Zoek en highlight ORF's in sequentie
+    /**
+     * Inner class voor het afhandelen van actions in de GUI.
+     */
+    private class ActionHandler implements ActionListener, ItemListener {
+
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            if (evt.getSource() == openMenuItem) {
+                FileHandler.loadFile(GUI.this);
+            } else if (evt.getSource() == dbSaveMenuItem) {
+                // TODO: Opslaan in database
+            } else if (evt.getSource() == exitMenuItem) {
+                System.exit(0);
+            } else if (evt.getSource() == eiwitMenuItem) {
+                // TODO: Zet sequentiemodus op eiwit
+            } else if (evt.getSource() == dnaMenuItem) {
+                // TODO: Zet sequentiemodus op DNA
+            } else if (evt.getSource() == highlightMenuItem) {
+                ORFHighlighter.setHighlightKleur(JColorChooser.showDialog(GUI.this.frame, "Highlight kleur", ORFHighlighter.getHighlightKleur()));
+            } else if (evt.getSource() == blastMenuItem) {
+                // TODO: Toon pop-up met BLAST settings
+            } else if (evt.getSource() == orfLengteMenuItem) {
+                // TODO: Toon pop-up waar ORF lengte kan worden ingesteld https://stackoverflow.com/questions/11093326/restricting-jtextfield-input-to-integers#11093360
+            } else if (evt.getSource() == zoekButton) {
+                // TODO: Zoek en highlight ORF's in sequentie
+            }
         }
+
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            if (e.getSource() == headerComboBox) {
+                seqTextPane.setText(FileHandler.getHeaderToSeq().get(headerComboBox.getSelectedItem().toString()).toString());
+            }
+        }
+    }
+
+    /**
+     * @return frame
+     */
+    public JFrame getFrame() {
+        return frame;
     }
 
     /**
@@ -228,9 +253,9 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     /**
-     * @return seqEditorPane
+     * @return seqTextPane
      */
-    public JEditorPane getSeqEditorPane() {
-        return seqEditorPane;
+    public JEditorPane getSeqTextPane() {
+        return seqTextPane;
     }
 }
