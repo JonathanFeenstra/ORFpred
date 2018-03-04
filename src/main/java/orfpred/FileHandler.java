@@ -12,8 +12,6 @@ import javax.swing.JFileChooser;
 import java.util.LinkedHashMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.sequence.DNASequence;
 import org.biojava.nbio.core.sequence.io.*;
@@ -28,8 +26,6 @@ import org.biojava.nbio.sequencing.io.fastq.*;
  */
 public class FileHandler {
 
-    private static FileFilter selectedFileFilter;
-
     private static LinkedHashMap<String, DNASequence> headerToSeq;
 
     /**
@@ -41,12 +37,12 @@ public class FileHandler {
      */
     public static File selectFile(Component parent) throws FileNotFoundException {
         JFileChooser chooser = new JFileChooser();
-        chooser.setFileFilter(new FileNameExtensionFilter("FASTA file", "fasta", "fna", "ffn", "fa"));
-        chooser.addChoosableFileFilter(new FileNameExtensionFilter("FASTQ file", "fastq", "fq"));
-        chooser.addChoosableFileFilter(new FileNameExtensionFilter("GenBank file", "gb", "gbk"));
+        for (FileType ft : FileType.values()) {
+            chooser.addChoosableFileFilter(ft.getFileFilter());
+        }
+        chooser.setFileFilter(chooser.getChoosableFileFilters()[1]);
         int returnVal = chooser.showOpenDialog(parent);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            selectedFileFilter = chooser.getFileFilter();
             if (chooser.getSelectedFile().exists()) {
                 return chooser.getSelectedFile();
             }
@@ -65,10 +61,13 @@ public class FileHandler {
             File selectedFile = FileHandler.selectFile(gui.getFrame());
             if (selectedFile != null) {
                 FileHandler.setHeaderToSeq(selectedFile);
-                gui.getHeaderComboBox().setModel(new DefaultComboBoxModel(headerToSeq.keySet().toArray()));
-                gui.getHeaderComboBox().setEnabled(true);
-                gui.getZoekButton().setEnabled(true);
-                gui.getSeqTextPane().setText(headerToSeq.entrySet().iterator().next().getValue().toString().toUpperCase());
+                if (headerToSeq != null) {
+                    // TODO: Naar GUI updater class
+                    gui.getHeaderComboBox().setModel(new DefaultComboBoxModel(headerToSeq.keySet().toArray()));
+                    gui.getHeaderComboBox().setEnabled(true);
+                    gui.getZoekButton().setEnabled(true);
+                    gui.getSeqTextPane().setText(headerToSeq.entrySet().iterator().next().getValue().toString().toUpperCase());
+                }
             }
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(gui.getFrame(), ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
@@ -82,19 +81,14 @@ public class FileHandler {
      */
     public static void setHeaderToSeq(File file) {
         try {
-            switch (selectedFileFilter.getDescription()) {
-                case "FASTA file":
-                    headerToSeq = FastaReaderHelper.readFastaDNASequence(file);
-                    break;
-                case "FASTQ file":
-                    headerToSeq = readFastqDNASequence(file);
-                    break;
-                case "GenBank file":
-                    headerToSeq = GenbankReaderHelper.readGenbankDNASequence(file);
-                    break;
-                default:
-                    // TODO: File type bepalen op een andere manier
-                    break;
+            if (FileType.FASTA.getFileFilter().accept(file)) {
+                headerToSeq = FastaReaderHelper.readFastaDNASequence(file);
+            } else if (FileType.FASTQ.getFileFilter().accept(file)) {
+                headerToSeq = readFastqDNASequence(file);
+            } else if (FileType.GENBANK.getFileFilter().accept(file)) {
+                headerToSeq = GenbankReaderHelper.readGenbankDNASequence(file);
+            } else {
+                headerToSeq = askFileTypeAndRead(file);
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "IOExeption", JOptionPane.ERROR_MESSAGE);
@@ -104,10 +98,27 @@ public class FileHandler {
     }
 
     /**
-     * @return headerToSeq
+     * Opent venster om de gebruiker om het bestandstype te vragen en gebruikt
+     * de adequate leesmethode om de data in te laden.
+     *
+     * @param file het geselecteerde bestand
+     * @return LinkedHashMap<header, DNA sequentie>
+     * @throws Exception bij fouten tijdens het inlezen
      */
-    public static LinkedHashMap<String, DNASequence> getHeaderToSeq() {
-        return headerToSeq;
+    public static LinkedHashMap<String, DNASequence> askFileTypeAndRead(File file) throws Exception {
+        switch (JOptionPane.showOptionDialog(null, "Selecteer het bestandstype:",
+                "Bestandstype", JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE, null, FileType.values(),
+                FileType.FASTA)) {
+            case 0:
+                return FastaReaderHelper.readFastaDNASequence(file);
+            case 1:
+                return readFastqDNASequence(file);
+            case 2:
+                return GenbankReaderHelper.readGenbankDNASequence(file);
+            default:
+                return askFileTypeAndRead(file);
+        }
     }
 
     /**
@@ -129,5 +140,12 @@ public class FileHandler {
             }
         }
         return fastqHeaderToSeq;
+    }
+    
+    /**
+     * @return headerToSeq
+     */
+    public static LinkedHashMap<String, DNASequence> getHeaderToSeq() {
+        return headerToSeq;
     }
 }

@@ -9,6 +9,7 @@ package orfpred;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.text.DefaultCaret;
 
 /**
  * Class voor het weergeven van de GUI.
@@ -51,7 +52,7 @@ public class GUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("ORFpred - Open Reading Frame predictie tool");
-        ActionHandler actionHandler = new ActionHandler();
+        EventHandler eventHandler = new EventHandler();
         frame.setSize(720, 505);
         frame.setResizable(false);
 
@@ -67,14 +68,14 @@ public class GUI implements Runnable {
         JMenu bestandMenu = new JMenu("Bestand");
         openMenuItem = new JMenuItem("Open...", new ImageIcon(getClass().getResource("/open.png")));
         openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
-        openMenuItem.addActionListener(actionHandler);
+        openMenuItem.addActionListener(eventHandler);
         dbSaveMenuItem = new JMenuItem("Opslaan in database", new ImageIcon(getClass().getResource("/database.png")));
         dbSaveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-        dbSaveMenuItem.addActionListener(actionHandler);
+        dbSaveMenuItem.addActionListener(eventHandler);
         JSeparator bestandMenuSeparator = new JSeparator();
         exitMenuItem = new JMenuItem("Afsluiten", new ImageIcon(getClass().getResource("/exit.png")));
         exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
-        exitMenuItem.addActionListener(actionHandler);
+        exitMenuItem.addActionListener(eventHandler);
 
         bestandMenu.add(openMenuItem);
         bestandMenu.add(dbSaveMenuItem);
@@ -87,7 +88,7 @@ public class GUI implements Runnable {
         eiwitMenuItem = new JRadioButtonMenuItem("Eiwit", true);
         dnaMenuItem = new JRadioButtonMenuItem("DNA");
         highlightMenuItem = new JMenuItem("Highlight kleur", new ImageIcon(getClass().getResource("/highlight.png")));
-        highlightMenuItem.addActionListener(actionHandler);
+        highlightMenuItem.addActionListener(eventHandler);
 
         seqTypeGroup = new ButtonGroup();
         seqTypeGroup.add(eiwitMenuItem);
@@ -103,9 +104,9 @@ public class GUI implements Runnable {
         //<editor-fold defaultstate="collapsed" desc="Toolsmenu aanmaken">
         JMenu toolsMenu = new JMenu("Tools");
         blastMenuItem = new JMenuItem("BLAST hele sequentie", new ImageIcon(getClass().getResource("/blast.png")));
-        blastMenuItem.addActionListener(actionHandler);
+        blastMenuItem.addActionListener(eventHandler);
         orfLengteMenuItem = new JMenuItem("Stel minimale ORF lengte in...");
-        orfLengteMenuItem.addActionListener(actionHandler);
+        orfLengteMenuItem.addActionListener(eventHandler);
 
         toolsMenu.add(blastMenuItem);
         toolsMenu.add(orfLengteMenuItem);
@@ -130,21 +131,25 @@ public class GUI implements Runnable {
         headerComboBox = new JComboBox();
         headerComboBox.setModel(new DefaultComboBoxModel(new String[]{"Open een bestand..."}));
         headerComboBox.setEnabled(false);
-        headerComboBox.addItemListener(actionHandler);
+        headerComboBox.addItemListener(eventHandler);
         
         zoekButton = new JButton("Voorspel ORF's", new ImageIcon(getClass().getResource("/search.png")));
         zoekButton.setEnabled(false);
-        zoekButton.addActionListener(actionHandler);
+        zoekButton.addActionListener(eventHandler);
 
         seqTextPane = new JTextPane() {
+            // Zorgt ervoor dat de textpane horizontaal uitbreidt.
             @Override
             public boolean getScrollableTracksViewportWidth() {
                 return getUI().getPreferredSize(this).width
                         < getParent().getWidth();
             }
         };
-
+        
+        // Zorgt ervoor dat de scrollbar niet automatisch van positie verandert.
+        ((DefaultCaret) seqTextPane.getCaret()).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
         seqTextPane.setEditable(false);
+        
         seqScrollPane = new JScrollPane(seqTextPane);
         seqScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
@@ -196,9 +201,9 @@ public class GUI implements Runnable {
     }
 
     /**
-     * Inner class voor het afhandelen van actions in de GUI.
+     * Inner class voor het afhandelen van events in de GUI.
      */
-    private class ActionHandler implements ActionListener, ItemListener {
+    private class EventHandler implements ActionListener, ItemListener {
 
         @Override
         public void actionPerformed(ActionEvent evt) {
