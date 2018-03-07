@@ -27,7 +27,7 @@ public class GUI implements Runnable {
             orfLengteMenuItem;
     private JRadioButtonMenuItem eiwitMenuItem, dnaMenuItem;
     private ButtonGroup seqTypeGroup;
-    private JComboBox headerComboBox;
+    private JComboBox<String> headerComboBox;
     private JButton zoekButton;
     private JLabel headerLabel, seqLabel, blastLabel;
     private JScrollPane seqScrollPane, blastScrollPane;
@@ -208,7 +208,9 @@ public class GUI implements Runnable {
         @Override
         public void actionPerformed(ActionEvent evt) {
             if (evt.getSource() == openMenuItem) {
-                FileHandler.loadFile(GUI.this);
+                EventQueue.invokeLater(() -> {
+                    GUIUpdater.loadFile(GUI.this);
+                });         
             } else if (evt.getSource() == dbSaveMenuItem) {
                 // TODO: Opslaan in database
             } else if (evt.getSource() == exitMenuItem) {
@@ -246,7 +248,7 @@ public class GUI implements Runnable {
     /**
      * @return headerComboBox
      */
-    public JComboBox getHeaderComboBox() {
+    public JComboBox<String> getHeaderComboBox() {
         return headerComboBox;
     }
 

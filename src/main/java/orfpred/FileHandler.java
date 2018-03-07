@@ -10,7 +10,6 @@ import java.awt.Component;
 import java.io.*;
 import javax.swing.JFileChooser;
 import java.util.LinkedHashMap;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.sequence.DNASequence;
@@ -49,29 +48,6 @@ public class FileHandler {
             throw new FileNotFoundException();
         }
         return null;
-    }
-
-    /**
-     * Procedure om bestanden in te laden.
-     *
-     * @param gui de betreffende GUI
-     */
-    public static void loadFile(GUI gui) {
-        try {
-            File selectedFile = FileHandler.selectFile(gui.getFrame());
-            if (selectedFile != null) {
-                FileHandler.setHeaderToSeq(selectedFile);
-                if (headerToSeq != null) {
-                    // TODO: Naar GUI updater class
-                    gui.getHeaderComboBox().setModel(new DefaultComboBoxModel(headerToSeq.keySet().toArray()));
-                    gui.getHeaderComboBox().setEnabled(true);
-                    gui.getZoekButton().setEnabled(true);
-                    gui.getSeqTextPane().setText(headerToSeq.entrySet().iterator().next().getValue().toString().toUpperCase());
-                }
-            }
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(gui.getFrame(), ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     /**
@@ -141,7 +117,7 @@ public class FileHandler {
         }
         return fastqHeaderToSeq;
     }
-    
+
     /**
      * @return headerToSeq
      */

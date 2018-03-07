@@ -24,14 +24,14 @@ public class ReadingFramer {
      * Geeft RNA reading frames voor gegeven DNA sequentie.
      *
      * @param dnaSeq de DNA sequentie
-     * @return array van RNA reading frames
+     * @return array van reading frames
      */
-    public RNASequence[] getRNAFrames(DNASequence dnaSeq) {
-        RNASequence[] rnaFrames = new RNASequence[6];
-        for (int i = 0; i <= 6; i++) {
-            rnaFrames[i] = dnaSeq.getRNASequence(Frame.getAllFrames()[i]);
+    public static RNASequence[] getReadingFrames(DNASequence dnaSeq) {
+        RNASequence[] readingFrames = new RNASequence[6];
+        for (int i = 0; i <= 5; i++) {
+            readingFrames[i] = dnaSeq.getRNASequence(Frame.getAllFrames()[i]);
         }
-        return rnaFrames;
+        return readingFrames;
     }
     
     /**
@@ -40,10 +40,10 @@ public class ReadingFramer {
      * @param dnaSeq de DNA sequentie
      * @return array van eiwit reading frames
      */
-    public ProteinSequence[] getProteinFrames(DNASequence dnaSeq) {
+    public static ProteinSequence[] getProteinFrames(DNASequence dnaSeq) {
         ProteinSequence[] proteinFrames = new ProteinSequence[6];
-        RNASequence[] rnaFrames = getRNAFrames(dnaSeq);
-        for (int i = 0; i <= 6; i++) {
+        RNASequence[] rnaFrames = getReadingFrames(dnaSeq);
+        for (int i = 0; i <= 5; i++) {
             proteinFrames[i] = rnaFrames[i].getProteinSequence();
         }
         return proteinFrames;
