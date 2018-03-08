@@ -4,11 +4,9 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
-package orfpred;
+package orfpred.sequence;
 
-import org.biojava.nbio.core.sequence.DNASequence;
-import org.biojava.nbio.core.sequence.ProteinSequence;
-import org.biojava.nbio.core.sequence.RNASequence;
+import org.biojava.nbio.core.sequence.*;
 import org.biojava.nbio.core.sequence.transcription.Frame;
 
 /**
@@ -19,20 +17,6 @@ import org.biojava.nbio.core.sequence.transcription.Frame;
  * @version 1.0
  */
 public class ReadingFramer {
-
-    /**
-     * Geeft RNA reading frames voor gegeven DNA sequentie.
-     *
-     * @param dnaSeq de DNA sequentie
-     * @return array van reading frames
-     */
-    public static RNASequence[] getReadingFrames(DNASequence dnaSeq) {
-        RNASequence[] readingFrames = new RNASequence[6];
-        for (int i = 0; i <= 5; i++) {
-            readingFrames[i] = dnaSeq.getRNASequence(Frame.getAllFrames()[i]);
-        }
-        return readingFrames;
-    }
     
     /**
      * Geeft eiwit reading frames voor gegeven DNA sequentie.
@@ -42,9 +26,9 @@ public class ReadingFramer {
      */
     public static ProteinSequence[] getProteinFrames(DNASequence dnaSeq) {
         ProteinSequence[] proteinFrames = new ProteinSequence[6];
-        RNASequence[] rnaFrames = getReadingFrames(dnaSeq);
         for (int i = 0; i <= 5; i++) {
-            proteinFrames[i] = rnaFrames[i].getProteinSequence();
+            RNASequence rnaFrame = dnaSeq.getRNASequence(Frame.getAllFrames()[i]);
+            proteinFrames[i] = rnaFrame.getProteinSequence();
         }
         return proteinFrames;
     }

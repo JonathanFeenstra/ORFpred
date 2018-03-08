@@ -4,8 +4,10 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
-package orfpred;
+package orfpred.gui;
 
+import orfpred.sequence.ORFHighlighter;
+import orfpred.file.FileHandler;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -25,8 +27,6 @@ public class GUI implements Runnable {
     private JMenuItem openMenuItem, dbSaveMenuItem, exitMenuItem,
             highlightMenuItem, blastMenuItem,
             orfLengteMenuItem;
-    private JRadioButtonMenuItem eiwitMenuItem, dnaMenuItem;
-    private ButtonGroup seqTypeGroup;
     private JComboBox<String> headerComboBox;
     private JButton zoekButton;
     private JLabel headerLabel, seqLabel, blastLabel;
@@ -44,7 +44,7 @@ public class GUI implements Runnable {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
+            showErrorMessage(ex, ex.getMessage());
         }
         EventQueue.invokeLater(new GUI());
     }
@@ -84,20 +84,10 @@ public class GUI implements Runnable {
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Weergave menu aanmaken">
-        JMenu weergaveMenu = new JMenu("Weergave"), seqMenu = new JMenu("Type sequentie...");
-        eiwitMenuItem = new JRadioButtonMenuItem("Eiwit", true);
-        dnaMenuItem = new JRadioButtonMenuItem("DNA");
+        JMenu weergaveMenu = new JMenu("Weergave");
         highlightMenuItem = new JMenuItem("Highlight kleur", new ImageIcon(getClass().getResource("/highlight.png")));
         highlightMenuItem.addActionListener(eventHandler);
 
-        seqTypeGroup = new ButtonGroup();
-        seqTypeGroup.add(eiwitMenuItem);
-        seqTypeGroup.add(dnaMenuItem);
-
-        seqMenu.add(eiwitMenuItem);
-        seqMenu.add(dnaMenuItem);
-
-        weergaveMenu.add(seqMenu);
         weergaveMenu.add(highlightMenuItem);
         //</editor-fold>
 
@@ -215,10 +205,6 @@ public class GUI implements Runnable {
                 // TODO: Opslaan in database
             } else if (evt.getSource() == exitMenuItem) {
                 System.exit(0);
-            } else if (evt.getSource() == eiwitMenuItem) {
-                // TODO: Zet sequentiemodus op eiwit
-            } else if (evt.getSource() == dnaMenuItem) {
-                // TODO: Zet sequentiemodus op DNA
             } else if (evt.getSource() == highlightMenuItem) {
                 ORFHighlighter.setHighlightKleur(JColorChooser.showDialog(GUI.this.frame, "Highlight kleur", ORFHighlighter.getHighlightKleur()));
             } else if (evt.getSource() == blastMenuItem) {
@@ -236,6 +222,18 @@ public class GUI implements Runnable {
                 seqTextPane.setText(FileHandler.getHeaderToSeq().get(headerComboBox.getSelectedItem().toString()).toString());
             }
         }
+    }
+    
+    /**
+     * Toont foutmelding pop-up.
+     * 
+     * @param ex de exception
+     * @param msg de boodschap
+     */
+    public static void showErrorMessage(Exception ex, String msg) {
+        JFrame parent = new JFrame();
+        parent.setIconImage(new ImageIcon(GUI.class.getResource("/orfpred.png")).getImage());
+        JOptionPane.showMessageDialog(parent, msg, ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
     }
 
     /**

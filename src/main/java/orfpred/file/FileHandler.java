@@ -4,7 +4,7 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
-package orfpred;
+package orfpred.file;
 
 import java.awt.Component;
 import java.io.*;
@@ -54,22 +54,17 @@ public class FileHandler {
      * Leest een bestand met DNA-sequenteie(s) en stopt data in headerToSeq.
      *
      * @param file een bestand met DNA-sequentie(s)
+     * @throws java.lang.Exception
      */
-    public static void setHeaderToSeq(File file) {
-        try {
-            if (FileType.FASTA.getFileFilter().accept(file)) {
-                headerToSeq = FastaReaderHelper.readFastaDNASequence(file);
-            } else if (FileType.FASTQ.getFileFilter().accept(file)) {
-                headerToSeq = readFastqDNASequence(file);
-            } else if (FileType.GENBANK.getFileFilter().accept(file)) {
-                headerToSeq = GenbankReaderHelper.readGenbankDNASequence(file);
-            } else {
-                headerToSeq = askFileTypeAndRead(file);
-            }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "IOExeption", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
+    public static void setHeaderToSeq(File file) throws Exception {
+        if (FileType.FASTA.getFileFilter().accept(file)) {
+            headerToSeq = FastaReaderHelper.readFastaDNASequence(file);
+        } else if (FileType.FASTQ.getFileFilter().accept(file)) {
+            headerToSeq = readFastqDNASequence(file);
+        } else if (FileType.GENBANK.getFileFilter().accept(file)) {
+            headerToSeq = GenbankReaderHelper.readGenbankDNASequence(file);
+        } else {
+            headerToSeq = askFileTypeAndRead(file);
         }
     }
 
@@ -103,17 +98,14 @@ public class FileHandler {
      * @param file FASTQ bestand
      * @return LinkedHashMap van FASTQ header(s) en DNA sequentie(s)
      * @throws IOException bij problemen met het bestand openen
+     * @throws org.biojava.nbio.core.exceptions.CompoundNotFoundException als
+     * karakter geen nucleotide is.
      */
-    public static LinkedHashMap<String, DNASequence> readFastqDNASequence(File file) throws IOException {
+    public static LinkedHashMap<String, DNASequence> readFastqDNASequence(File file) throws IOException, CompoundNotFoundException {
         FastqReader fastqReader = new SangerFastqReader();
         LinkedHashMap<String, DNASequence> fastqHeaderToSeq = new LinkedHashMap<>();
         for (Fastq fastq : fastqReader.read(file)) {
-            try {
-                fastqHeaderToSeq.put(fastq.getDescription(), new DNASequence(fastq.getSequence()));
-            } catch (CompoundNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
-                break;
-            }
+            fastqHeaderToSeq.put(fastq.getDescription(), new DNASequence(fastq.getSequence()));
         }
         return fastqHeaderToSeq;
     }

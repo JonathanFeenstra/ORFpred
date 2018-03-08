@@ -4,20 +4,20 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
-package orfpred;
+package orfpred.gui;
 
+import orfpred.sequence.ReadingFramer;
+import orfpred.file.FileHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.SimpleAttributeSet;
-import org.biojava.nbio.core.sequence.RNASequence;
+import javax.swing.text.*;
+import org.biojava.nbio.core.sequence.ProteinSequence;
 
 /**
- * Class om de GUI te updaten.
+ * Class om de GUI te updaten. Methoden uit deze class dienen aangeropen te
+ * worden via EventQueue.invokeLater().
  *
  * @author Projectgroep 10
  * @since JDK 1.8
@@ -40,11 +40,13 @@ public class GUIUpdater { // TODO: Misschien handig om de GUI als variabele op t
                     // TODO: Dit is niet echt nodig als ze al enabled staan, misschien zorgen dat dit alleen de eerste keer gebeurt.
                     gui.getHeaderComboBox().setEnabled(true);
                     gui.getZoekButton().setEnabled(true);
-                    showReadingFrames(gui, ReadingFramer.getReadingFrames(FileHandler.getHeaderToSeq().entrySet().iterator().next().getValue()));
+                    showReadingFrames(gui, ReadingFramer.getProteinFrames(FileHandler.getHeaderToSeq().entrySet().iterator().next().getValue()));
                 }
             }
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(gui.getFrame(), ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
+            GUI.showErrorMessage(ex, ex.getMessage());
+        } catch (Exception ex) {
+            GUI.showErrorMessage(ex, ex.getMessage());
         }
     }
 
@@ -54,13 +56,13 @@ public class GUIUpdater { // TODO: Misschien handig om de GUI als variabele op t
      * @param gui de betreffende GUI
      * @param readingFrames de te weergeven reading frames
      */
-    public static void showReadingFrames(GUI gui, RNASequence[] readingFrames) {
-        for (RNASequence readingFrame : readingFrames) {
-            Document seqDocument = gui.getSeqTextPane().getDocument();
+    public static void showReadingFrames(GUI gui, ProteinSequence[] readingFrames) {
+        Document seqDocument = gui.getSeqTextPane().getDocument();
+        for (ProteinSequence readingFrame : readingFrames) {
             try {
-                seqDocument.insertString(seqDocument.getLength(), readingFrame.toString().replace('U', 'T') + "\n", new SimpleAttributeSet());
+                seqDocument.insertString(seqDocument.getLength(), readingFrame.toString() + "\n", new SimpleAttributeSet());
             } catch (BadLocationException ex) {
-                JOptionPane.showMessageDialog(gui.getFrame(), ex.getMessage(), ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
+                GUI.showErrorMessage(ex, ex.getMessage());
             }
         }
     }
