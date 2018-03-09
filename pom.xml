@@ -16,6 +16,12 @@
             <artifactId>biojava-sequencing</artifactId>
             <version>4.0.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.biojava/biojava-ws -->
+        <dependency>
+            <groupId>org.biojava</groupId>
+            <artifactId>biojava-ws</artifactId>
+            <version>4.0.0</version>
+        </dependency>
     </dependencies> 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
