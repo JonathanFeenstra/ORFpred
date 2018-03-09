@@ -4,6 +4,7 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
+
 package orfpred.gui;
 
 import orfpred.sequence.ORFHighlighter;
@@ -29,8 +30,6 @@ public class GUI implements Runnable {
             orfLengteMenuItem;
     private JComboBox<String> headerComboBox;
     private JButton zoekButton;
-    private JLabel headerLabel, seqLabel, blastLabel;
-    private JScrollPane seqScrollPane, blastScrollPane;
     private JEditorPane seqTextPane;
 
     private final Font LABEL_FONT = new Font("Arial", Font.BOLD, 12);
@@ -44,7 +43,7 @@ public class GUI implements Runnable {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
-            showErrorMessage(ex, ex.getMessage());
+            System.err.println(ex.toString());
         }
         EventQueue.invokeLater(new GUI());
     }
@@ -52,13 +51,16 @@ public class GUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("ORFpred - Open Reading Frame predictie tool");
-        EventHandler eventHandler = new EventHandler();
+
         frame.setSize(720, 505);
         frame.setResizable(false);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationByPlatform(true);
         frame.setIconImage(new ImageIcon(getClass().getResource("/orfpred.png")).getImage());
+
+        GUIUpdater guiUpdater = new GUIUpdater(this);
+        GUIEventHandler eventHandler = new GUIEventHandler(guiUpdater);
 
         Container window = frame.getContentPane();
 
@@ -108,7 +110,7 @@ public class GUI implements Runnable {
 
         frame.setJMenuBar(menuBar);
 
-        headerLabel = new JLabel(new ImageIcon(getClass().getResource("/header.png")));
+        JLabel headerLabel = new JLabel(new ImageIcon(getClass().getResource("/header.png")));
         window.add(headerLabel, BorderLayout.NORTH);
 
         JPanel mainPanel = new JPanel();
@@ -116,13 +118,14 @@ public class GUI implements Runnable {
         mainPanel.setLayout(mainPanelLayout);
 
         //<editor-fold defaultstate="collapsed" desc="Mainpanel componenten aanmaken">
-        seqLabel = new JLabel("Sequentie");
+        JLabel seqLabel = new JLabel("Sequentie");
         seqLabel.setFont(LABEL_FONT);
+
         headerComboBox = new JComboBox();
         headerComboBox.setModel(new DefaultComboBoxModel(new String[]{"Open een bestand..."}));
         headerComboBox.setEnabled(false);
         headerComboBox.addItemListener(eventHandler);
-        
+
         zoekButton = new JButton("Voorspel ORF's", new ImageIcon(getClass().getResource("/search.png")));
         zoekButton.setEnabled(false);
         zoekButton.addActionListener(eventHandler);
@@ -135,17 +138,17 @@ public class GUI implements Runnable {
                         < getParent().getWidth();
             }
         };
-        
+
         // Zorgt ervoor dat de scrollbar niet automatisch van positie verandert.
         ((DefaultCaret) seqTextPane.getCaret()).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
         seqTextPane.setEditable(false);
-        
-        seqScrollPane = new JScrollPane(seqTextPane);
+
+        JScrollPane seqScrollPane = new JScrollPane(seqTextPane);
         seqScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        blastLabel = new JLabel("BLAST resultaten");
+        JLabel blastLabel = new JLabel("BLAST resultaten");
         blastLabel.setFont(LABEL_FONT);
-        blastScrollPane = new JScrollPane();
+        JScrollPane blastScrollPane = new JScrollPane();
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Layout, overgenomen uit GUI builder">
@@ -193,14 +196,25 @@ public class GUI implements Runnable {
     /**
      * Inner class voor het afhandelen van events in de GUI.
      */
-    private class EventHandler implements ActionListener, ItemListener {
+    private class GUIEventHandler implements ActionListener, ItemListener {
+
+        private final GUIUpdater updater;
+
+        /**
+         * Constructor.
+         *
+         * @param guiUpdater de GUIUpdater van de betreffende GUI
+         */
+        public GUIEventHandler(GUIUpdater guiUpdater) {
+            this.updater = guiUpdater;
+        }
 
         @Override
         public void actionPerformed(ActionEvent evt) {
             if (evt.getSource() == openMenuItem) {
                 EventQueue.invokeLater(() -> {
-                    GUIUpdater.loadFile(GUI.this);
-                });         
+                    updater.loadFile();
+                });
             } else if (evt.getSource() == dbSaveMenuItem) {
                 // TODO: Opslaan in database
             } else if (evt.getSource() == exitMenuItem) {
@@ -212,7 +226,9 @@ public class GUI implements Runnable {
             } else if (evt.getSource() == orfLengteMenuItem) {
                 // TODO: Toon pop-up waar ORF lengte kan worden ingesteld https://stackoverflow.com/questions/11093326/restricting-jtextfield-input-to-integers#11093360
             } else if (evt.getSource() == zoekButton) {
-                // TODO: Zoek en highlight ORF's in sequentie
+                EventQueue.invokeLater(() -> {
+                    // TODO: Zoek en highlight ORF's in sequentie
+                });
             }
         }
 
@@ -223,17 +239,15 @@ public class GUI implements Runnable {
             }
         }
     }
-    
+
     /**
      * Toont foutmelding pop-up.
-     * 
+     *
      * @param ex de exception
      * @param msg de boodschap
      */
-    public static void showErrorMessage(Exception ex, String msg) {
-        JFrame parent = new JFrame();
-        parent.setIconImage(new ImageIcon(GUI.class.getResource("/orfpred.png")).getImage());
-        JOptionPane.showMessageDialog(parent, msg, ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
+    public void showErrorMessage(Exception ex, String msg) {
+        JOptionPane.showMessageDialog(this.getFrame(), msg, ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
     }
 
     /**

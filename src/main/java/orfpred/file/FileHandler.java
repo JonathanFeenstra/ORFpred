@@ -4,6 +4,7 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
+
 package orfpred.file;
 
 import java.awt.Component;
@@ -17,7 +18,7 @@ import org.biojava.nbio.core.sequence.io.*;
 import org.biojava.nbio.sequencing.io.fastq.*;
 
 /**
- * Class voor het beheren van bestanden.
+ * Deze class bestaat exclusief uit static methoden om bestanden te beheren.
  *
  * @author Projectgroep 10
  * @since JDK 1.8
@@ -26,15 +27,15 @@ import org.biojava.nbio.sequencing.io.fastq.*;
 public class FileHandler {
 
     private static LinkedHashMap<String, DNASequence> headerToSeq;
+    private static File selectedFile;
 
     /**
      * Opent een JFileChooser om een bestand te selecteren.
      *
      * @param parent de parent voor de JFileChooser opendialog
-     * @return het geselecteerde bestand of null
      * @throws FileNotFoundException als het bestand niet gevonden is
      */
-    public static File selectFile(Component parent) throws FileNotFoundException {
+    public static void selectFile(Component parent) throws FileNotFoundException {
         JFileChooser chooser = new JFileChooser();
         for (FileType ft : FileType.values()) {
             chooser.addChoosableFileFilter(ft.getFileFilter());
@@ -43,28 +44,27 @@ public class FileHandler {
         int returnVal = chooser.showOpenDialog(parent);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             if (chooser.getSelectedFile().exists()) {
-                return chooser.getSelectedFile();
+                selectedFile = chooser.getSelectedFile();
+            } else {
+                throw new FileNotFoundException();
             }
-            throw new FileNotFoundException();
         }
-        return null;
     }
 
     /**
-     * Leest een bestand met DNA-sequenteie(s) en stopt data in headerToSeq.
+     * Leest het geselecteerde bestand en stopt data in headerToSeq.
      *
-     * @param file een bestand met DNA-sequentie(s)
-     * @throws java.lang.Exception
+     * @throws Exception bij exceptions uit BioJava
      */
-    public static void setHeaderToSeq(File file) throws Exception {
-        if (FileType.FASTA.getFileFilter().accept(file)) {
-            headerToSeq = FastaReaderHelper.readFastaDNASequence(file);
-        } else if (FileType.FASTQ.getFileFilter().accept(file)) {
-            headerToSeq = readFastqDNASequence(file);
-        } else if (FileType.GENBANK.getFileFilter().accept(file)) {
-            headerToSeq = GenbankReaderHelper.readGenbankDNASequence(file);
+    public static void readHeaderToSeq() throws Exception {
+        if (FileType.FASTA.getFileFilter().accept(selectedFile)) {
+            headerToSeq = FastaReaderHelper.readFastaDNASequence(selectedFile);
+        } else if (FileType.FASTQ.getFileFilter().accept(selectedFile)) {
+            headerToSeq = readFastqDNASequence(selectedFile);
+        } else if (FileType.GENBANK.getFileFilter().accept(selectedFile)) {
+            headerToSeq = GenbankReaderHelper.readGenbankDNASequence(selectedFile);
         } else {
-            headerToSeq = askFileTypeAndRead(file);
+            headerToSeq = askFileTypeAndRead(selectedFile);
         }
     }
 
@@ -98,8 +98,7 @@ public class FileHandler {
      * @param file FASTQ bestand
      * @return LinkedHashMap van FASTQ header(s) en DNA sequentie(s)
      * @throws IOException bij problemen met het bestand openen
-     * @throws org.biojava.nbio.core.exceptions.CompoundNotFoundException als
-     * karakter geen nucleotide is.
+     * @throws CompoundNotFoundException als karakter geen nucleotide is.
      */
     public static LinkedHashMap<String, DNASequence> readFastqDNASequence(File file) throws IOException, CompoundNotFoundException {
         FastqReader fastqReader = new SangerFastqReader();
@@ -109,11 +108,25 @@ public class FileHandler {
         }
         return fastqHeaderToSeq;
     }
+    
+    /**
+     * @return selectedFile
+     */
+    public static File getSelectedFile() {
+        return selectedFile;
+    }
 
     /**
      * @return headerToSeq
      */
     public static LinkedHashMap<String, DNASequence> getHeaderToSeq() {
         return headerToSeq;
+    }
+
+    /**
+     * @return headers
+     */
+    public static String[] getHeaders() {
+        return headerToSeq.keySet().toArray(new String[FileHandler.getHeaderToSeq().keySet().size()]);
     }
 }
