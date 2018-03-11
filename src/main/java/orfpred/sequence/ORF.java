@@ -4,7 +4,6 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
-
 package orfpred.sequence;
 
 import org.biojava.nbio.core.sequence.transcription.Frame;
@@ -19,22 +18,23 @@ import org.biojava.nbio.core.sequence.transcription.Frame;
 public class ORF { // TODO: Overerven uit BioJava sequentie: eiwit of nucleotide
 
     private final Frame readingFrame;
+    private final String sequence;
     private final int start;
     private final int stop;
-    // TODO: Meer attributen opslaan
 
     /**
      * Constructor.
      *
      * @param frame de reading frame
+     * @param seq de sequentie
      * @param startPos de startpositie
      * @param stopPos de stoppositie
      */
-    public ORF(Frame frame, int startPos, int stopPos) {
+    public ORF(Frame frame, String seq, int startPos, int stopPos) {
         this.readingFrame = frame;
         this.start = startPos;
         this.stop = stopPos;
-        // TODO: Meer attributen
+        this.sequence = seq;
     }
 
     /**
@@ -42,6 +42,13 @@ public class ORF { // TODO: Overerven uit BioJava sequentie: eiwit of nucleotide
      */
     public Frame getReadingFrame() {
         return readingFrame;
+    }
+
+    /**
+     * @return sequence
+     */
+    public String getSequence() {
+        return sequence;
     }
 
     /**

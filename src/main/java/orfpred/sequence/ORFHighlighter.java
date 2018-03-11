@@ -8,8 +8,12 @@ package orfpred.sequence;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.*;
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 import orfpred.gui.GUI;
@@ -27,9 +31,11 @@ public class ORFHighlighter implements Runnable {
 
     private static Color highlightKleur = Color.CYAN;
     private static DefaultHighlightPainter painter;
+    private static HashMap<Integer, ORF> positionToORF;
     private static int minORFLength = 30;
     private final ProteinSequence[] readingFrames;
     private final GUI targetGUI;
+    private boolean[] isHighlighted;
 
     /**
      * Constructor.
@@ -46,6 +52,8 @@ public class ORFHighlighter implements Runnable {
     @Override
     public void run() {
         targetGUI.getSeqTextPane().getHighlighter().removeAllHighlights();
+        isHighlighted = new boolean[targetGUI.getSeqTextPane().getText().length()];
+        positionToORF = new HashMap<>();
         predictORFs(readingFrames).forEach((ORF orf) -> {
             try {
                 highlightORF(targetGUI.getSeqTextPane(), orf);
@@ -53,6 +61,7 @@ public class ORFHighlighter implements Runnable {
                 targetGUI.showErrorMessage(ex, ex.getMessage());
             }
         });
+        addClickListener(targetGUI.getSeqTextPane());
     }
 
     /**
@@ -69,7 +78,7 @@ public class ORFHighlighter implements Runnable {
                 Matcher matcher = Pattern.compile("\\*.+?\\*").matcher(readingFrame.toString());
                 while (matcher.find()) {
                     if (matcher.group().length() - 2 >= minORFLength) {
-                        predictedORFs.add(new ORF(Frame.values()[frameNum], matcher.start() + 1, matcher.end() - 1));
+                        predictedORFs.add(new ORF(Frame.values()[frameNum], matcher.group().substring(1, matcher.group().length() - 1), matcher.start() + 1, matcher.end() - 1));
                     }
                 }
                 frameNum++;
@@ -90,8 +99,29 @@ public class ORFHighlighter implements Runnable {
         for (int i = 0; i < orf.getReadingFrame().ordinal(); i++) {
             offset += readingFrames[i].getLength() + 1;
         }
-        seqPane.getHighlighter().addHighlight(offset + orf.getStart(), offset + orf.getStop(), painter);
-        // TODO: ORF klikbaar maken
+        int start = offset + orf.getStart(), stop = offset + orf.getStop();
+        seqPane.getHighlighter().addHighlight(start, stop, painter);
+        for (int pos = start; pos < stop; pos++) {
+            isHighlighted[pos] = true;
+            positionToORF.put(pos, orf);
+        }
+    }
+
+    /**
+     * Voegt CaretListener toe aan JTextPane die het BLAST dialoogvenster opent
+     * bij het klikken op een gemarkeerd ORF.
+     *
+     * @param seqTextPane de te beluisteren JTextPane
+     */
+    public void addClickListener(JTextPane seqTextPane) {
+        for (CaretListener clickListener : seqTextPane.getCaretListeners()) {
+            seqTextPane.removeCaretListener(clickListener);
+        }
+        seqTextPane.addCaretListener((CaretEvent e) -> {
+            if (isHighlighted[e.getDot()]) {
+                JOptionPane.showInputDialog(positionToORF.get(e.getDot()).getSequence()); // TODO: Placeholder, zorg dat je echt kan blasten
+            }
+        });
     }
 
     /**

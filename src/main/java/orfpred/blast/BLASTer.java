@@ -4,7 +4,6 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
-
 package orfpred.blast;
 
 /**

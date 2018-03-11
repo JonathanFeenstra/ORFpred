@@ -7,7 +7,6 @@
 package orfpred.gui;
 
 import orfpred.sequence.ORFHighlighter;
-import orfpred.file.FileHandler;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

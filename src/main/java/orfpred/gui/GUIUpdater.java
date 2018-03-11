@@ -25,7 +25,7 @@ import org.biojava.nbio.core.sequence.ProteinSequence;
  * @version 1.0
  */
 public class GUIUpdater {
-
+    
     private final GUI targetGUI;
     private LinkedHashMap<String, DNASequence> headerToSeq;
     private ProteinSequence[] shownReadingFrames;

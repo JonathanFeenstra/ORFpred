@@ -4,7 +4,6 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
-
 package orfpred.sequence;
 
 import org.biojava.nbio.core.sequence.*;
@@ -18,7 +17,7 @@ import org.biojava.nbio.core.sequence.transcription.Frame;
  * @version 1.0
  */
 public class ReadingFramer {
-    
+
     /**
      * Geeft eiwit reading frames voor gegeven DNA-sequentie.
      *
@@ -35,4 +34,3 @@ public class ReadingFramer {
     }
 
 }
-
