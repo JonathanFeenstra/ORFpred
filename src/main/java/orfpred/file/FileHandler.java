@@ -4,7 +4,6 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
-
 package orfpred.file;
 
 import java.awt.Component;
@@ -26,16 +25,18 @@ import org.biojava.nbio.sequencing.io.fastq.*;
  */
 public class FileHandler {
 
-    private static LinkedHashMap<String, DNASequence> headerToSeq;
-    private static File selectedFile;
+    // Stopt default constuctor zodat de class niet kan worden geïnstantieerd.
+    private FileHandler() {
+    }
 
     /**
      * Opent een JFileChooser om een bestand te selecteren.
      *
      * @param parent de parent voor de JFileChooser opendialog
+     * @return het geselecteerde bestand (of null)
      * @throws FileNotFoundException als het bestand niet gevonden is
      */
-    public static void selectFile(Component parent) throws FileNotFoundException {
+    public static File selectFile(Component parent) throws FileNotFoundException {
         JFileChooser chooser = new JFileChooser();
         for (FileType ft : FileType.values()) {
             chooser.addChoosableFileFilter(ft.getFileFilter());
@@ -44,28 +45,30 @@ public class FileHandler {
         int returnVal = chooser.showOpenDialog(parent);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             if (chooser.getSelectedFile().exists()) {
-                selectedFile = chooser.getSelectedFile();
-            } else {
-                throw new FileNotFoundException();
+                return chooser.getSelectedFile();
             }
+            throw new FileNotFoundException();
         }
+        return null;
     }
 
     /**
-     * Leest het geselecteerde bestand en stopt data in headerToSeq.
+     * Leest een bestand en retourneert LinkedHashMap van headers naar
+     * DNASequence objecten.
      *
+     * @param file het te lezen bestand
+     * @return LinkedHashMap<header, DNASequence>
      * @throws Exception bij exceptions uit BioJava
      */
-    public static void readHeaderToSeq() throws Exception {
-        if (FileType.FASTA.getFileFilter().accept(selectedFile)) {
-            headerToSeq = FastaReaderHelper.readFastaDNASequence(selectedFile);
-        } else if (FileType.FASTQ.getFileFilter().accept(selectedFile)) {
-            headerToSeq = readFastqDNASequence(selectedFile);
-        } else if (FileType.GENBANK.getFileFilter().accept(selectedFile)) {
-            headerToSeq = GenbankReaderHelper.readGenbankDNASequence(selectedFile);
-        } else {
-            headerToSeq = askFileTypeAndRead(selectedFile);
+    public static LinkedHashMap<String, DNASequence> readHeaderToSeq(File file) throws Exception {
+        if (FileType.FASTA.getFileFilter().accept(file)) {
+            return FastaReaderHelper.readFastaDNASequence(file);
+        } else if (FileType.FASTQ.getFileFilter().accept(file)) {
+            return readFastqDNASequence(file);
+        } else if (FileType.GENBANK.getFileFilter().accept(file)) {
+            return GenbankReaderHelper.readGenbankDNASequence(file);
         }
+        return askFileTypeAndRead(file);
     }
 
     /**
@@ -108,25 +111,5 @@ public class FileHandler {
         }
         return fastqHeaderToSeq;
     }
-    
-    /**
-     * @return selectedFile
-     */
-    public static File getSelectedFile() {
-        return selectedFile;
-    }
 
-    /**
-     * @return headerToSeq
-     */
-    public static LinkedHashMap<String, DNASequence> getHeaderToSeq() {
-        return headerToSeq;
-    }
-
-    /**
-     * @return headers
-     */
-    public static String[] getHeaders() {
-        return headerToSeq.keySet().toArray(new String[FileHandler.getHeaderToSeq().keySet().size()]);
-    }
 }

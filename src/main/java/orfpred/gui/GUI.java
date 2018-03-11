@@ -4,7 +4,6 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
-
 package orfpred.gui;
 
 import orfpred.sequence.ORFHighlighter;
@@ -13,6 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
+import orfpred.sequence.ReadingFramer;
 
 /**
  * Class voor het weergeven van de GUI.
@@ -30,7 +30,7 @@ public class GUI implements Runnable {
             orfLengteMenuItem;
     private JComboBox<String> headerComboBox;
     private JButton zoekButton;
-    private JEditorPane seqTextPane;
+    private JTextPane seqTextPane;
 
     private final Font LABEL_FONT = new Font("Arial", Font.BOLD, 12);
 
@@ -142,6 +142,7 @@ public class GUI implements Runnable {
         // Zorgt ervoor dat de scrollbar niet automatisch van positie verandert.
         ((DefaultCaret) seqTextPane.getCaret()).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
         seqTextPane.setEditable(false);
+        seqTextPane.setFont(new Font("Lucida Console", Font.PLAIN, 12));
 
         JScrollPane seqScrollPane = new JScrollPane(seqTextPane);
         seqScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -226,16 +227,16 @@ public class GUI implements Runnable {
             } else if (evt.getSource() == orfLengteMenuItem) {
                 // TODO: Toon pop-up waar ORF lengte kan worden ingesteld https://stackoverflow.com/questions/11093326/restricting-jtextfield-input-to-integers#11093360
             } else if (evt.getSource() == zoekButton) {
-                EventQueue.invokeLater(() -> {
-                    // TODO: Zoek en highlight ORF's in sequentie
-                });
+                EventQueue.invokeLater(new ORFHighlighter(updater.getShownReadingFrames(), GUI.this));
             }
         }
 
         @Override
         public void itemStateChanged(ItemEvent e) {
             if (e.getSource() == headerComboBox) {
-                seqTextPane.setText(FileHandler.getHeaderToSeq().get(headerComboBox.getSelectedItem().toString()).toString());
+                EventQueue.invokeLater(() -> {
+                    updater.showReadingFrames(ReadingFramer.getProteinFrames(updater.getHeaderToSeq().get(headerComboBox.getSelectedItem().toString())));
+                });
             }
         }
     }
@@ -274,7 +275,7 @@ public class GUI implements Runnable {
     /**
      * @return seqTextPane
      */
-    public JEditorPane getSeqTextPane() {
+    public JTextPane getSeqTextPane() {
         return seqTextPane;
     }
 }

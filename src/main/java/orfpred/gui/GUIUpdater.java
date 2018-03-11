@@ -4,14 +4,16 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
-
 package orfpred.gui;
 
+import java.io.File;
 import orfpred.sequence.ReadingFramer;
 import orfpred.file.FileHandler;
 import java.io.FileNotFoundException;
+import java.util.LinkedHashMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.text.*;
+import org.biojava.nbio.core.sequence.DNASequence;
 import org.biojava.nbio.core.sequence.ProteinSequence;
 
 /**
@@ -25,30 +27,29 @@ import org.biojava.nbio.core.sequence.ProteinSequence;
 public class GUIUpdater {
 
     private final GUI targetGUI;
-            
+    private LinkedHashMap<String, DNASequence> headerToSeq;
+    private ProteinSequence[] shownReadingFrames;
+
     /**
      * Constructor.
-     * 
+     *
      * @param gui
      */
     public GUIUpdater(GUI gui) {
         this.targetGUI = gui;
     }
-    
+
     /**
      * Procedure om bestanden in te laden.
      */
     public void loadFile() {
         try {
-            FileHandler.selectFile(targetGUI.getFrame());
-            if (FileHandler.getSelectedFile() != null) {
-                FileHandler.readHeaderToSeq();
-                if (FileHandler.getHeaderToSeq() != null) {
-                    showHeaders(FileHandler.getHeaders());
-                    // TODO: Dit is niet nodig als ze al enabled staan, misschien zorgen dat dit alleen de eerste keer gebeurt
-                    targetGUI.getHeaderComboBox().setEnabled(true);
-                    targetGUI.getZoekButton().setEnabled(true);
-                    showReadingFrames(ReadingFramer.getProteinFrames(FileHandler.getHeaderToSeq().entrySet().iterator().next().getValue()));
+            File selectedFile = FileHandler.selectFile(targetGUI.getFrame());
+            if (selectedFile != null) {
+                headerToSeq = FileHandler.readHeaderToSeq(selectedFile);
+                if (headerToSeq != null) {
+                    showHeaders(headerToSeq.keySet().toArray(new String[headerToSeq.size()]));
+                    showReadingFrames(ReadingFramer.getProteinFrames(headerToSeq.entrySet().iterator().next().getValue()));
                 }
             }
         } catch (FileNotFoundException ex) {
@@ -64,6 +65,7 @@ public class GUIUpdater {
      * @param readingFrames de te weergeven reading frames
      */
     public void showReadingFrames(ProteinSequence[] readingFrames) {
+        targetGUI.getSeqTextPane().setText("");
         Document seqDocument = targetGUI.getSeqTextPane().getDocument();
         for (ProteinSequence readingFrame : readingFrames) {
             try {
@@ -72,6 +74,10 @@ public class GUIUpdater {
                 targetGUI.showErrorMessage(ex, ex.getMessage());
             }
         }
+        if (!targetGUI.getZoekButton().isEnabled()) {
+            targetGUI.getZoekButton().setEnabled(true);
+        }
+        shownReadingFrames = readingFrames;
     }
 
     /**
@@ -81,5 +87,22 @@ public class GUIUpdater {
      */
     public void showHeaders(String[] headers) {
         targetGUI.getHeaderComboBox().setModel(new DefaultComboBoxModel<>(headers));
+        if (!targetGUI.getHeaderComboBox().isEnabled()) {
+            targetGUI.getHeaderComboBox().setEnabled(true);
+        }
+    }
+
+    /**
+     * @return headerToSeq
+     */
+    public LinkedHashMap<String, DNASequence> getHeaderToSeq() {
+        return headerToSeq;
+    }
+
+    /**
+     * @return shownReadingFrames
+     */
+    public ProteinSequence[] getShownReadingFrames() {
+        return shownReadingFrames;
     }
 }

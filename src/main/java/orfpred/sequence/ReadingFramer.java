@@ -20,15 +20,15 @@ import org.biojava.nbio.core.sequence.transcription.Frame;
 public class ReadingFramer {
     
     /**
-     * Geeft eiwit reading frames voor gegeven DNA sequentie.
+     * Geeft eiwit reading frames voor gegeven DNA-sequentie.
      *
-     * @param dnaSeq de DNA sequentie
+     * @param dnaSeq de DNA-sequentie
      * @return array van eiwit reading frames
      */
     public static ProteinSequence[] getProteinFrames(DNASequence dnaSeq) {
         ProteinSequence[] proteinFrames = new ProteinSequence[6];
         for (int i = 0; i <= 5; i++) {
-            RNASequence rnaFrame = dnaSeq.getRNASequence(Frame.getAllFrames()[i]);
+            RNASequence rnaFrame = dnaSeq.getRNASequence(Frame.values()[i]);
             proteinFrames[i] = rnaFrame.getProteinSequence();
         }
         return proteinFrames;

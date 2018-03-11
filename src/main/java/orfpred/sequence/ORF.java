@@ -4,6 +4,7 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
+
 package orfpred.sequence;
 
 import org.biojava.nbio.core.sequence.transcription.Frame;
@@ -17,8 +18,9 @@ import org.biojava.nbio.core.sequence.transcription.Frame;
  */
 public class ORF { // TODO: Overerven uit BioJava sequentie: eiwit of nucleotide
 
-    private Frame readingFrame;
-    private int start, stop;
+    private final Frame readingFrame;
+    private final int start;
+    private final int stop;
     // TODO: Meer attributen opslaan
 
     /**
@@ -27,12 +29,8 @@ public class ORF { // TODO: Overerven uit BioJava sequentie: eiwit of nucleotide
      * @param frame de reading frame
      * @param startPos de startpositie
      * @param stopPos de stoppositie
-     * @throws InvalidORFLengthException als lengte niet deelbaar is door 3.
      */
-    public ORF(Frame frame, int startPos, int stopPos) throws InvalidORFLengthException {
-        if ((stopPos - startPos) % 3 != 0) {
-            throw new InvalidORFLengthException(startPos, stopPos);
-        }
+    public ORF(Frame frame, int startPos, int stopPos) {
         this.readingFrame = frame;
         this.start = startPos;
         this.stop = stopPos;
@@ -40,27 +38,23 @@ public class ORF { // TODO: Overerven uit BioJava sequentie: eiwit of nucleotide
     }
 
     /**
-     * Exception bij ORF lengtes die niet deelbaar zijn door 3.
+     * @return readingFrame
      */
-    class InvalidORFLengthException extends Exception {
+    public Frame getReadingFrame() {
+        return readingFrame;
+    }
 
-        /**
-         * Parameterloze Constructor.
-         */
-        public InvalidORFLengthException() {
-            super("De ORF lengte moet deelbaar zijn door 3");
-        }
+    /**
+     * @return start
+     */
+    public int getStart() {
+        return start;
+    }
 
-        /**
-         * Constructor met start en eindpositie.
-         *
-         * @param start startpositie van ORF
-         * @param stop stoppositie van ORF
-         */
-        public InvalidORFLengthException(int start, int stop) {
-            super("De ORF lengte moet deelbaar zijn door 3.\n"
-                    + "Startpositie " + start + " en stoppositie " + stop
-                    + "resulteren in een lengte van " + (stop - start) + ".");
-        }
+    /**
+     * @return stop
+     */
+    public int getStop() {
+        return stop;
     }
 }
