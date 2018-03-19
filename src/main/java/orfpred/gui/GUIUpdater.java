@@ -25,7 +25,7 @@ import org.biojava.nbio.core.sequence.ProteinSequence;
  * @version 1.0
  */
 public class GUIUpdater {
-    
+
     private final GUI targetGUI;
     private LinkedHashMap<String, DNASequence> headerToSeq;
     private ProteinSequence[] shownReadingFrames;
@@ -67,12 +67,13 @@ public class GUIUpdater {
     public void showReadingFrames(ProteinSequence[] readingFrames) {
         targetGUI.getSeqTextPane().setText("");
         Document seqDocument = targetGUI.getSeqTextPane().getDocument();
-        for (ProteinSequence readingFrame : readingFrames) {
-            try {
+        try {
+            seqDocument.insertString(seqDocument.getLength(), headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem()).toString() + "\n", new SimpleAttributeSet());
+            for (ProteinSequence readingFrame : readingFrames) {
                 seqDocument.insertString(seqDocument.getLength(), readingFrame.toString() + "\n", new SimpleAttributeSet());
-            } catch (BadLocationException ex) {
-                targetGUI.showErrorMessage(ex, ex.getMessage());
             }
+        } catch (BadLocationException ex) {
+            targetGUI.showErrorMessage(ex, ex.getMessage());
         }
         if (!targetGUI.getZoekButton().isEnabled()) {
             targetGUI.getZoekButton().setEnabled(true);
