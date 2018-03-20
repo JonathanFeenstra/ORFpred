@@ -11,7 +11,9 @@ import orfpred.sequence.ReadingFramer;
 import orfpred.file.FileHandler;
 import java.io.FileNotFoundException;
 import java.util.LinkedHashMap;
+import java.util.NoSuchElementException;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.text.*;
 import org.biojava.nbio.core.sequence.DNASequence;
 import org.biojava.nbio.core.sequence.ProteinSequence;
@@ -54,6 +56,8 @@ public class GUIUpdater {
             }
         } catch (FileNotFoundException ex) {
             targetGUI.showErrorMessage(ex, ex.getMessage());
+        } catch (NoSuchElementException ex) {
+            JOptionPane.showMessageDialog(null, "Bestandstype niet juist. Kijk of het bestand in het juiste format staat en of het bestand DNA sequenties bevat");
         } catch (Exception ex) {
             targetGUI.showErrorMessage(ex, ex.getMessage());
         }
