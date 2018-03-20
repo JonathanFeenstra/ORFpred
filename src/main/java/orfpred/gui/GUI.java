@@ -30,6 +30,7 @@ public class GUI implements Runnable {
     private JComboBox<String> headerComboBox;
     private JButton zoekButton;
     private JTextPane seqTextPane;
+    private javax.swing.JLabel readingFrameLabel;
 
     private final Font LABEL_FONT = new Font("Arial", Font.BOLD, 12);
 
@@ -128,7 +129,10 @@ public class GUI implements Runnable {
         zoekButton = new JButton("Voorspel ORF's", new ImageIcon(getClass().getResource("/search.png")));
         zoekButton.setEnabled(false);
         zoekButton.addActionListener(eventHandler);
-        
+
+        readingFrameLabel = new JLabel("<html>+1<br/>+2<br/>+3<br/>Ref<br/>-1<br/>-2<br/>-3</html>", SwingConstants.CENTER);
+        readingFrameLabel.setFont(new Font("Courier", Font.BOLD, 12));
+
         seqTextPane = new JTextPane() {
             // Zorgt ervoor dat de textpane horizontaal uitbreidt.
             @Override
@@ -158,7 +162,10 @@ public class GUI implements Runnable {
                                 .addContainerGap()
                                 .addGroup(mainPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addComponent(blastScrollPane, GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
-                                        .addComponent(seqScrollPane, GroupLayout.Alignment.LEADING)
+                                        .addGroup(mainPanelLayout.createSequentialGroup()
+                                                .addComponent(readingFrameLabel)
+                                                .addGap(1, 1, 1)
+                                                .addComponent(seqScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
                                                 .addComponent(blastLabel)
                                                 .addGap(0, 0, Short.MAX_VALUE))
@@ -179,7 +186,9 @@ public class GUI implements Runnable {
                                         .addComponent(zoekButton)
                                         .addComponent(headerComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(seqScrollPane, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(seqScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                                        .addComponent(readingFrameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 110, 110))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(blastLabel)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
