@@ -6,10 +6,12 @@
  */
 package orfpred.gui;
 
+import java.awt.List;
 import java.io.File;
 import orfpred.sequence.ReadingFramer;
 import orfpred.file.FileHandler;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 import javax.swing.DefaultComboBoxModel;
@@ -86,7 +88,7 @@ public class GUIUpdater {
                         break;
                     case 3:
                         seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
-                        seqDocument.insertString(seqDocument.getLength(), headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem()).toString() + "\n", new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem()).toString() + "          \n", new SimpleAttributeSet());
                         break;
                     case 4:
                         seqDocument.insertString(seqDocument.getLength(), " " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
@@ -95,7 +97,25 @@ public class GUIUpdater {
                         seqDocument.insertString(seqDocument.getLength(), "  " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
                         break;
                     case 6:
-                        seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces, new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        for (int i = 0; i < headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem()).toString().length(); i += 10) {
+                            if (i < 10) {
+                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "         ", new SimpleAttributeSet());
+                            } else if (i < 100) {
+                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "        ", new SimpleAttributeSet());
+                            } else if (i < 1000) {
+                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "       ", new SimpleAttributeSet());
+                            } else if (i < 10000) {
+                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "      ", new SimpleAttributeSet());
+                            } else if (i < 100000) {
+                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "     ", new SimpleAttributeSet());
+                            } else if (i < 1000000) {
+                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "    ", new SimpleAttributeSet());
+                            } else {
+                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "   ", new SimpleAttributeSet());
+                            }
+
+                        }
                         break;
                     default:
                         break;
