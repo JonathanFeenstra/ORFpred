@@ -68,35 +68,34 @@ public class GUIUpdater {
         targetGUI.getSeqTextPane().setText("");
         Document seqDocument = targetGUI.getSeqTextPane().getDocument();
         try {
-            
+
             int teller = 0;
             for (ProteinSequence readingFrame : readingFrames) {
                 teller++;
                 String readingFrameWithSpaces = readingFrame.toString().replace("", "  ").trim();
-                switch(teller){
+                switch (teller) {
                     case 1:
-                        seqDocument.insertString(seqDocument.getLength(), " "+readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), " " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
                         break;
                     case 2:
-                        seqDocument.insertString(seqDocument.getLength(), "  "+readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), "  " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
                         break;
                     case 3:
-                        seqDocument.insertString(seqDocument.getLength(), "   "+readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
                         seqDocument.insertString(seqDocument.getLength(), headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem()).toString() + "\n", new SimpleAttributeSet());
                         break;
                     case 4:
-                        seqDocument.insertString(seqDocument.getLength(), " "+readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), " " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
                         break;
                     case 5:
-                        seqDocument.insertString(seqDocument.getLength(), "  "+readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), "  " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
                         break;
                     case 6:
-                        seqDocument.insertString(seqDocument.getLength(), "   "+readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces, new SimpleAttributeSet());
                         break;
                     default:
                         break;
                 }
-                //seqDocument.insertString(seqDocument.getLength(), readingFrame.toString() + "\n", new SimpleAttributeSet());
             }
         } catch (BadLocationException ex) {
             targetGUI.showErrorMessage(ex, ex.getMessage());

@@ -17,6 +17,7 @@ import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 import orfpred.gui.GUI;
+import orfpred.gui.GUIUpdater;
 import org.biojava.nbio.core.sequence.ProteinSequence;
 import org.biojava.nbio.core.sequence.transcription.Frame;
 
@@ -75,7 +76,7 @@ public class ORFHighlighter implements Runnable {
         int frameNum = 0;
         if (readingFrames != null) {
             for (ProteinSequence readingFrame : readingFrames) {
-                Matcher matcher = Pattern.compile("\\*.+?\\*").matcher(readingFrame.toString());
+                Matcher matcher = Pattern.compile("\\*[^*]+?\\*").matcher(readingFrame.toString());
                 while (matcher.find()) {
                     if (matcher.group().length() - 2 >= minORFLength) {
                         predictedORFs.add(new ORF(Frame.values()[frameNum], matcher.group().substring(1, matcher.group().length() - 1), matcher.start() + 1, matcher.end() - 1));
@@ -97,9 +98,20 @@ public class ORFHighlighter implements Runnable {
     public void highlightORF(JTextPane seqPane, ORF orf) throws BadLocationException {
         int offset = 0;
         for (int i = 0; i < orf.getReadingFrame().ordinal(); i++) {
-            offset += readingFrames[i].getLength() + 1;
+            offset += readingFrames[i].getLength() * 3 + 1;
+            switch (i) {
+                case 1:
+                    offset++;
+                    break;
+                case 2:
+                    offset += seqPane.getText().split("\n")[3].length();
+                    break;
+                case 4:
+                    offset++;
+                    break;
+            }
         }
-        int start = offset + orf.getStart(), stop = offset + orf.getStop();
+        int start = offset + orf.getStart() * 3, stop = offset + orf.getStop() * 3;
         seqPane.getHighlighter().addHighlight(start, stop, painter);
         for (int pos = start; pos < stop; pos++) {
             isHighlighted[pos] = true;
@@ -118,8 +130,12 @@ public class ORFHighlighter implements Runnable {
             seqTextPane.removeCaretListener(clickListener);
         }
         seqTextPane.addCaretListener((CaretEvent e) -> {
-            if (isHighlighted[e.getDot()]) {
-                JOptionPane.showInputDialog(positionToORF.get(e.getDot()).getSequence()); // TODO: Placeholder, zorg dat je echt kan blasten
+            try {
+                if (isHighlighted[e.getDot()]) {
+                    JOptionPane.showInputDialog(positionToORF.get(e.getDot()).getSequence()); // TODO: Placeholder, zorg dat je echt kan blasten
+                }
+            } catch (Exception ex) {
+                // Negeer: er wordt buiten de tekst geklikt
             }
         });
     }

@@ -128,7 +128,7 @@ public class GUI implements Runnable {
         zoekButton = new JButton("Voorspel ORF's", new ImageIcon(getClass().getResource("/search.png")));
         zoekButton.setEnabled(false);
         zoekButton.addActionListener(eventHandler);
-
+        
         seqTextPane = new JTextPane() {
             // Zorgt ervoor dat de textpane horizontaal uitbreidt.
             @Override
@@ -187,7 +187,6 @@ public class GUI implements Runnable {
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         //</editor-fold>
-
         window.add(mainPanel);
 
         frame.setVisible(true);
