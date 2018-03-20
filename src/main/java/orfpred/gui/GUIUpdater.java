@@ -25,7 +25,7 @@ import org.biojava.nbio.core.sequence.ProteinSequence;
  * @version 1.0
  */
 public class GUIUpdater {
-    
+
     private final GUI targetGUI;
     private LinkedHashMap<String, DNASequence> headerToSeq;
     private ProteinSequence[] shownReadingFrames;
@@ -60,19 +60,45 @@ public class GUIUpdater {
     }
 
     /**
-     * Toont de reading frames in de GUI.
+     * Toont de reading frames en DNA sequentie in de GUI.
      *
      * @param readingFrames de te weergeven reading frames
      */
     public void showReadingFrames(ProteinSequence[] readingFrames) {
         targetGUI.getSeqTextPane().setText("");
         Document seqDocument = targetGUI.getSeqTextPane().getDocument();
-        for (ProteinSequence readingFrame : readingFrames) {
-            try {
-                seqDocument.insertString(seqDocument.getLength(), readingFrame.toString() + "\n", new SimpleAttributeSet());
-            } catch (BadLocationException ex) {
-                targetGUI.showErrorMessage(ex, ex.getMessage());
+        try {
+
+            int teller = 0;
+            for (ProteinSequence readingFrame : readingFrames) {
+                teller++;
+                String readingFrameWithSpaces = readingFrame.toString().replace("", "  ").trim();
+                switch (teller) {
+                    case 1:
+                        seqDocument.insertString(seqDocument.getLength(), " " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        break;
+                    case 2:
+                        seqDocument.insertString(seqDocument.getLength(), "  " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        break;
+                    case 3:
+                        seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem()).toString() + "\n", new SimpleAttributeSet());
+                        break;
+                    case 4:
+                        seqDocument.insertString(seqDocument.getLength(), " " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        break;
+                    case 5:
+                        seqDocument.insertString(seqDocument.getLength(), "  " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        break;
+                    case 6:
+                        seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces, new SimpleAttributeSet());
+                        break;
+                    default:
+                        break;
+                }
             }
+        } catch (BadLocationException ex) {
+            targetGUI.showErrorMessage(ex, ex.getMessage());
         }
         if (!targetGUI.getZoekButton().isEnabled()) {
             targetGUI.getZoekButton().setEnabled(true);

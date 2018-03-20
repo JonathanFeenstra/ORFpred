@@ -128,7 +128,7 @@ public class GUI implements Runnable {
         zoekButton = new JButton("Voorspel ORF's", new ImageIcon(getClass().getResource("/search.png")));
         zoekButton.setEnabled(false);
         zoekButton.addActionListener(eventHandler);
-
+        
         seqTextPane = new JTextPane() {
             // Zorgt ervoor dat de textpane horizontaal uitbreidt.
             @Override
@@ -141,7 +141,7 @@ public class GUI implements Runnable {
         // Zorgt ervoor dat de scrollbar niet automatisch van positie verandert.
         ((DefaultCaret) seqTextPane.getCaret()).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
         seqTextPane.setEditable(false);
-        seqTextPane.setFont(new Font("Lucida Console", Font.PLAIN, 12));
+        seqTextPane.setFont(new Font("Courier", Font.PLAIN, 12));
 
         JScrollPane seqScrollPane = new JScrollPane(seqTextPane);
         seqScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -179,15 +179,14 @@ public class GUI implements Runnable {
                                         .addComponent(zoekButton)
                                         .addComponent(headerComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(seqScrollPane, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(seqScrollPane, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(blastLabel)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(blastScrollPane, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(blastScrollPane, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         //</editor-fold>
-
         window.add(mainPanel);
 
         frame.setVisible(true);
