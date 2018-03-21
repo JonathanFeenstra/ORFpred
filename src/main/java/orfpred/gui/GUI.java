@@ -136,6 +136,8 @@ public class GUI implements Runnable {
         } else {
             readingFrameLabel.setFont(new Font("Courier", Font.BOLD, 12));
         }
+        readingFrameLabel.setVerticalAlignment(SwingConstants.TOP);
+        
         seqTextPane = new JTextPane() {
             // Zorgt ervoor dat de textpane horizontaal uitbreidt.
             @Override
