@@ -136,7 +136,6 @@ public class GUI implements Runnable {
         } else {
             readingFrameLabel.setFont(new Font("Courier", Font.BOLD, 12));
         }
-        readingFrameLabel.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(4.0f)));
         seqTextPane = new JTextPane() {
             // Zorgt ervoor dat de textpane horizontaal uitbreidt.
             @Override
