@@ -104,6 +104,9 @@ public class ORFHighlighter implements Runnable {
                     break;
                 case 2:
                     offset += seqPane.getText().split("\n")[3].length();
+                    if (System.getProperty("os.name").startsWith("Windows")) {
+                        offset--;
+                    }
                     break;
                 case 4:
                     offset++;
