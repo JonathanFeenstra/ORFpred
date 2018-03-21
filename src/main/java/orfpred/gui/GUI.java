@@ -130,8 +130,12 @@ public class GUI implements Runnable {
         zoekButton.setEnabled(false);
         zoekButton.addActionListener(eventHandler);
 
-        readingFrameLabel = new JLabel("<html>+1<br/>+2<br/>+3<br/>Ref<br/>-1<br/>-2<br/>-3</html>", SwingConstants.CENTER);
-        readingFrameLabel.setFont(new Font("Courier", Font.BOLD, 12));
+        readingFrameLabel = new JLabel("<html>+1<br/>+2<br/>+3<br/>Ref<br/>-1<br/>-2<br/>-3<br/>Pos</html>", SwingConstants.CENTER);
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            readingFrameLabel.setFont(new Font("Lucida Console", Font.BOLD, 12));
+        } else {
+            readingFrameLabel.setFont(new Font("Courier", Font.BOLD, 12));
+        }
 
         seqTextPane = new JTextPane() {
             // Zorgt ervoor dat de textpane horizontaal uitbreidt.
@@ -147,7 +151,7 @@ public class GUI implements Runnable {
         seqTextPane.setEditable(false);
         if (System.getProperty("os.name").startsWith("Windows")) {
             seqTextPane.setFont(new Font("Lucida Console", Font.PLAIN, 12));
-        }else{
+        } else {
             seqTextPane.setFont(new Font("Courier", Font.PLAIN, 12));
         }
 
@@ -192,7 +196,8 @@ public class GUI implements Runnable {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(seqScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                                        .addComponent(readingFrameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 110, 110))
+                                        .addComponent(readingFrameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                //.addComponent(readingFrameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 110, 110) // oud werkend
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(blastLabel)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
