@@ -136,7 +136,7 @@ public class GUI implements Runnable {
         } else {
             readingFrameLabel.setFont(new Font("Courier", Font.BOLD, 12));
         }
-
+        readingFrameLabel.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(4.0f)));
         seqTextPane = new JTextPane() {
             // Zorgt ervoor dat de textpane horizontaal uitbreidt.
             @Override
@@ -196,8 +196,7 @@ public class GUI implements Runnable {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(seqScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                                        .addComponent(readingFrameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                //.addComponent(readingFrameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 110, 110) // oud werkend
+                                        .addComponent(readingFrameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(blastLabel)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
