@@ -6,6 +6,7 @@
  */
 package orfpred.sequence;
 
+import org.biojava.nbio.core.sequence.DNASequence;
 import org.biojava.nbio.core.sequence.transcription.Frame;
 
 /**
@@ -15,12 +16,11 @@ import org.biojava.nbio.core.sequence.transcription.Frame;
  * @since JDK 1.8
  * @version 1.0
  */
-public class ORF { // TODO: Overerven uit BioJava sequentie: eiwit of nucleotide
+public class ORF extends DNASequence {
 
     private final Frame readingFrame;
     private final String sequence;
-    private final int start;
-    private final int stop;
+    private final int start, stop;
 
     /**
      * Constructor.

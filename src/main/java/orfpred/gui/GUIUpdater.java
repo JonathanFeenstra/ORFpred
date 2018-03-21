@@ -6,12 +6,10 @@
  */
 package orfpred.gui;
 
-import java.awt.List;
 import java.io.File;
 import orfpred.sequence.ReadingFramer;
 import orfpred.file.FileHandler;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 import javax.swing.DefaultComboBoxModel;
@@ -74,47 +72,27 @@ public class GUIUpdater {
         targetGUI.getSeqTextPane().setText("");
         Document seqDocument = targetGUI.getSeqTextPane().getDocument();
         try {
-
-            int teller = 0;
+            int lineNum = 0;
             for (ProteinSequence readingFrame : readingFrames) {
-                teller++;
+                lineNum++;
                 String readingFrameWithSpaces = readingFrame.toString().replace("", "  ").trim();
-                switch (teller) {
+                switch (lineNum) {
                     case 1:
+                    case 4:
                         seqDocument.insertString(seqDocument.getLength(), " " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
                         break;
                     case 2:
+                    case 5:
                         seqDocument.insertString(seqDocument.getLength(), "  " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
                         break;
                     case 3:
                         seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
-                        seqDocument.insertString(seqDocument.getLength(), headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem()).toString() + "          \n", new SimpleAttributeSet());
-                        break;
-                    case 4:
-                        seqDocument.insertString(seqDocument.getLength(), " " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
-                        break;
-                    case 5:
-                        seqDocument.insertString(seqDocument.getLength(), "  " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem().toString()).toString() + "          \n", new SimpleAttributeSet());
                         break;
                     case 6:
                         seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
-                        for (int i = 0; i < headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem()).toString().length(); i += 10) {
-                            if (i < 10) {
-                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "         ", new SimpleAttributeSet());
-                            } else if (i < 100) {
-                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "        ", new SimpleAttributeSet());
-                            } else if (i < 1000) {
-                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "       ", new SimpleAttributeSet());
-                            } else if (i < 10000) {
-                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "      ", new SimpleAttributeSet());
-                            } else if (i < 100000) {
-                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "     ", new SimpleAttributeSet());
-                            } else if (i < 1000000) {
-                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "    ", new SimpleAttributeSet());
-                            } else {
-                                seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + "   ", new SimpleAttributeSet());
-                            }
-
+                        for (int i = 1; i < headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem().toString()).toString().length(); i += 10) {
+                            seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + new String(new char[10 - Integer.toString(i).length()]).replace("\0", " "), new SimpleAttributeSet());
                         }
                         break;
                     default:

@@ -18,7 +18,7 @@ import java.util.MissingResourceException;
  */
 public class DatabaseConnector {
 
-    private String url, user, password;
+    private final String url, user, password;
     private Connection dbConnection;
 
     /**
@@ -27,6 +27,8 @@ public class DatabaseConnector {
      * @param dbURL de database url
      * @param usr de database user
      * @param pass de database password
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     public DatabaseConnector(String dbURL, String usr, String pass)throws SQLException, ClassNotFoundException, MissingResourceException{
         this.url = dbURL;
@@ -38,9 +40,9 @@ public class DatabaseConnector {
      * Maakt connectie met de database.
      *
      * @throws SQLException bij problemen met de toegang tot de database
+     * @throws java.lang.ClassNotFoundException
      */
-    public void connect() throws SQLException, ClassNotFoundException, MissingResourceException {
-
+    public final void connect() throws SQLException, ClassNotFoundException, MissingResourceException {
         if (url != null) {
             Class.forName("com.mysql.jdbc.Driver");
             this.dbConnection = DriverManager.getConnection(url, user, password);
