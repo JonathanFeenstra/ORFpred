@@ -79,18 +79,18 @@ public class GUIUpdater {
                 switch (lineNum) {
                     case 1:
                     case 4:
-                        seqDocument.insertString(seqDocument.getLength(), " " + readingFrameWithSpaces + System.getProperty("line.separator"), new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), " " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
                         break;
                     case 2:
                     case 5:
-                        seqDocument.insertString(seqDocument.getLength(), "  " + readingFrameWithSpaces + System.getProperty("line.separator"), new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), "  " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
                         break;
                     case 3:
-                        seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces + System.getProperty("line.separator"), new SimpleAttributeSet());
-                        seqDocument.insertString(seqDocument.getLength(), headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem().toString()).toString().toUpperCase() + "          " + System.getProperty("line.separator"), new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem().toString()).toString().toUpperCase() + "          \n", new SimpleAttributeSet());
                         break;
                     case 6:
-                        seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces + System.getProperty("line.separator"), new SimpleAttributeSet());
+                        seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
                         for (int i = 1; i < headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem().toString()).toString().length(); i += 10) {
                             seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + new String(new char[10 - Integer.toString(i).length()]).replace("\0", " "), new SimpleAttributeSet());
                         }
