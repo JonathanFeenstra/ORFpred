@@ -145,7 +145,11 @@ public class GUI implements Runnable {
         // Zorgt ervoor dat de scrollbar niet automatisch van positie verandert.
         ((DefaultCaret) seqTextPane.getCaret()).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
         seqTextPane.setEditable(false);
-        seqTextPane.setFont(new Font("Courier", Font.PLAIN, 12));
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            seqTextPane.setFont(new Font("Lucida Console", Font.PLAIN, 12));
+        }else{
+            seqTextPane.setFont(new Font("Courier", Font.PLAIN, 12));
+        }
 
         JScrollPane seqScrollPane = new JScrollPane(seqTextPane);
         seqScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
