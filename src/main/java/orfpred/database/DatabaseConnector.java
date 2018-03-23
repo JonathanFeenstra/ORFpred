@@ -6,7 +6,6 @@
  */
 package orfpred.database;
 
-import javax.swing.*;
 import java.sql.*;
 import java.util.MissingResourceException;
 
