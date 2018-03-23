@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="@cytosine.nl">
+  <database-model serializer="dbm" rdbms="ORACLE" format-version="4.7">
+    <root id="1"/>
+    <schema id="2" parent="1" name="OWE7_PG9">
+      <ObjectId>210</ObjectId>
+      <IntrospectionTimestamp>2018-03-21.20:15:30</IntrospectionTimestamp>
+      <CreatedTimestamp>2018-03-21.12:50:52</CreatedTimestamp>
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="PUBLIC">
+      <ObjectId>1</ObjectId>
+    </schema>
+    <schema id="4" parent="1" name="SYS">
+      <ObjectId>0</ObjectId>
+    </schema>
+    <schema id="5" parent="1" name="SYSTEM">
+      <ObjectId>5</ObjectId>
+    </schema>
+    <schema id="6" parent="1" name="OUTLN">
+      <ObjectId>11</ObjectId>
+    </schema>
+    <schema id="7" parent="1" name="DIP">
+      <ObjectId>18</ObjectId>
+    </schema>
+    <schema id="8" parent="1" name="TSMSYS">
+      <ObjectId>20</ObjectId>
+    </schema>
+    <schema id="9" parent="1" name="DBSNMP">
+      <ObjectId>23</ObjectId>
+    </schema>
+    <schema id="10" parent="1" name="CTXSYS">
+      <ObjectId>25</ObjectId>
+    </schema>
+    <schema id="11" parent="1" name="XDB">
+      <ObjectId>27</ObjectId>
+    </schema>
+    <schema id="12" parent="1" name="ANONYMOUS">
+      <ObjectId>28</ObjectId>
+    </schema>
+    <schema id="13" parent="1" name="MDSYS">
+      <ObjectId>32</ObjectId>
+    </schema>
+    <schema id="14" parent="1" name="HR">
+      <ObjectId>33</ObjectId>
+    </schema>
+    <schema id="15" parent="1" name="FLOWS_FILES">
+      <ObjectId>34</ObjectId>
+    </schema>
+    <schema id="16" parent="1" name="FLOWS_020100">
+      <ObjectId>35</ObjectId>
+    </schema>
+    <schema id="17" parent="1" name="APEX_PUBLIC_USER">
+      <ObjectId>36</ObjectId>
+    </schema>
+    <schema id="18" parent="1" name="APEX_040000">
+      <ObjectId>38</ObjectId>
+    </schema>
+    <schema id="19" parent="1" name="BIOINFORMATICA">
+      <ObjectId>39</ObjectId>
+    </schema>
+    <schema id="20" parent="1" name="ONDERNEMING">
+      <ObjectId>40</ObjectId>
+    </schema>
+    <schema id="21" parent="1" name="MARTIJN">
+      <ObjectId>41</ObjectId>
+    </schema>
+    <schema id="22" parent="1" name="RUBEN">
+      <ObjectId>42</ObjectId>
+    </schema>
+    <schema id="23" parent="1" name="DEMO">
+      <ObjectId>51</ObjectId>
+    </schema>
+    <schema id="24" parent="1" name="DNAPROFILES">
+      <ObjectId>52</ObjectId>
+    </schema>
+    <schema id="25" parent="1" name="STEPHAN">
+      <ObjectId>63</ObjectId>
+    </schema>
+    <schema id="26" parent="1" name="ENSEMBLDB">
+      <ObjectId>64</ObjectId>
+    </schema>
+    <schema id="27" parent="1" name="BIOINF">
+      <ObjectId>114</ObjectId>
+    </schema>
+    <schema id="28" parent="1" name="GONNY">
+      <ObjectId>137</ObjectId>
+    </schema>
+    <schema id="29" parent="1" name="OWE">
+      <ObjectId>138</ObjectId>
+    </schema>
+    <schema id="30" parent="1" name="BOXIP">
+      <ObjectId>141</ObjectId>
+    </schema>
+    <schema id="31" parent="1" name="XZMVS">
+      <ObjectId>142</ObjectId>
+    </schema>
+    <schema id="32" parent="1" name="RECHH">
+      <ObjectId>143</ObjectId>
+    </schema>
+    <schema id="33" parent="1" name="OOYKI">
+      <ObjectId>144</ObjectId>
+    </schema>
+    <schema id="34" parent="1" name="ZOIOM">
+      <ObjectId>145</ObjectId>
+    </schema>
+    <schema id="35" parent="1" name="GLADV">
+      <ObjectId>146</ObjectId>
+    </schema>
+    <schema id="36" parent="1" name="MAOQQ">
+      <ObjectId>147</ObjectId>
+    </schema>
+    <schema id="37" parent="1" name="YZOLI">
+      <ObjectId>148</ObjectId>
+    </schema>
+    <schema id="38" parent="1" name="EVZNM">
+      <ObjectId>149</ObjectId>
+    </schema>
+    <schema id="39" parent="1" name="EVULU">
+      <ObjectId>150</ObjectId>
+    </schema>
+    <schema id="40" parent="1" name="ERFVI">
+      <ObjectId>151</ObjectId>
+    </schema>
+    <schema id="41" parent="1" name="CRDEW">
+      <ObjectId>152</ObjectId>
+    </schema>
+    <schema id="42" parent="1" name="JTPFK">
+      <ObjectId>153</ObjectId>
+    </schema>
+    <schema id="43" parent="1" name="AGUGO">
+      <ObjectId>154</ObjectId>
+    </schema>
+    <schema id="44" parent="1" name="KKONL">
+      <ObjectId>155</ObjectId>
+    </schema>
+    <schema id="45" parent="1" name="BNROB">
+      <ObjectId>156</ObjectId>
+    </schema>
+    <schema id="46" parent="1" name="MULUZ">
+      <ObjectId>157</ObjectId>
+    </schema>
+    <schema id="47" parent="1" name="ALGDA">
+      <ObjectId>158</ObjectId>
+    </schema>
+    <schema id="48" parent="1" name="NXXUY">
+      <ObjectId>159</ObjectId>
+    </schema>
+    <schema id="49" parent="1" name="VNBIK">
+      <ObjectId>160</ObjectId>
+    </schema>
+    <schema id="50" parent="1" name="PUZWU">
+      <ObjectId>161</ObjectId>
+    </schema>
+    <schema id="51" parent="1" name="GAAOA">
+      <ObjectId>162</ObjectId>
+    </schema>
+    <schema id="52" parent="1" name="YAXAO">
+      <ObjectId>163</ObjectId>
+    </schema>
+    <schema id="53" parent="1" name="VXTVV">
+      <ObjectId>164</ObjectId>
+    </schema>
+    <schema id="54" parent="1" name="YJMTF">
+      <ObjectId>165</ObjectId>
+    </schema>
+    <schema id="55" parent="1" name="CLLEP">
+      <ObjectId>166</ObjectId>
+    </schema>
+    <schema id="56" parent="1" name="BTCEY">
+      <ObjectId>167</ObjectId>
+    </schema>
+    <schema id="57" parent="1" name="BEMCB">
+      <ObjectId>168</ObjectId>
+    </schema>
+    <schema id="58" parent="1" name="UNULU">
+      <ObjectId>169</ObjectId>
+    </schema>
+    <schema id="59" parent="1" name="SSMPE">
+      <ObjectId>170</ObjectId>
+    </schema>
+    <schema id="60" parent="1" name="LEDHF">
+      <ObjectId>171</ObjectId>
+    </schema>
+    <schema id="61" parent="1" name="YIAOL">
+      <ObjectId>172</ObjectId>
+    </schema>
+    <schema id="62" parent="1" name="TTDPD">
+      <ObjectId>173</ObjectId>
+    </schema>
+    <schema id="63" parent="1" name="NMZOM">
+      <ObjectId>174</ObjectId>
+    </schema>
+    <schema id="64" parent="1" name="ATUTU">
+      <ObjectId>175</ObjectId>
+    </schema>
+    <schema id="65" parent="1" name="ZEYOE">
+      <ObjectId>176</ObjectId>
+    </schema>
+    <schema id="66" parent="1" name="UITVI">
+      <ObjectId>177</ObjectId>
+    </schema>
+    <schema id="67" parent="1" name="SNENU">
+      <ObjectId>178</ObjectId>
+    </schema>
+    <schema id="68" parent="1" name="KMOES">
+      <ObjectId>179</ObjectId>
+    </schema>
+    <schema id="69" parent="1" name="HIKXF">
+      <ObjectId>180</ObjectId>
+    </schema>
+    <schema id="70" parent="1" name="ITAEE">
+      <ObjectId>181</ObjectId>
+    </schema>
+    <schema id="71" parent="1" name="DULER">
+      <ObjectId>182</ObjectId>
+    </schema>
+    <schema id="72" parent="1" name="DSTEP">
+      <ObjectId>183</ObjectId>
+    </schema>
+    <schema id="73" parent="1" name="AIIDY">
+      <ObjectId>184</ObjectId>
+    </schema>
+    <schema id="74" parent="1" name="GUQZK">
+      <ObjectId>185</ObjectId>
+    </schema>
+    <schema id="75" parent="1" name="CEPLS">
+      <ObjectId>186</ObjectId>
+    </schema>
+    <schema id="76" parent="1" name="ADERD">
+      <ObjectId>187</ObjectId>
+    </schema>
+    <schema id="77" parent="1" name="JGEEM">
+      <ObjectId>188</ObjectId>
+    </schema>
+    <schema id="78" parent="1" name="AYNXA">
+      <ObjectId>189</ObjectId>
+    </schema>
+    <schema id="79" parent="1" name="STURI">
+      <ObjectId>190</ObjectId>
+    </schema>
+    <schema id="80" parent="1" name="HOIYH">
+      <ObjectId>191</ObjectId>
+    </schema>
+    <schema id="81" parent="1" name="IEPFU">
+      <ObjectId>192</ObjectId>
+    </schema>
+    <schema id="82" parent="1" name="JVDNL">
+      <ObjectId>193</ObjectId>
+    </schema>
+    <schema id="83" parent="1" name="LOJEZ">
+      <ObjectId>194</ObjectId>
+    </schema>
+    <schema id="84" parent="1" name="RETHI">
+      <ObjectId>195</ObjectId>
+    </schema>
+    <schema id="85" parent="1" name="UWWNH">
+      <ObjectId>196</ObjectId>
+    </schema>
+    <schema id="86" parent="1" name="AZKCQ">
+      <ObjectId>197</ObjectId>
+    </schema>
+    <schema id="87" parent="1" name="SEAKL">
+      <ObjectId>198</ObjectId>
+    </schema>
+    <schema id="88" parent="1" name="UPVDR">
+      <ObjectId>199</ObjectId>
+    </schema>
+    <schema id="89" parent="1" name="THIJN">
+      <ObjectId>200</ObjectId>
+    </schema>
+    <schema id="90" parent="1" name="BGNMH">
+      <ObjectId>201</ObjectId>
+    </schema>
+    <schema id="91" parent="1" name="OWE7_PG1">
+      <ObjectId>202</ObjectId>
+    </schema>
+    <schema id="92" parent="1" name="OWE7_PG2">
+      <ObjectId>203</ObjectId>
+    </schema>
+    <schema id="93" parent="1" name="OWE7_PG3">
+      <ObjectId>204</ObjectId>
+    </schema>
+    <schema id="94" parent="1" name="OWE7_PG4">
+      <ObjectId>205</ObjectId>
+    </schema>
+    <schema id="95" parent="1" name="OWE7_PG5">
+      <ObjectId>206</ObjectId>
+    </schema>
+    <schema id="96" parent="1" name="OWE7_PG6">
+      <ObjectId>207</ObjectId>
+    </schema>
+    <schema id="97" parent="1" name="OWE7_PG7">
+      <ObjectId>208</ObjectId>
+    </schema>
+    <schema id="98" parent="1" name="OWE7_PG8">
+      <ObjectId>209</ObjectId>
+    </schema>
+    <schema id="99" parent="1" name="OWE7_PG10">
+      <ObjectId>211</ObjectId>
+    </schema>
+    <table id="100" parent="2" name="BESTAND">
+      <ObjectId>193100</ObjectId>
+      <CreatedTimestamp>2018-03-21.12:50:52</CreatedTimestamp>
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="101" parent="2" name="BLAST_RESULTAAT">
+      <ObjectId>193098</ObjectId>
+      <CreatedTimestamp>2018-03-21.12:50:52</CreatedTimestamp>
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="102" parent="2" name="ORF">
+      <ObjectId>193102</ObjectId>
+      <CreatedTimestamp>2018-03-21.12:50:52</CreatedTimestamp>
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="103" parent="2" name="SEQUENTIE">
+      <ObjectId>193104</ObjectId>
+      <CreatedTimestamp>2018-03-21.12:50:52</CreatedTimestamp>
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <column id="104" parent="100" name="BESTAND_ID">
+      <Position>1</Position>
+      <DataType>NUMBER(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="105" parent="100" name="NAAM">
+      <Position>2</Position>
+      <DataType>VARCHAR2(50 char)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="106" parent="100" name="BESTAND_PK">
+      <ObjectId>193101</ObjectId>
+      <CreatedTimestamp>2018-03-21.12:50:52</CreatedTimestamp>
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <TablespaceName>SYSTEM</TablespaceName>
+      <ColNames>BESTAND_ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="107" parent="100" name="BESTAND_PK">
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <ColNames>BESTAND_ID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>BESTAND_PK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="108" parent="101" name="RESULT_ID">
+      <Position>1</Position>
+      <DataType>NUMBER(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="109" parent="101" name="DESCRIPTION">
+      <Position>2</Position>
+      <DataType>VARCHAR2(100 char)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="110" parent="101" name="BITSCORE">
+      <Position>3</Position>
+      <DataType>NUMBER(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="111" parent="101" name="QUERY_COVERAGE">
+      <Position>4</Position>
+      <DataType>NUMBER(5,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="112" parent="101" name="EVALUE">
+      <Position>5</Position>
+      <DataType>VARCHAR2(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="113" parent="101" name="IDENTITY">
+      <Position>6</Position>
+      <DataType>NUMBER(5,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="114" parent="101" name="POSITIVES">
+      <Position>7</Position>
+      <DataType>NUMBER(5,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="115" parent="101" name="GAPS">
+      <Position>8</Position>
+      <DataType>NUMBER(*)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="116" parent="101" name="ORF_ID">
+      <Position>9</Position>
+      <DataType>NUMBER(10)|0</DataType>
+    </column>
+    <index id="117" parent="101" name="BLAST_RESULTAAT_PK">
+      <ObjectId>193099</ObjectId>
+      <CreatedTimestamp>2018-03-21.12:50:52</CreatedTimestamp>
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <TablespaceName>SYSTEM</TablespaceName>
+      <ColNames>RESULT_ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="118" parent="101" name="BLAST_RESULTAAT_PK">
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <ColNames>RESULT_ID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>BLAST_RESULTAAT_PK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="119" parent="101" name="BLAST_RESULTAAT_ORF_FK">
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <ColNames>ORF_ID</ColNames>
+      <RefSchemaName>OWE7_PG9</RefSchemaName>
+      <RefTableName>ORF</RefTableName>
+      <RefKeyName>ORF_PK</RefKeyName>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <column id="120" parent="102" name="ORF_ID">
+      <Position>1</Position>
+      <DataType>NUMBER(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="121" parent="102" name="FRAME">
+      <Position>2</Position>
+      <DataType>VARCHAR2(2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="122" parent="102" name="START_POS">
+      <Position>3</Position>
+      <DataType>NUMBER(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="123" parent="102" name="END_POS">
+      <Position>4</Position>
+      <DataType>NUMBER(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="124" parent="102" name="SEQ_ID">
+      <Position>5</Position>
+      <DataType>NUMBER(10)|0</DataType>
+    </column>
+    <index id="125" parent="102" name="ORF_PK">
+      <ObjectId>193103</ObjectId>
+      <CreatedTimestamp>2018-03-21.12:50:52</CreatedTimestamp>
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <TablespaceName>SYSTEM</TablespaceName>
+      <ColNames>ORF_ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="126" parent="102" name="ORF_PK">
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <ColNames>ORF_ID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>ORF_PK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="127" parent="102" name="ORF_SEQUENTIE_FK">
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <ColNames>SEQ_ID</ColNames>
+      <RefSchemaName>OWE7_PG9</RefSchemaName>
+      <RefTableName>SEQUENTIE</RefTableName>
+      <RefKeyName>SEQUENTIE_PK</RefKeyName>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <check id="128" parent="102" name="ORF_CK_1">
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <ColNames>FRAME</ColNames>
+      <Predicate>frame &lt;= 1 AND frame &gt;= 6</Predicate>
+    </check>
+    <column id="129" parent="103" name="SEQ_ID">
+      <Position>1</Position>
+      <DataType>NUMBER(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="130" parent="103" name="HEADER">
+      <Position>2</Position>
+      <DataType>VARCHAR2(500 char)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="131" parent="103" name="SEQUENTIE">
+      <Position>3</Position>
+      <DataType>CLOB|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="132" parent="103" name="BESTAND_ID">
+      <Position>4</Position>
+      <DataType>NUMBER(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="133" parent="103" name="SEQUENTIE_PK">
+      <ObjectId>193107</ObjectId>
+      <CreatedTimestamp>2018-03-21.12:50:52</CreatedTimestamp>
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <TablespaceName>SYSTEM</TablespaceName>
+      <ColNames>SEQ_ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="134" parent="103" name="SEQUENTIE_PK">
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <ColNames>SEQ_ID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SEQUENTIE_PK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="135" parent="103" name="SEQUENTIE_BESTAND_FK">
+      <ModifiedTimestamp>2018-03-21.12:50:52</ModifiedTimestamp>
+      <ColNames>BESTAND_ID</ColNames>
+      <RefSchemaName>OWE7_PG9</RefSchemaName>
+      <RefTableName>BESTAND</RefTableName>
+      <RefKeyName>BESTAND_PK</RefKeyName>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+  </database-model>
+</dataSource>

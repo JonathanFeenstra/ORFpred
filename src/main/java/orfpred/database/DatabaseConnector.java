@@ -6,6 +6,7 @@
  */
 package orfpred.database;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.MissingResourceException;
 
@@ -18,22 +19,20 @@ import java.util.MissingResourceException;
  */
 public class DatabaseConnector {
 
-    private final String url, user, password;
+    private final String url = "jdbc:oracle:thin:@cytosine.nl:1521:xe", user = "owe7_pg9", password = "blaat1234";
     private Connection dbConnection;
+
 
     /**
      * Constructor voor de DatabaseConnector
      *
-     * @param dbURL de database url
-     * @param usr de database user
-     * @param pass de database password
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    public DatabaseConnector(String dbURL, String usr, String pass)throws SQLException, ClassNotFoundException, MissingResourceException{
-        this.url = dbURL;
-        this.user = usr;
-        this.password = pass;
+    public DatabaseConnector()throws SQLException, ClassNotFoundException, MissingResourceException{
+        //this.url = dbURL;
+        //this.user = usr;
+        //this.password = pass;
         this.connect();
     }
     /**
@@ -43,12 +42,22 @@ public class DatabaseConnector {
      * @throws java.lang.ClassNotFoundException
      */
     public final void connect() throws SQLException, ClassNotFoundException, MissingResourceException {
-        if (url != null) {
-            Class.forName("com.mysql.jdbc.Driver");
-            this.dbConnection = DriverManager.getConnection(url, user, password);
-        } else {
-            throw new MissingResourceException("URL-missing","DatabadeConnector","URL-missing");
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        this.dbConnection = DriverManager.getConnection(url, user, password);
+
+
+    }
+
+    public ResultSet sentFeedbackQuery(String query){
+        try {
+            Statement statement = dbConnection.createStatement();
+            return statement.executeQuery(query);
+        } catch (SQLException e){
+            System.out.println(e.toString());
+            return null;
         }
+
     }
 
     /**

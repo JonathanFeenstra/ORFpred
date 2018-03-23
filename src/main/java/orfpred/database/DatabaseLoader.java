@@ -6,6 +6,8 @@
  */
 package orfpred.database;
 
+import javax.swing.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.MissingResourceException;
 
@@ -18,6 +20,14 @@ public class DatabaseLoader {
 
     private final DatabaseConnector connector;
 
+
+    public static void main(String[] args) {
+        try {
+            DatabaseLoader loader = new DatabaseLoader();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
     /**
      * Constructor
      * 
@@ -26,7 +36,13 @@ public class DatabaseLoader {
      * @throws MissingResourceException 
      */
     public DatabaseLoader() throws SQLException, ClassNotFoundException, MissingResourceException {
-        this.connector = new DatabaseConnector("","","");
+        this.connector = new DatabaseConnector();
+        ResultSet set = connector.sentFeedbackQuery("SELECT * " +
+                "FROM BESTAND " +
+                "INNER JOIN SEQUENTIE ON BESTAND.BESTAND_ID = SEQUENTIE.BESTAND_ID " +
+                "INNER JOIN ORF ON SEQUENTIE.SEQ_ID = ORF.SEQ_ID");
+        System.out.println(set.getString("BESTAND_ID"));
+
     }
 
     /**
