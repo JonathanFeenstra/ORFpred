@@ -32,6 +32,7 @@ public class ORFHighlighter implements Runnable {
     private static Color highlightKleur = Color.CYAN;
     private static DefaultHighlightPainter painter;
     private static HashMap<Integer, ORF> positionToORF;
+    private static boolean searchMode;
     private static int minORFLength = 30;
     private final ProteinSequence[] readingFrames;
     private final GUI targetGUI;
@@ -75,10 +76,10 @@ public class ORFHighlighter implements Runnable {
         int frameNum = 0;
         if (readingFrames != null) {
             for (ProteinSequence readingFrame : readingFrames) {
-                Matcher matcher = Pattern.compile("\\*[^*]+?\\*").matcher(readingFrame.toString());
+                Matcher matcher = searchMode ? Pattern.compile("M[^X*]+?\\*").matcher(readingFrame.toString()) : Pattern.compile("\\*[^X*]+?\\*").matcher(readingFrame.toString());
                 while (matcher.find()) {
                     if (matcher.group().length() - 2 >= minORFLength) {
-                        predictedORFs.add(new ORF(Frame.values()[frameNum], matcher.group().substring(1, matcher.group().length() - 1), matcher.start() + 1, matcher.end() - 1));
+                        predictedORFs.add(new ORF(Frame.values()[frameNum], matcher.group().substring(1, matcher.group().length() - 1), searchMode ? matcher.start() : matcher.start() + 1, matcher.end() - 1));
                     }
                 }
                 frameNum++;
@@ -162,6 +163,15 @@ public class ORFHighlighter implements Runnable {
      */
     public static void setMinORFLength(int length) {
         minORFLength = length;
+    }
+
+    /**
+     * searchMode setter
+     *
+     * @param sM zoekmodus: true = prokaryoot, false = eukaryoot.
+     */
+    public static void setSearchMode(boolean sM) {
+        searchMode = sM;
     }
 
 }
