@@ -22,8 +22,12 @@ Voor het functioneren van ORFPred zijn de volgende stappen belangrijk:
 		- Druk nu op Test Connection om de installatie te controleren
 		- Druk als laatst op Apply en OK
 	- Voor NetBeans:
-		- Volg de stappen onder "Establishing a Connection to Oracle Database" van https://netbeans.org/kb/docs/ide/oracle-db.html
+		- Download de ojdbc8.jar (van http://www.oracle.com/technetwork/database/features/jdbc/jdbc-ucp-122-3110062.html ) en plaatst deze in de loacatie naar keuze
+		- Open het ORFPred project (File-->Open Project...)
+		- Klik op de services 
+		- Rechtermuisknop op Databases --> New Connection --> {Kies de ORacle Thin Driver} -->add{ga naar de locatie van de ojdbc.jar bestand en voeg deze toe}-->Next
 		- Vul hierbij dezelfe gegevens in als weergeven in de uitleg van Intellij
+		- klik op Next-->Next-->Finish
 
 
 *Oracle Driver kan pas geïnstalleerd worden na de installatie van Maven en NetBeans/Intellij
