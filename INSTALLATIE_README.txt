@@ -16,6 +16,7 @@ Voor het functioneren van ORFPred zijn de volgende stappen belangrijk:
 			- Host: cytosine.nl
 			- SID: XE
 			- User: owe7_pg9
+			- Password: blaat1234
 			- URL: jdbc:oracle:thin:@cytosine.nl:1521:XE
 		- (als er staat "Update Latest Driver") dan klikt u deze aan)
 		- Druk nu op Test Connection om de installatie te controleren
