@@ -4,9 +4,9 @@ Voor het functioneren van ORFPred zijn de volgende stappen belangrijk:
 - NetBeans van https://netbeans.org/ of JetBrains Intellij https://www.jetbrains.com/idea/
 - Maven (download van: https://maven.apache.org/ )
 - Oracle Driver*:
-	- Plaatst de twee bestanden in de "BESTANDEN VOOR INSTALLATIE" map in de volgende map: C:\{gebruikersnaam}\.M2
+	- Plaatst de twee bestanden in de "BESTANDEN VOOR INSTALLATIE" map in de volgende map: C:\{gebruikersnaam}\.M2 (voor Ubuntu: /usr/share/maven3/conf/)
 	  (Mocht settings.xml al aanwezig zijn dan kunt u deze vervangen of aanvullen met 
-	  de inhoud van de ORFPred settings.xml bestand door het bestand te openen met Kladblok.exe)**
+	  de inhoud van de ORFPred settings.xml bestand door het bestand te openen met bijv. Kladblok.exe of een text verwerkings programma van Ubuntu)**
 	- Voor Intellij: 
 		- Na het openen van het ORFPred project (File-->Open...) klikt u met de rechtermuisknop op ORFPred in de projectveld
 		- Vervolgens klikt u op New-->Data Scource-->{kies een willekeurige driver}-->OK-->{klik op de rode min teken links boven}-->{klik op de groene plus teken links boven}-->Oracle
