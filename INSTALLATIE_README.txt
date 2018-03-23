@@ -26,7 +26,8 @@ Voor het functioneren van ORFPred zijn de volgende stappen belangrijk:
 
 
 *Oracle Driver kan pas geïnstalleerd worden na de installatie van Maven en NetBeans/Intellij
-** Mocht de map niet aanwezig zijn controleer dan uw Maven installatie: 
+** Mocht de map niet aanwezig zijn dan kunt u controleren of u verborgen mappen kunt zien https://support.microsoft.com/nl-nl/help/14201/windows-show-hidden-files 
+   of controleer of uw Maven installatie gelukt is: 
 	- Ga naar uw commandline/opdrachtprompt en typ: mvn
 	- Druk op enter
 	- Krijgt een Scanning for projects... bericht dan is uw installatie gelukt en 
