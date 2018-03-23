@@ -26,11 +26,10 @@ public class GUI implements Runnable {
 
     private JMenuItem openMenuItem, dbSaveMenuItem, exitMenuItem,
             highlightMenuItem, blastMenuItem,
-            orfLengteMenuItem;
+            orfLengteMenuItem, prokaryootMenuItem, eukaryootMenuItem;
     private JComboBox<String> headerComboBox;
     private JButton zoekButton;
     private JTextPane seqTextPane;
-    private javax.swing.JLabel readingFrameLabel;
 
     private final Font LABEL_FONT = new Font("Arial", Font.BOLD, 12);
 
@@ -94,14 +93,26 @@ public class GUI implements Runnable {
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Toolsmenu aanmaken">
-        JMenu toolsMenu = new JMenu("Tools");
+        JMenu toolsMenu = new JMenu("Tools"), orfSearchMenu = new JMenu("ORF zoekmodus");
         blastMenuItem = new JMenuItem("BLAST hele sequentie", new ImageIcon(getClass().getResource("/blast.png")));
         blastMenuItem.addActionListener(eventHandler);
         orfLengteMenuItem = new JMenuItem("Stel minimale ORF lengte in...");
         orfLengteMenuItem.addActionListener(eventHandler);
+        
+        prokaryootMenuItem = new JRadioButtonMenuItem("Prokaryoot - start tot stop");
+        prokaryootMenuItem.addActionListener(eventHandler);
+        eukaryootMenuItem = new JRadioButtonMenuItem("Eukaryoot - stop tot stop", true);
+        eukaryootMenuItem.addActionListener(eventHandler);
+        
+        ButtonGroup orfSearchGroup = new ButtonGroup();
+        orfSearchGroup.add(prokaryootMenuItem);
+        orfSearchGroup.add(eukaryootMenuItem);
+        orfSearchMenu.add(prokaryootMenuItem);
+        orfSearchMenu.add(eukaryootMenuItem);
 
         toolsMenu.add(blastMenuItem);
         toolsMenu.add(orfLengteMenuItem);
+        toolsMenu.add(orfSearchMenu);
         //</editor-fold>
 
         menuBar.add(bestandMenu);
@@ -130,7 +141,7 @@ public class GUI implements Runnable {
         zoekButton.setEnabled(false);
         zoekButton.addActionListener(eventHandler);
 
-        readingFrameLabel = new JLabel("<html>+1<br/>+2<br/>+3<br/>Ref<br/>-1<br/>-2<br/>-3<br/>Pos</html>", SwingConstants.CENTER);
+        JLabel readingFrameLabel = new JLabel("<html>+1<br/>+2<br/>+3<br/>Ref<br/>-1<br/>-2<br/>-3<br/>Pos</html>", SwingConstants.CENTER);
         if (System.getProperty("os.name").startsWith("Windows")) {
             readingFrameLabel.setFont(new Font("Lucida Console", Font.BOLD, 12));
         } else {
@@ -244,6 +255,8 @@ public class GUI implements Runnable {
                 // TODO: Toon pop-up waar ORF lengte kan worden ingesteld https://stackoverflow.com/questions/11093326/restricting-jtextfield-input-to-integers#11093360
             } else if (evt.getSource() == zoekButton) {
                 EventQueue.invokeLater(new ORFHighlighter(updater.getShownReadingFrames(), GUI.this));
+            } else if (evt.getSource() == prokaryootMenuItem || evt.getSource() == eukaryootMenuItem) {
+                ORFHighlighter.setSearchMode(prokaryootMenuItem.isSelected());
             }
         }
 
