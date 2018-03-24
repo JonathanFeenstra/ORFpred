@@ -18,18 +18,11 @@
             <artifactId>biojava-sequencing</artifactId>
             <version>4.0.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.biojava/biojava-ws -->
         <dependency>
             <groupId>org.biojava</groupId>
             <artifactId>biojava-ws</artifactId>
             <version>4.0.0</version>
-        </dependency>
-        <!--&lt;!&ndash; https://maven.oracle.com/ &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>com.oracle.jdbc</groupId>-->
-            <!--<artifactId>ojdbc8</artifactId>-->
-            <!--<version>12.2.0.1</version>-->
-        <!--</dependency>-->
+        </dependency>    
     </dependencies>
 
     <repositories>

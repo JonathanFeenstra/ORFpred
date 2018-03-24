@@ -1,5 +1,5 @@
 /*
- * ORFpred - © Projectgroep 10: Damian Bolwerk, Jonathan Feenstra, 
+ * ORFpred - © Projectgroep 9: Damian Bolwerk, Jonathan Feenstra, 
  * Fini De Gruyter, Lotte Houwen & Alex Janse 2018.
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
@@ -16,7 +16,7 @@ import orfpred.sequence.ReadingFramer;
 /**
  * Class voor het weergeven van de GUI.
  *
- * @author Projectgroep 10
+ * @author Projectgroep 9
  * @since JDK 1.8
  * @version 1.0
  */

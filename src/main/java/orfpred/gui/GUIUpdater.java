@@ -1,5 +1,5 @@
 /*
- * ORFpred - © Projectgroep 10: Damian Bolwerk, Jonathan Feenstra, 
+ * ORFpred - © Projectgroep 9: Damian Bolwerk, Jonathan Feenstra, 
  * Fini De Gruyter, Lotte Houwen & Alex Janse 2018.
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 import javax.swing.text.*;
 import org.biojava.nbio.core.sequence.DNASequence;
 import org.biojava.nbio.core.sequence.ProteinSequence;
@@ -22,7 +21,7 @@ import org.biojava.nbio.core.sequence.ProteinSequence;
  * Class om de GUI te updaten. Methoden uit deze class dienen aangeropen te
  * worden via EventQueue.invokeLater().
  *
- * @author Projectgroep 10
+ * @author Projectgroep 9
  * @since JDK 1.8
  * @version 1.0
  */
@@ -57,7 +56,7 @@ public class GUIUpdater {
         } catch (FileNotFoundException ex) {
             targetGUI.showErrorMessage(ex, ex.getMessage());
         } catch (NoSuchElementException ex) {
-            JOptionPane.showMessageDialog(null, "Bestandstype niet juist. Kijk of het bestand in het juiste format staat en of het bestand DNA sequenties bevat");
+            targetGUI.showErrorMessage(ex, "Onjuist bestandsformaat. Controleer of het bestand headers (beginnend met '>') en DNA-sequenties bevat.");
         } catch (Exception ex) {
             targetGUI.showErrorMessage(ex, ex.getMessage());
         }
