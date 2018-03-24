@@ -22,7 +22,7 @@
             <groupId>org.biojava</groupId>
             <artifactId>biojava-ws</artifactId>
             <version>4.0.0</version>
-        </dependency>    
+        </dependency>
     </dependencies>
 
     <repositories>
