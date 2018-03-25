@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.*;
@@ -151,6 +152,9 @@ public class ORFHighlighter implements Runnable {
      * @param seqTextPane de te beluisteren JTextPane
      */
     public void addHoverListener(JTextPane seqTextPane) {
+        for (MouseMotionListener hoverListener: seqTextPane.getMouseMotionListeners()) {
+            seqTextPane.removeMouseMotionListener(hoverListener);
+        }
         seqTextPane.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
