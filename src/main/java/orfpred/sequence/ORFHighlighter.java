@@ -7,6 +7,9 @@
 package orfpred.sequence;
 
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.*;
@@ -136,6 +139,26 @@ public class ORFHighlighter implements Runnable {
                 }
             } catch (Exception ex) {
                 // Negeer: er wordt buiten de tekst geklikt
+            }
+        });
+        addHoverListener(seqTextPane);
+    }
+
+    /**
+     * Voegt MouseMotionListener toe om het cursoricoon te veranderen bij het
+     * hoveren over een gemarkeerd ORF.
+     *
+     * @param seqTextPane de te beluisteren JTextPane
+     */
+    public void addHoverListener(JTextPane seqTextPane) {
+        seqTextPane.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                if (isHighlighted[seqTextPane.viewToModel(e.getPoint())]) {
+                    seqTextPane.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                } else {
+                    seqTextPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                }
             }
         });
     }
