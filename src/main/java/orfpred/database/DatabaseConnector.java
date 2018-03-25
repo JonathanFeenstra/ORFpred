@@ -17,9 +17,9 @@ import java.sql.*;
  */
 public class DatabaseConnector {
 
-    private final String url = "jdbc:oracle:thin:@cytosine.nl:1521:xe",
-            user = "owe7_pg9",
-            password = "blaat1234";
+    private final String URL = "jdbc:oracle:thin:@cytosine.nl:1521:xe",
+            USER = "owe7_pg9",
+            PASSWORD = "blaat1234";
     private Connection dbConnection;
 
     /**
@@ -28,10 +28,10 @@ public class DatabaseConnector {
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    protected DatabaseConnector()throws SQLException, ClassNotFoundException{
+    protected DatabaseConnector() throws SQLException, ClassNotFoundException {
         this.connect();
     }
-    
+
     /**
      * Maakt connectie met de database.
      *
@@ -40,30 +40,35 @@ public class DatabaseConnector {
      */
     protected final void connect() throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
-        this.dbConnection = DriverManager.getConnection(url, user, password);
+        this.dbConnection = DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
     /**
      * Methode om queries te verzenden en de resultaten te retourneren
+     *
      * @param query String met daarin de query
      * @return de ResultSet met daarin het resultaat van de query
-     * @throws SQLException wordt opgegooid als er een exception optreed bij de SQL server
+     * @throws SQLException wordt opgegooid als er een exception optreed bij de
+     * SQL server
      */
-    protected ResultSet sentFeedbackQuery(String query)throws SQLException{
+    protected ResultSet sentFeedbackQuery(String query) throws SQLException {
         Statement statement = dbConnection.createStatement();
         return statement.executeQuery(query);
     }
 
     /**
      * Methode om insertie queries uit te kunnen voeren
-     * @param table String met daarin de table naam waar de gegevens in moeten worden opgeslagen
+     *
+     * @param table String met daarin de table naam waar de gegevens in moeten
+     * worden opgeslagen
      * @param values String met daarin de gegevens die moeten worden opgeslagen
-     * @throws SQLException wordt opgegooid als er een exception optreed bij de SQL server
+     * @throws SQLException wordt opgegooid als er een exception optreed bij de
+     * SQL server
      */
-    protected void sentInsertionQuery(String table, String values) throws SQLException{
+    protected void sentInsertionQuery(String table, String values) throws SQLException {
         Statement statement = dbConnection.createStatement();
-        if (values.endsWith(")")){
-            statement.executeQuery("INSERT INTO "+table+" VALUES "+values);
+        if (values.endsWith(")")) {
+            statement.executeQuery("INSERT INTO " + table + " VALUES " + values);
         } else {
             statement.executeQuery("INSERT INTO " + table + " VALUES (" + values + ")");
         }
