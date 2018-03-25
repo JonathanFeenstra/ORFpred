@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf2129c2-df4f-46be-a1b8-076721fbd842" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java" />
+    <list default="true" id="bf2129c2-df4f-46be-a1b8-076721fbd842" name="Default" comment="&quot;JavaDoc voor de &quot;">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java" afterPath="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseLoader.java" afterPath="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseLoader.java" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/database/DatabaseConnector.class" afterPath="$PROJECT_DIR$/target/classes/orfpred/database/DatabaseConnector.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/database/DatabaseLoader.class" afterPath="$PROJECT_DIR$/target/classes/orfpred/database/DatabaseLoader.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/file/FileHandler.class" afterPath="$PROJECT_DIR$/target/classes/orfpred/file/FileHandler.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/file/FileType.class" afterPath="$PROJECT_DIR$/target/classes/orfpred/file/FileType.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/gui/GUI$1.class" afterPath="$PROJECT_DIR$/target/classes/orfpred/gui/GUI$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/gui/GUI$GUIEventHandler.class" afterPath="$PROJECT_DIR$/target/classes/orfpred/gui/GUI$GUIEventHandler.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/gui/GUI.class" afterPath="$PROJECT_DIR$/target/classes/orfpred/gui/GUI.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/gui/GUIUpdater.class" afterPath="$PROJECT_DIR$/target/classes/orfpred/gui/GUIUpdater.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/sequence/ORFHighlighter.class" afterPath="$PROJECT_DIR$/target/classes/orfpred/sequence/ORFHighlighter.class" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java" afterPath="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,18 +52,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseConnector.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DatabaseConnector.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+            <state relative-caret-position="1375">
+              <caret line="60" column="90" lean-forward="false" selection-start-line="60" selection-start-column="90" selection-end-line="60" selection-end-column="90" />
               <folding>
-                <marker date="1521983190368" expanded="true" signature="1884:1913" ph="INSERT INTO missingValue... " />
-                <marker date="1521983190368" expanded="true" signature="1884:1921" ph="INSERT INTO missingValue... " />
-                <marker date="1521983190368" expanded="true" signature="1884:1922" ph="INSERT INTO missingValue... " />
-                <marker date="1521983190368" expanded="true" signature="1977:1989" ph="INSERT INTO missingValue... " />
-                <marker date="1521983190368" expanded="true" signature="1977:2011" ph="INSERT INTO missingValue... " />
-                <marker date="1521983190368" expanded="true" signature="1977:2026" ph="INSERT INTO missingValue... " />
+                <marker date="1521990872205" expanded="true" signature="2336:2365" ph="INSERT INTO missingValue... " />
+                <marker date="1521990872205" expanded="true" signature="2336:2373" ph="INSERT INTO missingValue... " />
+                <marker date="1521990872205" expanded="true" signature="2336:2374" ph="INSERT INTO missingValue... " />
+                <marker date="1521990872205" expanded="true" signature="2429:2441" ph="INSERT INTO missingValue... " />
+                <marker date="1521990872205" expanded="true" signature="2429:2463" ph="INSERT INTO missingValue... " />
+                <marker date="1521990872205" expanded="true" signature="2429:2478" ph="INSERT INTO missingValue... " />
               </folding>
             </state>
           </provider>
@@ -80,23 +72,23 @@
       <file leaf-file-name="DatabaseLoader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-950">
-              <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+            <state relative-caret-position="3350">
+              <caret line="134" column="90" lean-forward="false" selection-start-line="134" selection-start-column="90" selection-end-line="134" selection-end-column="90" />
               <folding>
-                <element signature="e#0#4055#0" expanded="true" />
+                <element signature="e#0#6330#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseSaver.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DatabaseSaver.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="53" column="48" lean-forward="true" selection-start-line="53" selection-start-column="48" selection-end-line="53" selection-end-column="48" />
+            <state relative-caret-position="100">
+              <caret line="13" column="26" lean-forward="false" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
               <folding>
-                <element signature="e#0#3549#0" expanded="true" />
-                <element signature="imports" expanded="true" />
+                <element signature="e#0#6345#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -167,9 +159,9 @@
         <option value="$PROJECT_DIR$/src/main/java/orfpred/database/SearchType.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$USER_HOME$/.m2/settings.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java" />
-        <option value="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java" />
+        <option value="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java" />
       </list>
     </option>
   </component>
@@ -529,7 +521,7 @@
       <workItem from="1521901665613" duration="891000" />
       <workItem from="1521904552141" duration="27000" />
       <workItem from="1521981286073" duration="23000" />
-      <workItem from="1521981595413" duration="6107000" />
+      <workItem from="1521981595413" duration="9235000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;connectie met db is mogelijk&quot;">
       <created>1521808266033</created>
@@ -545,11 +537,18 @@
       <option name="project" value="LOCAL" />
       <updated>1521823799553</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="&quot;DatabaseSaver toegevoegd met methodes, ook de oneWayQuery methode toegevoegd bij de DatabaseConnector&quot;">
+      <created>1521987811789</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1521987811789</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43975000" />
+    <option name="totallyTimeSpent" value="47103000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -569,6 +568,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20052083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -581,7 +581,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -623,18 +622,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;connectie met db is mogelijk&quot;" />
     <MESSAGE value="&quot;DataBaseLoader methodes gegeven en gecontroleerd&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;DataBaseLoader methodes gegeven en gecontroleerd&quot;" />
+    <MESSAGE value="&quot;DatabaseSaver toegevoegd met methodes, ook de oneWayQuery methode toegevoegd bij de DatabaseConnector&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;DatabaseSaver toegevoegd met methodes, ook de oneWayQuery methode toegevoegd bij de DatabaseConnector&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java</url>
-          <line>55</line>
-          <properties />
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="35" />
     </breakpoint-manager>
     <watches-manager />
@@ -653,12 +645,12 @@
         <state relative-caret-position="1425">
           <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding>
-            <marker date="1521983190368" expanded="true" signature="1884:1913" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1921" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1922" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:1989" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2011" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2026" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2365" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2373" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2374" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2441" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2463" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2478" ph="INSERT INTO missingValue... " />
           </folding>
         </state>
       </provider>
@@ -677,7 +669,8 @@
         <state relative-caret-position="300">
           <caret line="18" column="46" lean-forward="false" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
           <folding>
-            <element signature="e#0#4055#0" expanded="true" />
+            <element signature="e#0#6330#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -695,12 +688,12 @@
         <state relative-caret-position="525">
           <caret line="21" column="50" lean-forward="false" selection-start-line="21" selection-start-column="50" selection-end-line="21" selection-end-column="50" />
           <folding>
-            <marker date="1521983190368" expanded="true" signature="1884:1913" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1921" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1922" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:1989" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2011" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2026" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2365" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2373" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2374" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2441" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2463" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2478" ph="INSERT INTO missingValue... " />
           </folding>
         </state>
       </provider>
@@ -724,7 +717,8 @@
         <state relative-caret-position="400">
           <caret line="22" column="7" lean-forward="false" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
           <folding>
-            <element signature="e#0#4055#0" expanded="true" />
+            <element signature="e#0#6330#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -751,12 +745,12 @@
         <state relative-caret-position="600">
           <caret line="30" column="47" lean-forward="false" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
           <folding>
-            <marker date="1521983190368" expanded="true" signature="1884:1913" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1921" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1922" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:1989" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2011" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2026" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2365" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2373" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2374" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2441" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2463" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2478" ph="INSERT INTO missingValue... " />
           </folding>
         </state>
       </provider>
@@ -767,7 +761,8 @@
         <state relative-caret-position="200">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
-            <element signature="e#0#4055#0" expanded="true" />
+            <element signature="e#0#6330#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -785,12 +780,12 @@
         <state relative-caret-position="600">
           <caret line="30" column="47" lean-forward="false" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
           <folding>
-            <marker date="1521983190368" expanded="true" signature="1884:1913" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1921" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1922" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:1989" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2011" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2026" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2365" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2373" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2374" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2441" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2463" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2478" ph="INSERT INTO missingValue... " />
           </folding>
         </state>
       </provider>
@@ -801,7 +796,8 @@
         <state relative-caret-position="200">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
-            <element signature="e#0#4055#0" expanded="true" />
+            <element signature="e#0#6330#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -819,12 +815,12 @@
         <state relative-caret-position="750">
           <caret line="30" column="47" lean-forward="false" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
           <folding>
-            <marker date="1521983190368" expanded="true" signature="1884:1913" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1921" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1922" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:1989" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2011" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2026" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2365" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2373" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2374" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2441" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2463" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2478" ph="INSERT INTO missingValue... " />
           </folding>
         </state>
       </provider>
@@ -835,7 +831,8 @@
         <state relative-caret-position="200">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
-            <element signature="e#0#4055#0" expanded="true" />
+            <element signature="e#0#6330#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -853,12 +850,12 @@
         <state relative-caret-position="600">
           <caret line="30" column="47" lean-forward="true" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
           <folding>
-            <marker date="1521983190368" expanded="true" signature="1884:1913" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1921" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1922" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:1989" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2011" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2026" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2365" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2373" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2374" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2441" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2463" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2478" ph="INSERT INTO missingValue... " />
           </folding>
         </state>
       </provider>
@@ -869,7 +866,8 @@
         <state relative-caret-position="200">
           <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
-            <element signature="e#0#4055#0" expanded="true" />
+            <element signature="e#0#6330#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -981,21 +979,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding>
-            <marker date="1521983190368" expanded="true" signature="1884:1913" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1921" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1884:1922" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:1989" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2011" ph="INSERT INTO missingValue... " />
-            <marker date="1521983190368" expanded="true" signature="1977:2026" ph="INSERT INTO missingValue... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/sequence/ORF.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -1006,21 +989,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-950">
-          <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+        <state relative-caret-position="3350">
+          <caret line="134" column="90" lean-forward="false" selection-start-line="134" selection-start-column="90" selection-end-line="134" selection-end-column="90" />
           <folding>
-            <element signature="e#0#4055#0" expanded="true" />
+            <element signature="e#0#6330#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="53" column="48" lean-forward="true" selection-start-line="53" selection-start-column="48" selection-end-line="53" selection-end-column="48" />
+        <state relative-caret-position="100">
+          <caret line="13" column="26" lean-forward="false" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
           <folding>
-            <element signature="e#0#3549#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#6345#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1375">
+          <caret line="60" column="90" lean-forward="false" selection-start-line="60" selection-start-column="90" selection-end-line="60" selection-end-column="90" />
+          <folding>
+            <marker date="1521990872205" expanded="true" signature="2336:2365" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2373" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2336:2374" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2441" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2463" ph="INSERT INTO missingValue... " />
+            <marker date="1521990872205" expanded="true" signature="2429:2478" ph="INSERT INTO missingValue... " />
           </folding>
         </state>
       </provider>

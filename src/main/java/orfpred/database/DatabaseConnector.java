@@ -7,7 +7,6 @@
 package orfpred.database;
 
 import java.sql.*;
-import java.util.MissingResourceException;
 
 /**
  * Deze class is verantwoordelijk voor de connectie met de database.
@@ -29,10 +28,7 @@ public class DatabaseConnector {
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    protected DatabaseConnector()throws SQLException, ClassNotFoundException, MissingResourceException{
-        //this.url = dbURL;
-        //this.user = usr;
-        //this.password = pass;
+    protected DatabaseConnector()throws SQLException, ClassNotFoundException{
         this.connect();
     }
     
@@ -42,17 +38,29 @@ public class DatabaseConnector {
      * @throws SQLException bij problemen met de toegang tot de database
      * @throws java.lang.ClassNotFoundException
      */
-    protected final void connect() throws SQLException, ClassNotFoundException, MissingResourceException {
+    protected final void connect() throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         this.dbConnection = DriverManager.getConnection(url, user, password);
     }
 
+    /**
+     * Methode om queries te verzenden en de resultaten te retourneren
+     * @param query String met daarin de query
+     * @return de ResultSet met daarin het resultaat van de query
+     * @throws SQLException wordt opgegooid als er een exception optreed bij de SQL server
+     */
     protected ResultSet sentFeedbackQuery(String query)throws SQLException{
         Statement statement = dbConnection.createStatement();
         return statement.executeQuery(query);
     }
 
-    protected void sentOneWayQuery(String table, String values) throws SQLException{
+    /**
+     * Methode om insertie queries uit te kunnen voeren
+     * @param table String met daarin de table naam waar de gegevens in moeten worden opgeslagen
+     * @param values String met daarin de gegevens die moeten worden opgeslagen
+     * @throws SQLException wordt opgegooid als er een exception optreed bij de SQL server
+     */
+    protected void sentInsertionQuery(String table, String values) throws SQLException{
         Statement statement = dbConnection.createStatement();
         if (values.endsWith(")")){
             statement.executeQuery("INSERT INTO "+table+" VALUES "+values);
