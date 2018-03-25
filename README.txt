@@ -32,7 +32,7 @@ Voor het functioneren van ORFPred zijn de volgende stappen belangrijk:
 		- Klik met de rechtermuisknop op ojbc8-12.2.01.jar --> Manually install artifact --> browse --> {ga naar de locatie van de ojbdc8.jar bestand en open deze}
 
 
-*Oracle Driver kan pas geïnstalleerd worden na de installatie van Maven en NetBeans/Intellij
+*Oracle Driver kan pas geÃ¯nstalleerd worden na de installatie van Maven en NetBeans/Intellij
 ** Mocht de map niet aanwezig zijn dan kunt u controleren of u verborgen mappen kunt zien https://support.microsoft.com/nl-nl/help/14201/windows-show-hidden-files (n.v.t. bij Ubuntu)
    of controleer of uw Maven installatie gelukt is: 
 	- Ga naar uw commandline/opdrachtprompt en typ: mvn
