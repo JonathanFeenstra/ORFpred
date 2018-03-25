@@ -32,7 +32,7 @@ import org.biojava.nbio.core.sequence.transcription.Frame;
  * @version 1.0
  */
 public class ORFHighlighter implements Runnable {
-
+    
     private static Color highlightKleur = Color.CYAN;
     private static DefaultHighlightPainter painter;
     private static HashMap<Integer, ORF> positionToORF;
@@ -53,7 +53,7 @@ public class ORFHighlighter implements Runnable {
         this.targetGUI = gui;
         painter = new DefaultHighlightPainter(highlightKleur);
     }
-
+    
     @Override
     public void run() {
         targetGUI.getSeqTextPane().getHighlighter().removeAllHighlights();
@@ -152,7 +152,7 @@ public class ORFHighlighter implements Runnable {
      * @param seqTextPane de te beluisteren JTextPane
      */
     public void addHoverListener(JTextPane seqTextPane) {
-        for (MouseMotionListener hoverListener: seqTextPane.getMouseMotionListeners()) {
+        for (MouseMotionListener hoverListener : seqTextPane.getMouseMotionListeners()) {
             seqTextPane.removeMouseMotionListener(hoverListener);
         }
         seqTextPane.addMouseMotionListener(new MouseMotionAdapter() {
@@ -200,5 +200,5 @@ public class ORFHighlighter implements Runnable {
     public static void setSearchMode(boolean sM) {
         searchMode = sM;
     }
-
+    
 }

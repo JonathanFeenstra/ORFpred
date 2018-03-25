@@ -89,8 +89,8 @@ public class GUIUpdater {
                         seqDocument.insertString(seqDocument.getLength(), headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem().toString()).toString().toUpperCase() + "          \n", new SimpleAttributeSet());
                         break;
                     case 6:
-                        seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces + "\n", new SimpleAttributeSet());
-                        for (int i = 1; i < headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem().toString()).toString().length(); i += 10) {
+                        seqDocument.insertString(seqDocument.getLength(), "   " + readingFrameWithSpaces + "\n1        ", new SimpleAttributeSet());
+                        for (int i = 10; i < headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem().toString()).toString().length(); i += 10) {
                             seqDocument.insertString(seqDocument.getLength(), String.valueOf(i) + new String(new char[10 - Integer.toString(i).length()]).replace("\0", " "), new SimpleAttributeSet());
                         }
                         break;
