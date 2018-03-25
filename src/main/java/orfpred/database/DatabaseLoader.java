@@ -26,15 +26,6 @@ public class DatabaseLoader {
 
     private final DatabaseConnector connector;
 
-    
-    public static void main(String[] args) {
-        try{
-        DatabaseLoader loader = new DatabaseLoader();
-            System.out.println("dadas");
-        } catch (Exception e){
-            System.out.println(e.toString());
-        }
-    }
     /**
      * Constructor
      * 
@@ -44,8 +35,6 @@ public class DatabaseLoader {
      */
     public DatabaseLoader() throws SQLException, ClassNotFoundException, MissingResourceException {
         this.connector = new DatabaseConnector();
-        getStoredFileNames();
-
     }
 
 
@@ -61,7 +50,7 @@ public class DatabaseLoader {
         return parseResultSetToArray(new String[]{"SEQ_ID","HEADER","SEQUENTIE"},resultSet);
     }
 
-    public HashMap<String, ORF> getORFFromDB(String seqID, String seq) throws SQLException, ParseException{
+    public HashMap<String, ORF> getORFFromDB(String seqID, String seq) throws SQLException, ParserException{
         HashMap<String, ORF> orfList = new HashMap<>();
         ResultSet resultSet = connector.sentFeedbackQuery("SELECT ORF_ID, FRAME, " +
                 "START_POS, END_POS FROM ORF WHERE SEQ_ID = "+seqID);
@@ -75,7 +64,7 @@ public class DatabaseLoader {
         return orfList;
     }
 
-    public Frame getFrame(ResultSet resultSet) throws SQLException, ParseException{
+    public Frame getFrame(ResultSet resultSet) throws SQLException, ParserException{
         String frame = resultSet.getString("FRAME");
         switch (frame){
             case "+1":
