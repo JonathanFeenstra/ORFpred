@@ -24,7 +24,7 @@ public class GUI implements Runnable {
 
     private JFrame frame;
 
-    private JMenuItem openMenuItem, dbSaveMenuItem, exitMenuItem,
+    private JMenuItem openMenuItem, openDBMenuItem, dbSaveMenuItem, exitMenuItem,
             highlightMenuItem, blastMenuItem,
             orfLengteMenuItem, prokaryootMenuItem, eukaryootMenuItem;
     private JComboBox<String> headerComboBox;
@@ -70,6 +70,9 @@ public class GUI implements Runnable {
         openMenuItem = new JMenuItem("Open...", new ImageIcon(getClass().getResource("/open.png")));
         openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
         openMenuItem.addActionListener(eventHandler);
+        openDBMenuItem = new JMenuItem("Open vanuit databank", new ImageIcon(getClass().getResource("/open.png")));
+        openDBMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
+        openDBMenuItem.addActionListener(eventHandler);
         dbSaveMenuItem = new JMenuItem("Opslaan in database", new ImageIcon(getClass().getResource("/database.png")));
         dbSaveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
         dbSaveMenuItem.addActionListener(eventHandler);
@@ -79,6 +82,7 @@ public class GUI implements Runnable {
         exitMenuItem.addActionListener(eventHandler);
 
         bestandMenu.add(openMenuItem);
+        bestandMenu.add(openDBMenuItem);
         bestandMenu.add(dbSaveMenuItem);
         bestandMenu.add(bestandMenuSeparator);
         bestandMenu.add(exitMenuItem);
@@ -243,6 +247,8 @@ public class GUI implements Runnable {
                 EventQueue.invokeLater(() -> {
                     updater.loadFile();
                 });
+            } else if (evt.getSource() == openDBMenuItem){
+                // TODO: popup met open uit database
             } else if (evt.getSource() == dbSaveMenuItem) {
                 // TODO: Opslaan in database
             } else if (evt.getSource() == exitMenuItem) {
