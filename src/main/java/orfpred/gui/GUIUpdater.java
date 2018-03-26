@@ -7,9 +7,13 @@
 package orfpred.gui;
 
 import java.io.File;
+
+import orfpred.database.DatabaseLoader;
 import orfpred.sequence.ReadingFramer;
 import orfpred.file.FileHandler;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 import javax.swing.DefaultComboBoxModel;
@@ -59,6 +63,17 @@ public class GUIUpdater {
             targetGUI.showErrorMessage(ex, "Onjuist bestandsformaat. Controleer of het bestand headers (beginnend met '>') en DNA-sequenties bevat.");
         } catch (Exception ex) {
             targetGUI.showErrorMessage(ex, ex.getMessage());
+        }
+    }
+
+    public void loadDBFile(int bestandsID){
+        try {
+            DatabaseLoader loader = new DatabaseLoader();
+            ArrayList<ArrayList<String>> headerSeqArray = loader.getHeadersFromFile(bestandsID);
+        } catch (SQLException e){
+
+        } catch (ClassNotFoundException e){
+
         }
     }
 

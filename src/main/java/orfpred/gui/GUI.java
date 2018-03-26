@@ -225,6 +225,7 @@ public class GUI implements Runnable {
         frame.setVisible(true);
     }
 
+
     /**
      * Inner class voor het afhandelen van events in de GUI.
      */
@@ -313,4 +314,5 @@ public class GUI implements Runnable {
     public JTextPane getSeqTextPane() {
         return seqTextPane;
     }
+
 }
