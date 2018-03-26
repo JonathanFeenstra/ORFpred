@@ -8,6 +8,7 @@ package orfpred.sequence;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.EventQueue;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
@@ -21,6 +22,7 @@ import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 import orfpred.gui.GUI;
+import orfpred.gui.ORFPopUp;
 import org.biojava.nbio.core.sequence.ProteinSequence;
 import org.biojava.nbio.core.sequence.transcription.Frame;
 
@@ -32,7 +34,7 @@ import org.biojava.nbio.core.sequence.transcription.Frame;
  * @version 1.0
  */
 public class ORFHighlighter implements Runnable {
-    
+
     private static Color highlightKleur = Color.CYAN;
     private static DefaultHighlightPainter painter;
     private static HashMap<Integer, ORF> positionToORF;
@@ -53,7 +55,7 @@ public class ORFHighlighter implements Runnable {
         this.targetGUI = gui;
         painter = new DefaultHighlightPainter(highlightKleur);
     }
-    
+
     @Override
     public void run() {
         targetGUI.getSeqTextPane().getHighlighter().removeAllHighlights();
@@ -136,7 +138,12 @@ public class ORFHighlighter implements Runnable {
         seqTextPane.addCaretListener((CaretEvent e) -> {
             try {
                 if (isHighlighted[e.getDot()]) {
-                    JOptionPane.showInputDialog(positionToORF.get(e.getDot()).getSequence()); // TODO: Placeholder, zorg dat je echt kan blasten
+                    EventQueue.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            new ORFPopUp(positionToORF.get(e.getDot()));
+                        }
+                    });
                 }
             } catch (Exception ex) {
                 // Negeer: er wordt buiten de tekst geklikt
@@ -200,5 +207,5 @@ public class ORFHighlighter implements Runnable {
     public static void setSearchMode(boolean sM) {
         searchMode = sM;
     }
-    
+
 }
