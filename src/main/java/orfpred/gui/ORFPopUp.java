@@ -1,20 +1,25 @@
+package orfpred.gui;
+
 /*
- * ORFpred - © Projectgroep 10: Damian Bolwerk, Jonathan Feenstra, 
+ * ORFpred - © Projectgroep 9: Damian Bolwerk, Jonathan Feenstra, 
  * Fini De Gruyter, Lotte Houwen & Alex Janse 2018.
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 28 maart 2018
  */
-package orfpred.gui;
+
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import orfpred.sequence.ORF;
 
@@ -47,7 +52,8 @@ public class ORFPopUp extends JFrame {
         setTitle("Eigenschappen ORF");
         setIconImage(new ImageIcon(getClass().getResource("/orfpred.png")).getImage());
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        
         Container window = getContentPane();
         window.setLayout(new FlowLayout());
 
@@ -58,7 +64,9 @@ public class ORFPopUp extends JFrame {
         JTextArea seqArea = new JTextArea(selectedORF.getSequence());
         seqArea.setPreferredSize(new Dimension(330, 150));
         seqArea.setLineWrap(true);
-        window.add(seqArea);
+        
+        JScrollPane seqScrollPane = new JScrollPane(seqArea);
+        window.add(seqScrollPane);
         
         JLabel startLabel = new JLabel("Startpositie ORF: " + Integer.toString(selectedORF.getStart())+ "     ");
         window.add(startLabel);
@@ -66,7 +74,22 @@ public class ORFPopUp extends JFrame {
         JLabel eindLabel = new JLabel("Eindpositie ORF: " + Integer.toString(selectedORF.getStop()) + "     ");
         window.add(eindLabel);
         
+        JLabel lengteLabel = new JLabel("Lengte ORF: " + Integer.toString(selectedORF.getSequence().length()) + "     ");
+        window.add(lengteLabel);
+        
+        JLabel frameLabel = new JLabel("Het ORF is gevonden in frame: " + ORF.parseFrameToString(selectedORF.getReadingFrame())+ "     ");
+        window.add(frameLabel);
+
         JButton buttonBLAST = new JButton("BLAST ORF");
+        buttonBLAST.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EventQueue.invokeLater(() -> {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                });
+            }
+            
+        });
         window.add(buttonBLAST); 
         
         setVisible(true);

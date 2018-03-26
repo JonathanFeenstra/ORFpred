@@ -6,6 +6,7 @@
  */
 package orfpred.sequence;
 
+import org.biojava.nbio.core.exceptions.ParserException;
 import org.biojava.nbio.core.sequence.DNASequence;
 import org.biojava.nbio.core.sequence.transcription.Frame;
 
@@ -63,5 +64,36 @@ public class ORF extends DNASequence {
      */
     public int getStop() {
         return stop;
+    }
+
+    /**
+     * Methode om van een Frame object een frame String te maken
+     *
+     * @param frame Frame object die geparsed moet worden
+     * @return String met daarin de gewenste String van het object
+     * @throws ParserException bij onbekende frames
+     */
+    public static String parseFrameToString(Frame frame) throws ParserException {
+        if (null == frame) {
+            return "-3";
+        } else {
+            switch (frame) {
+                case ONE:
+                    return "+1";
+                case TWO:
+                    return "+2";
+                case THREE:
+                    return "+3";
+                case REVERSED_ONE:
+                    return "-1";
+                case REVERSED_TWO:
+                    return "-2";
+                case REVERSED_THREE:
+                    return "-3";
+                default:
+                    break;
+            }
+        }
+        throw new ParserException("Error: Unkown frame found!");
     }
 }
