@@ -165,10 +165,14 @@ public class ORFHighlighter implements Runnable {
         seqTextPane.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
-                if (isHighlighted[seqTextPane.viewToModel(e.getPoint())]) {
-                    seqTextPane.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                } else {
-                    seqTextPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                try {
+                    if (isHighlighted[seqTextPane.viewToModel(e.getPoint())]) {
+                        seqTextPane.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                    } else {
+                        seqTextPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                    }
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    // Negeer: muis valt buiten tekst
                 }
             }
         });
