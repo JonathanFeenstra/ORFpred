@@ -7,14 +7,11 @@
 package orfpred.database;
 
 import orfpred.sequence.ORF;
-import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
-import org.biojava.nbio.core.exceptions.ParserException;
+import org.biojava.nbio.core.exceptions.*;
 import org.biojava.nbio.core.sequence.transcription.Frame;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.MissingResourceException;
+import java.util.*;
 
 /**
  * Class om data uit de database in te laden.
@@ -26,7 +23,7 @@ public class DatabaseLoader {
     private final DatabaseConnector connector;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @throws SQLException bij problemen met de connectie
      * @throws ClassNotFoundException als de vereiste class mist
@@ -77,6 +74,8 @@ public class DatabaseLoader {
      * @return Een HashMap met als key de ORF ID en als value een ORF object
      * @throws SQLException wordt opgegooid als er een exception optreed bij de
      * SQL server
+     * @throws CompoundNotFoundException als karakter geen aminozuur/nucleotide
+     * is
      */
     public HashMap<Integer, ORF> getORFFromDB(int seqID, String seq) throws SQLException, CompoundNotFoundException {
         HashMap<Integer, ORF> orfList = new HashMap<>();
@@ -88,7 +87,7 @@ public class DatabaseLoader {
                     end = Integer.parseInt(resultSet.getString("END_POS"));
             Frame frame = getFrame(resultSet);
             Integer orfID = Integer.parseInt(resultSet.getString("ORF_ID"));
-            if (orfIDMetBlast.contains(orfID)){
+            if (orfIDMetBlast.contains(orfID)) {
                 orfList.put(orfID, new ORF(orfID, frame, start, end));
             } else {
                 orfList.put(orfID, new ORF(frame, start, end));
@@ -169,10 +168,10 @@ public class DatabaseLoader {
         return createdArray;
     }
 
-    public ArrayList<Integer> getORFIDMetBLAST() throws SQLException{
+    public ArrayList<Integer> getORFIDMetBLAST() throws SQLException {
         ResultSet resultSet = connector.sentFeedbackQuery("SELECT ORF_ID FROM BLAST_RESULTAAT");
         ArrayList<Integer> idList = new ArrayList<>();
-        while (resultSet.next()){
+        while (resultSet.next()) {
             idList.add(Integer.parseInt(resultSet.getString(1)));
         }
         return idList;

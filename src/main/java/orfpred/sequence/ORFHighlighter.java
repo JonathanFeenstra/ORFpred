@@ -34,7 +34,7 @@ import org.biojava.nbio.core.sequence.transcription.Frame;
  * @version 1.0
  */
 public class ORFHighlighter implements Runnable {
-
+    
     private static Color highlightKleur = Color.CYAN;
     private static DefaultHighlightPainter painter;
     private static HashMap<Integer, ORF> positionToORF;
@@ -55,7 +55,7 @@ public class ORFHighlighter implements Runnable {
         this.targetGUI = gui;
         painter = new DefaultHighlightPainter(highlightKleur);
     }
-
+    
     @Override
     public void run() {
         targetGUI.getSeqTextPane().getHighlighter().removeAllHighlights();
@@ -144,7 +144,9 @@ public class ORFHighlighter implements Runnable {
             try {
                 if (isHighlighted[e.getDot()]) {
                     EventQueue.invokeLater(() -> {
-                        new ORFPopUp(positionToORF.get(e.getDot()));
+                        if (positionToORF.containsKey(e.getDot())) {
+                            targetGUI.showORFPopUp(positionToORF.get(e.getDot()));
+                        }
                     });
                 }
             } catch (Exception ex) {
@@ -213,5 +215,5 @@ public class ORFHighlighter implements Runnable {
     public static void setSearchMode(boolean sM) {
         searchMode = sM;
     }
-
+    
 }

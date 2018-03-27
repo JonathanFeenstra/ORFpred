@@ -6,8 +6,6 @@ package orfpred.gui;
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 29 maart 2018
  */
-
-
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -20,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import orfpred.sequence.ORF;
+import org.biojava.nbio.core.sequence.ProteinSequence;
 
 /**
  * Deze class toont een popup met informatie over het aangeklikte ORF.
@@ -28,14 +27,17 @@ import orfpred.sequence.ORF;
  */
 public class ORFPopUp extends JFrame {
 
+    private final ProteinSequence[] shownReadingFrames;
     private final ORF selectedORF;
 
     /**
      * Constructor
      *
+     * @param readingFrames de ingeladen reading frames
      * @param orf het aangeklikte ORF
      */
-    public ORFPopUp(ORF orf) {
+    public ORFPopUp(ProteinSequence[] readingFrames, ORF orf) {
+        this.shownReadingFrames = readingFrames;
         this.selectedORF = orf;
         this.showPopUp();
     }
@@ -45,36 +47,36 @@ public class ORFPopUp extends JFrame {
      * te BLASTen.
      */
     public final void showPopUp() {
-        setSize(400, 260);
+        setSize(400, 270);
         setTitle("Eigenschappen ORF");
         setIconImage(new ImageIcon(getClass().getResource("/orfpred.png")).getImage());
         setResizable(false);
         setLocationByPlatform(true);
-        
+
         Container window = getContentPane();
         window.setLayout(new FlowLayout());
 
         JLabel selectedORFLabel = new JLabel("Eiwitsequentie van het geselecteerde ORF: ");
         selectedORFLabel.setFont(GUI.LABEL_FONT);
         window.add(selectedORFLabel);
-        
-        JTextArea seqArea = new JTextArea();
+
+        JTextArea seqArea = new JTextArea(shownReadingFrames[selectedORF.getReadingFrame().ordinal()].toString().substring(selectedORF.getStart(), selectedORF.getStop()));
         seqArea.setPreferredSize(new Dimension(330, 150));
         seqArea.setLineWrap(true);
-        
+
         JScrollPane seqScrollPane = new JScrollPane(seqArea);
         window.add(seqScrollPane);
-        
-        JLabel startLabel = new JLabel("Startpositie ORF: " + Integer.toString(selectedORF.getStart())+ "     ");
+
+        JLabel startLabel = new JLabel("Startpositie ORF: " + Integer.toString(selectedORF.getStart()) + "     ");
         window.add(startLabel);
 
         JLabel eindLabel = new JLabel("Eindpositie ORF: " + Integer.toString(selectedORF.getStop()) + "     ");
         window.add(eindLabel);
-        
+
         JLabel lengteLabel = new JLabel("Lengte ORF: " + Integer.toString(selectedORF.getStop() - selectedORF.getStart()) + "     ");
         window.add(lengteLabel);
-        
-        JLabel frameLabel = new JLabel("Het ORF is gevonden in frame: " + ORF.parseFrameToString(selectedORF.getReadingFrame())+ "     ");
+
+        JLabel frameLabel = new JLabel("Het ORF is gevonden in frame: " + ORF.parseFrameToString(selectedORF.getReadingFrame()) + "     ");
         window.add(frameLabel);
 
         JButton buttonBLAST = new JButton("BLAST ORF");
@@ -83,8 +85,8 @@ public class ORFPopUp extends JFrame {
                 new BLASTPopUp(selectedORF).setVisible(true);
             });
         });
-        window.add(buttonBLAST); 
-        
+        window.add(buttonBLAST);
+
         setVisible(true);
     }
 

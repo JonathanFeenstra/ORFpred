@@ -9,7 +9,6 @@ package orfpred.sequence;
 import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.exceptions.ParserException;
 import org.biojava.nbio.core.sequence.DNASequence;
-import org.biojava.nbio.core.sequence.ProteinSequence;
 import org.biojava.nbio.core.sequence.transcription.Frame;
 
 /**
@@ -38,7 +37,7 @@ public class ORF extends DNASequence {
         this.start = startPos;
         this.stop = stopPos;
     }
-    
+
     /**
      * Constructor met database ID.
      *
@@ -53,27 +52,6 @@ public class ORF extends DNASequence {
         this.readingFrame = frame;
         this.start = startPos;
         this.stop = stopPos;
-    }
-
-    /**
-     * @return readingFrame
-     */
-    public Frame getReadingFrame() {
-        return readingFrame;
-    }
-
-    /**
-     * @return start
-     */
-    public int getStart() {
-        return start;
-    }
-
-    /**
-     * @return stop
-     */
-    public int getStop() {
-        return stop;
     }
 
     /**
@@ -105,5 +83,33 @@ public class ORF extends DNASequence {
             }
         }
         throw new ParserException("Error: Unkown frame found!");
+    }
+
+    /**
+     * @return readingFrame
+     */
+    public Frame getReadingFrame() {
+        return readingFrame;
+    }
+
+    /**
+     * @return start
+     */
+    public int getStart() {
+        return start;
+    }
+
+    /**
+     * @return stop
+     */
+    public int getStop() {
+        return stop;
+    }
+
+    /**
+     * @return databaseId
+     */
+    public int getDatabaseId() {
+        return databaseId;
     }
 }

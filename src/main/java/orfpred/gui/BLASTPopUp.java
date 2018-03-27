@@ -44,7 +44,7 @@ public class BLASTPopUp extends javax.swing.JFrame {
         databaseComboBox = new JComboBox<>();
         JLabel algoritmeLabel = new JLabel(), databaseLabel = new JLabel(), evalueLabel = new JLabel();
         evalueTekstField = new JTextField();
-        BLASTButton = new JButton();
+        BLASTButton = new JButton("BLAST", new ImageIcon(getClass().getResource("/blast.png")));
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("BLAST instellingen");
@@ -63,7 +63,6 @@ public class BLASTPopUp extends javax.swing.JFrame {
         evalueLabel.setText("E-value cut-off:");
 
         BLASTButton.setFont(GUI.LABEL_FONT);
-        BLASTButton.setText("BLAST");
         BLASTButton.addActionListener((ActionEvent e) -> {
             // TODO: BLASTEN
         });
@@ -88,7 +87,7 @@ public class BLASTPopUp extends javax.swing.JFrame {
                                                         .addComponent(algoritmeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                         .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(BLASTButton, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(BLASTButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap())
         );
         layout.setVerticalGroup(

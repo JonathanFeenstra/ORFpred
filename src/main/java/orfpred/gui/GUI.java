@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
+import orfpred.sequence.ORF;
 import orfpred.sequence.ReadingFramer;
 
 /**
@@ -23,6 +24,7 @@ import orfpred.sequence.ReadingFramer;
 public class GUI implements Runnable {
 
     private JFrame frame;
+    private GUIUpdater guiUpdater;
 
     private JMenuItem openMenuItem, openDBMenuItem, dbSaveMenuItem, exitMenuItem,
             highlightMenuItem, orfLengteMenuItem, prokaryootMenuItem,
@@ -61,7 +63,7 @@ public class GUI implements Runnable {
         frame.setLocationByPlatform(true);
         frame.setIconImage(new ImageIcon(getClass().getResource("/orfpred.png")).getImage());
 
-        GUIUpdater guiUpdater = new GUIUpdater(this);
+        guiUpdater = new GUIUpdater(this);
         GUIEventHandler eventHandler = new GUIEventHandler(guiUpdater);
 
         Container window = frame.getContentPane();
@@ -276,6 +278,10 @@ public class GUI implements Runnable {
             }
         }
     }
+    
+    public void showORFPopUp(ORF orf) {
+        new ORFPopUp(guiUpdater.getShownReadingFrames(), orf);
+    }
 
     /**
      * Toont foutmelding pop-up.
@@ -286,7 +292,7 @@ public class GUI implements Runnable {
     public void showErrorMessage(Exception ex, String msg) {
         JOptionPane.showMessageDialog(this.getFrame(), msg, ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
     }
-
+    
     /**
      * @return frame
      */
