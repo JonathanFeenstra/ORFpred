@@ -31,7 +31,10 @@ public class GUI implements Runnable {
     private JButton zoekButton;
     private JTextPane seqTextPane;
 
-    private final Font LABEL_FONT = new Font("Arial", Font.BOLD, 12);
+    /**
+     * Lettertype voor JLabels
+     */
+    public static final Font LABEL_FONT = new Font("Arial", Font.BOLD, 12);
 
     /**
      * Start de applicatie.
@@ -247,8 +250,7 @@ public class GUI implements Runnable {
                 });
             } else if (evt.getSource() == openDBMenuItem){
                 EventQueue.invokeLater(() -> {
-                    DBFileChooser.setGuiUpdater(updater);
-                    DBFileChooser.runFrame();
+                    new DBFileChooser(updater).setVisible(true);
                 });
             } else if (evt.getSource() == dbSaveMenuItem) {
                 // TODO: Opslaan in database

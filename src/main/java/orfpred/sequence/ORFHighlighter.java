@@ -90,7 +90,7 @@ public class ORFHighlighter implements Runnable {
                 Matcher matcher = searchMode ? Pattern.compile("M[^X*]+?\\*").matcher(readingFrame.toString()) : Pattern.compile("\\*[^X*]+?\\*").matcher(readingFrame.toString());
                 while (matcher.find()) {
                     if (matcher.group().length() - 2 >= minORFLength) {
-                        predictedORFs.add(new ORF(Frame.values()[frameNum], matcher.group().substring(1, matcher.group().length() - 1), searchMode ? matcher.start() : matcher.start() + 1, matcher.end() - 1));
+                        predictedORFs.add(new ORF(Frame.values()[frameNum], searchMode ? matcher.start() : matcher.start() + 1, matcher.end() - 1));
                     }
                 }
                 frameNum++;
