@@ -77,16 +77,21 @@ public class DatabaseLoader {
      * @throws SQLException wordt opgegooid als er een exception optreed bij de
      * SQL server
      */
-    public HashMap<String, ORF> getORFFromDB(int seqID, String seq) throws SQLException {
-        HashMap<String, ORF> orfList = new HashMap<>();
+    public HashMap<Integer, ORF> getORFFromDB(int seqID, String seq) throws SQLException {
+        HashMap<Integer, ORF> orfList = new HashMap<>();
         ResultSet resultSet = connector.sentFeedbackQuery("SELECT ORF_ID, FRAME, "
                 + "START_POS, END_POS FROM ORF WHERE SEQ_ID = " + seqID);
+        ArrayList<Integer> orfIDMetBlast = getORFIDMetBLAST();
         while (resultSet.next()) {
             int start = Integer.parseInt(resultSet.getString("START_POS")),
                     end = Integer.parseInt(resultSet.getString("END_POS"));
             Frame frame = getFrame(resultSet);
-            String orfID = resultSet.getString("ORF_ID");
-            orfList.put(orfID, new ORF(frame, seq.substring(start, end + 1), start, end));
+            Integer orfID = Integer.parseInt(resultSet.getString("ORF_ID"));
+            if (orfIDMetBlast.contains(orfID)){
+                orfList.put(orfID, new ORF(frame, seq.substring(start, end + 1), start, end, orfID));
+            } else {
+                orfList.put(orfID, new ORF(frame, seq.substring(start, end + 1), start, end));
+            }
         }
         return orfList;
     }
@@ -161,5 +166,14 @@ public class DatabaseLoader {
             counter++;
         }
         return createdArray;
+    }
+
+    public ArrayList<Integer> getORFIDMetBLAST() throws SQLException{
+        ResultSet resultSet = connector.sentFeedbackQuery("SELECT ORF_ID FROM BLAST_RESULTAAT");
+        ArrayList<Integer> idList = new ArrayList<>();
+        while (resultSet.next()){
+            idList.add(Integer.parseInt(resultSet.getString(1)));
+        }
+        return idList;
     }
 }
