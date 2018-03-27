@@ -86,10 +86,10 @@ public class ORFHighlighter implements Runnable {
         int frameNum = 0;
         if (readingFrames != null) {
             for (ProteinSequence readingFrame : readingFrames) {
-                Matcher matcher = searchMode ? Pattern.compile("M[^X*]+?\\*").matcher(readingFrame.toString()) : Pattern.compile("\\*[^X*]+?\\*").matcher(readingFrame.toString());
+                Matcher matcher = searchMode ? Pattern.compile("M[^X*]+").matcher(readingFrame.toString()) : Pattern.compile("[^X*]+").matcher(readingFrame.toString());
                 while (matcher.find()) {
                     if (matcher.group().length() - 2 >= minORFLength) {
-                        predictedORFs.add(new ORF(Frame.values()[frameNum], searchMode ? matcher.start() : matcher.start() + 1, matcher.end() - 1));
+                        predictedORFs.add(new ORF(Frame.values()[frameNum], searchMode ? matcher.start() : matcher.start(), matcher.end()));
                     }
                 }
                 frameNum++;
