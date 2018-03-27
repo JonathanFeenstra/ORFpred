@@ -2,7 +2,7 @@
  * ORFpred - © Projectgroep 9: Damian Bolwerk, Jonathan Feenstra, 
  * Fini De Gruyter, Lotte Houwen & Alex Janse 2018.
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
- * Release datum: 28 maart 2018
+ * Release datum: 29 maart 2018
  */
 package orfpred.gui;
 
@@ -25,8 +25,8 @@ public class GUI implements Runnable {
     private JFrame frame;
 
     private JMenuItem openMenuItem, openDBMenuItem, dbSaveMenuItem, exitMenuItem,
-            highlightMenuItem, blastMenuItem,
-            orfLengteMenuItem, prokaryootMenuItem, eukaryootMenuItem;
+            highlightMenuItem, orfLengteMenuItem, prokaryootMenuItem,
+            eukaryootMenuItem;
     private JComboBox<String> headerComboBox;
     private JButton zoekButton;
     private JTextPane seqTextPane;
@@ -98,8 +98,6 @@ public class GUI implements Runnable {
 
         //<editor-fold defaultstate="collapsed" desc="Toolsmenu aanmaken">
         JMenu toolsMenu = new JMenu("Tools"), orfSearchMenu = new JMenu("ORF zoekmodus");
-        blastMenuItem = new JMenuItem("BLAST hele sequentie", new ImageIcon(getClass().getResource("/blast.png")));
-        blastMenuItem.addActionListener(eventHandler);
         orfLengteMenuItem = new JMenuItem("Stel minimale ORF lengte in...");
         orfLengteMenuItem.addActionListener(eventHandler);
         
@@ -114,7 +112,6 @@ public class GUI implements Runnable {
         orfSearchMenu.add(prokaryootMenuItem);
         orfSearchMenu.add(eukaryootMenuItem);
 
-        toolsMenu.add(blastMenuItem);
         toolsMenu.add(orfLengteMenuItem);
         toolsMenu.add(orfSearchMenu);
         //</editor-fold>
@@ -259,8 +256,6 @@ public class GUI implements Runnable {
                 System.exit(0);
             } else if (evt.getSource() == highlightMenuItem) {
                 ORFHighlighter.setHighlightKleur(JColorChooser.showDialog(GUI.this.frame, "Highlight kleur", ORFHighlighter.getHighlightKleur()));
-            } else if (evt.getSource() == blastMenuItem) {
-                // TODO: Toon pop-up met BLAST settings
             } else if (evt.getSource() == orfLengteMenuItem) {
                 // TODO: Toon pop-up waar ORF lengte kan worden ingesteld https://stackoverflow.com/questions/11093326/restricting-jtextfield-input-to-integers#11093360
             } else if (evt.getSource() == zoekButton) {

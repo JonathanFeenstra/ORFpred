@@ -4,7 +4,7 @@ package orfpred.gui;
  * ORFpred - © Projectgroep 9: Damian Bolwerk, Jonathan Feenstra, 
  * Fini De Gruyter, Lotte Houwen & Alex Janse 2018.
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
- * Release datum: 28 maart 2018
+ * Release datum: 29 maart 2018
  */
 
 
