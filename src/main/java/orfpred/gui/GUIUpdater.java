@@ -18,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.text.*;
+import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.sequence.DNASequence;
 import org.biojava.nbio.core.sequence.ProteinSequence;
 
@@ -74,7 +75,17 @@ public class GUIUpdater {
     public void loadDBFile(int bestandsID){
         try {
             DatabaseLoader loader = new DatabaseLoader();
-            ArrayList<ArrayList<String>> headerSeqArray = loader.getHeadersFromFile(bestandsID);
+            headerToSeq = new LinkedHashMap<>();
+            ArrayList<ArrayList<String>> headerAndSeqData = loader.getHeadersFromFile(bestandsID);
+            headerAndSeqData.forEach((row) -> {
+                try {
+                    headerToSeq.put(row.get(1), new DNASequence(row.get(2)));
+                } catch (CompoundNotFoundException ex) {
+                    targetGUI.showErrorMessage(ex, "De volgende sequentie bevat een ongeldig karakter:\n" + row.get(1));
+                }
+            });
+            showHeaders(headerToSeq.keySet().toArray(new String[headerToSeq.size()]));
+            showReadingFrames(ReadingFramer.getProteinFrames(headerToSeq.entrySet().iterator().next().getValue()));
         } catch (SQLException | ClassNotFoundException ex){
             targetGUI.showErrorMessage(ex, ex.getMessage());
         }
