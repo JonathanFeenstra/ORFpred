@@ -249,7 +249,11 @@ public class GUI implements Runnable {
                     updater.loadFile();
                 });
             } else if (evt.getSource() == openDBMenuItem){
-                // TODO: popup met open uit database
+                EventQueue.invokeLater(() -> {
+                    DBFileChooser.setGuiUpdater(updater);
+                    DBFileChooser.runFrame();
+                });
+
             } else if (evt.getSource() == dbSaveMenuItem) {
                 // TODO: Opslaan in database
             } else if (evt.getSource() == exitMenuItem) {

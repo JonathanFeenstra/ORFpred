@@ -21,7 +21,7 @@ public class DBFileChooser extends JFrame implements ActionListener{
     private static ArrayList<ArrayList<String>> bestandList = null;
     private static GUIUpdater updater;
 
-    public static void main(String[] args) {
+    public static void runFrame() {
         getBestanden();
         if(bestandList != null) {
             DBFileChooser frame = new DBFileChooser();

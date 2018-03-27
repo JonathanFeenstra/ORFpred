@@ -87,11 +87,11 @@ public class DatabaseLoader {
                     end = Integer.parseInt(resultSet.getString("END_POS"));
             Frame frame = getFrame(resultSet);
             Integer orfID = Integer.parseInt(resultSet.getString("ORF_ID"));
-            if (orfIDMetBlast.contains(orfID)){
-                orfList.put(orfID, new ORF(frame, seq.substring(start, end + 1), start, end, orfID));
-            } else {
-                orfList.put(orfID, new ORF(frame, seq.substring(start, end + 1), start, end));
-            }
+//            if (orfIDMetBlast.contains(orfID)){
+//                orfList.put(orfID, new ORF(frame, seq.substring(start, end + 1), start, end, orfID));
+//            } else {
+//                orfList.put(orfID, new ORF(frame, seq.substring(start, end + 1), start, end));
+//            }
         }
         return orfList;
     }
