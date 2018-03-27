@@ -61,7 +61,7 @@ public class ORFPopUp extends JFrame {
         selectedORFLabel.setFont(LABEL_FONT);
         window.add(selectedORFLabel);
         
-        JTextArea seqArea = new JTextArea(selectedORF.getSequence());
+        JTextArea seqArea = new JTextArea(selectedORF.getProteinSequence().toString());
         seqArea.setPreferredSize(new Dimension(330, 150));
         seqArea.setLineWrap(true);
         
@@ -74,21 +74,17 @@ public class ORFPopUp extends JFrame {
         JLabel eindLabel = new JLabel("Eindpositie ORF: " + Integer.toString(selectedORF.getStop()) + "     ");
         window.add(eindLabel);
         
-        JLabel lengteLabel = new JLabel("Lengte ORF: " + Integer.toString(selectedORF.getSequence().length()) + "     ");
+        JLabel lengteLabel = new JLabel("Lengte ORF: " + Integer.toString(selectedORF.getProteinSequence().getLength()) + "     ");
         window.add(lengteLabel);
         
         JLabel frameLabel = new JLabel("Het ORF is gevonden in frame: " + ORF.parseFrameToString(selectedORF.getReadingFrame())+ "     ");
         window.add(frameLabel);
 
         JButton buttonBLAST = new JButton("BLAST ORF");
-        buttonBLAST.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                EventQueue.invokeLater(() -> {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                });
-            }
-            
+        buttonBLAST.addActionListener((ActionEvent e) -> {
+            EventQueue.invokeLater(() -> {
+                new BLASTPopUp(selectedORF);
+            });
         });
         window.add(buttonBLAST); 
         

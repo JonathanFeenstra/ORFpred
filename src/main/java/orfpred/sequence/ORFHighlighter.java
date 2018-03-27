@@ -15,7 +15,6 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.*;
-import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
@@ -23,6 +22,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 import orfpred.gui.GUI;
 import orfpred.gui.ORFPopUp;
+import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.sequence.ProteinSequence;
 import org.biojava.nbio.core.sequence.transcription.Frame;
 
@@ -61,13 +61,17 @@ public class ORFHighlighter implements Runnable {
         targetGUI.getSeqTextPane().getHighlighter().removeAllHighlights();
         isHighlighted = new boolean[targetGUI.getSeqTextPane().getText().length()];
         positionToORF = new HashMap<>();
-        predictORFs(readingFrames).forEach((ORF orf) -> {
-            try {
-                highlightORF(targetGUI.getSeqTextPane(), orf);
-            } catch (BadLocationException ex) {
-                targetGUI.showErrorMessage(ex, ex.getMessage());
-            }
-        });
+        try {
+            predictORFs(readingFrames).forEach((ORF orf) -> {
+                try {
+                    highlightORF(targetGUI.getSeqTextPane(), orf);
+                } catch (BadLocationException ex) {
+                    targetGUI.showErrorMessage(ex, ex.getMessage());
+                }
+            });
+        } catch (CompoundNotFoundException ex) {
+            targetGUI.showErrorMessage(ex, "Sequentie bevat ongeldige karakters.");
+        }
         addClickListener(targetGUI.getSeqTextPane());
     }
 
@@ -76,8 +80,9 @@ public class ORFHighlighter implements Runnable {
      *
      * @param readingFrames de te doorzoeken reading frames
      * @return ArrayList van ORF's
+     * @throws CompoundNotFoundException als karakter geen aminozuur is
      */
-    public static ArrayList<ORF> predictORFs(ProteinSequence[] readingFrames) {
+    public static ArrayList<ORF> predictORFs(ProteinSequence[] readingFrames) throws CompoundNotFoundException {
         ArrayList<ORF> predictedORFs = new ArrayList<>();
         int frameNum = 0;
         if (readingFrames != null) {
@@ -138,11 +143,8 @@ public class ORFHighlighter implements Runnable {
         seqTextPane.addCaretListener((CaretEvent e) -> {
             try {
                 if (isHighlighted[e.getDot()]) {
-                    EventQueue.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            new ORFPopUp(positionToORF.get(e.getDot()));
-                        }
+                    EventQueue.invokeLater(() -> {
+                        new ORFPopUp(positionToORF.get(e.getDot()));
                     });
                 }
             } catch (Exception ex) {
