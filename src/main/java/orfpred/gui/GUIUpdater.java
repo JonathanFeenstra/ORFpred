@@ -45,7 +45,7 @@ public class GUIUpdater {
     }
 
     /**
-     * Procedure om bestanden in te laden.
+     * Procedure om lokale bestanden in te laden.
      */
     public void loadFile() {
         try {
@@ -66,14 +66,17 @@ public class GUIUpdater {
         }
     }
 
+    /**
+     * Procedure om bestanden uit de database in te laden.
+     * 
+     * @param bestandsID het ID van het geselecteerde bestand
+     */
     public void loadDBFile(int bestandsID){
         try {
             DatabaseLoader loader = new DatabaseLoader();
             ArrayList<ArrayList<String>> headerSeqArray = loader.getHeadersFromFile(bestandsID);
-        } catch (SQLException e){
-
-        } catch (ClassNotFoundException e){
-
+        } catch (SQLException | ClassNotFoundException ex){
+            targetGUI.showErrorMessage(ex, ex.getMessage());
         }
     }
 

@@ -12,9 +12,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,7 +29,6 @@ import orfpred.sequence.ORF;
 public class ORFPopUp extends JFrame {
 
     private final ORF selectedORF;
-    private final Font LABEL_FONT = new Font("Arial", Font.BOLD, 12);
 
     /**
      * Constructor
@@ -58,7 +55,7 @@ public class ORFPopUp extends JFrame {
         window.setLayout(new FlowLayout());
 
         JLabel selectedORFLabel = new JLabel("Eiwitsequentie van het geselecteerde ORF: ");
-        selectedORFLabel.setFont(LABEL_FONT);
+        selectedORFLabel.setFont(GUI.LABEL_FONT);
         window.add(selectedORFLabel);
         
         JTextArea seqArea = new JTextArea();

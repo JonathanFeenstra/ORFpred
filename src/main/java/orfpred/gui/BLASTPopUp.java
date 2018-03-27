@@ -7,7 +7,7 @@
 package orfpred.gui;
 
 import orfpred.sequence.ORF;
-import java.awt.Font;
+import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 /**
@@ -23,8 +23,6 @@ public class BLASTPopUp extends javax.swing.JFrame {
     private JButton BLASTButton;
     private JComboBox<String> algoritmeComboBox, databaseComboBox;
     private JTextField evalueTekstField;
-    
-    private final Font LABEL_FONT = new Font("Arial", 1, 11);
 
     /**
      * Constructor.
@@ -40,6 +38,7 @@ public class BLASTPopUp extends javax.swing.JFrame {
      * Maakt popup componenten aan.
      */
     private void initComponents() {
+        setIconImage(new ImageIcon(getClass().getResource("/orfpred.png")).getImage());
 
         algoritmeComboBox = new JComboBox<>();
         databaseComboBox = new JComboBox<>();
@@ -54,21 +53,20 @@ public class BLASTPopUp extends javax.swing.JFrame {
         algoritmeComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"blastp", "blastn", "tblastn", "tblastx"}));
         databaseComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"Non-redundant protein sequences (NR)", "Swiss-Prot"}));
 
-        algoritmeLabel.setFont(LABEL_FONT);
+        algoritmeLabel.setFont(GUI.LABEL_FONT);
         algoritmeLabel.setText("Algoritme:");
 
-        databaseLabel.setFont(LABEL_FONT);
+        databaseLabel.setFont(GUI.LABEL_FONT);
         databaseLabel.setText("Database:");
 
-        evalueLabel.setFont(LABEL_FONT);
+        evalueLabel.setFont(GUI.LABEL_FONT);
         evalueLabel.setText("E-value cut-off:");
 
-        evalueTekstField.setText(" ");
-        // evalueTekstField.addActionListener();
-
-        BLASTButton.setFont(LABEL_FONT);
+        BLASTButton.setFont(GUI.LABEL_FONT);
         BLASTButton.setText("BLAST");
-        // BLASTButton.addActionListener();
+        BLASTButton.addActionListener((ActionEvent e) -> {
+            // TODO: BLASTEN
+        });
         
         //<editor-fold defaultstate="collapsed" desc="Layout">
         GroupLayout layout = new GroupLayout(getContentPane());
