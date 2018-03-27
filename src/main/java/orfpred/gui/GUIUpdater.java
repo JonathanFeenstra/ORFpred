@@ -85,9 +85,11 @@ public class GUIUpdater {
                 }
             });
             showHeaders(headerToSeq.keySet().toArray(new String[headerToSeq.size()]));
-            showReadingFrames(ReadingFramer.getProteinFrames(headerToSeq.entrySet().iterator().next().getValue()));
+            showReadingFrames(ReadingFramer.getProteinFrames(headerToSeq.values().iterator().next()));
         } catch (SQLException | ClassNotFoundException ex){
             targetGUI.showErrorMessage(ex, ex.getMessage());
+        } catch (NoSuchElementException ex) {
+            targetGUI.showErrorMessage(ex, "Ingeladen bestand bevat geen headers.");
         }
     }
 
