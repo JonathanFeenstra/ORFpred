@@ -7,6 +7,7 @@
 package orfpred.database;
 
 import orfpred.sequence.ORF;
+import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.exceptions.ParserException;
 import org.biojava.nbio.core.sequence.transcription.Frame;
 import java.sql.ResultSet;
@@ -77,7 +78,7 @@ public class DatabaseLoader {
      * @throws SQLException wordt opgegooid als er een exception optreed bij de
      * SQL server
      */
-    public HashMap<Integer, ORF> getORFFromDB(int seqID, String seq) throws SQLException {
+    public HashMap<Integer, ORF> getORFFromDB(int seqID, String seq) throws SQLException, CompoundNotFoundException {
         HashMap<Integer, ORF> orfList = new HashMap<>();
         ResultSet resultSet = connector.sentFeedbackQuery("SELECT ORF_ID, FRAME, "
                 + "START_POS, END_POS FROM ORF WHERE SEQ_ID = " + seqID);
@@ -87,11 +88,11 @@ public class DatabaseLoader {
                     end = Integer.parseInt(resultSet.getString("END_POS"));
             Frame frame = getFrame(resultSet);
             Integer orfID = Integer.parseInt(resultSet.getString("ORF_ID"));
-//            if (orfIDMetBlast.contains(orfID)){
-//                orfList.put(orfID, new ORF(frame, seq.substring(start, end + 1), start, end, orfID));
-//            } else {
-//                orfList.put(orfID, new ORF(frame, seq.substring(start, end + 1), start, end));
-//            }
+            if (orfIDMetBlast.contains(orfID)){
+                orfList.put(orfID, new ORF(orfID, frame, start, end));
+            } else {
+                orfList.put(orfID, new ORF(frame, start, end));
+            }
         }
         return orfList;
     }

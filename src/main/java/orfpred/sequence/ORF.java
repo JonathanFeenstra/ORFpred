@@ -22,7 +22,6 @@ import org.biojava.nbio.core.sequence.transcription.Frame;
 public class ORF extends DNASequence {
 
     private final Frame readingFrame;
-    private final ProteinSequence proteinSequence;
     private final int start, stop;
     private int databaseId;
 
@@ -30,16 +29,14 @@ public class ORF extends DNASequence {
      * Constructor zonder database ID.
      *
      * @param frame de reading frame
-     * @param protSeq de sequentie
      * @param startPos de startpositie
      * @param stopPos de stoppositie
      * @throws CompoundNotFoundException als karakter geen aminozuur is
      */
-    public ORF(Frame frame, String protSeq, int startPos, int stopPos) throws CompoundNotFoundException {
+    public ORF(Frame frame, int startPos, int stopPos) throws CompoundNotFoundException {
         this.readingFrame = frame;
         this.start = startPos;
         this.stop = stopPos;
-        this.proteinSequence = new ProteinSequence(protSeq);
     }
     
     /**
@@ -47,17 +44,15 @@ public class ORF extends DNASequence {
      *
      * @param dbId de database ID
      * @param frame de reading frame
-     * @param protSeq de sequentie
      * @param startPos de startpositie
      * @param stopPos de stoppositie
      * @throws CompoundNotFoundException als karakter geen aminozuur is
      */
-    public ORF(int dbId, Frame frame, String protSeq, int startPos, int stopPos) throws CompoundNotFoundException {
+    public ORF(int dbId, Frame frame, int startPos, int stopPos) throws CompoundNotFoundException {
         this.databaseId = dbId;
         this.readingFrame = frame;
         this.start = startPos;
         this.stop = stopPos;
-        this.proteinSequence = new ProteinSequence(protSeq);
     }
 
     /**
@@ -65,13 +60,6 @@ public class ORF extends DNASequence {
      */
     public Frame getReadingFrame() {
         return readingFrame;
-    }
-
-    /**
-     * @return proteinSequence
-     */
-    public ProteinSequence getProteinSequence() {
-        return proteinSequence;
     }
 
     /**
