@@ -93,7 +93,7 @@ public class DBFileChooser extends JFrame implements ActionListener {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "De volgende error is opgetreden: " + e.toString());
         } catch (ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "ORFPred kan geen de ojbc.jar file niet vinden.");
+            JOptionPane.showMessageDialog(null, "ORFPred kan de ojbc.jar file niet vinden.");
         }
     }
 }

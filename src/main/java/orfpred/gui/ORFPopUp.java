@@ -21,7 +21,7 @@ import orfpred.sequence.ORF;
 import org.biojava.nbio.core.sequence.ProteinSequence;
 
 /**
- * Deze class toont een popup met informatie over het aangeklikte ORF.
+ * Deze class maakt een pop-up met informatie over het aangeklikte ORF.
  *
  * @author Projectgroep 9
  */
@@ -31,7 +31,7 @@ public class ORFPopUp extends JFrame {
     private final ORF selectedORF;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param readingFrames de ingeladen reading frames
      * @param orf het aangeklikte ORF
@@ -39,14 +39,14 @@ public class ORFPopUp extends JFrame {
     public ORFPopUp(ProteinSequence[] readingFrames, ORF orf) {
         this.shownReadingFrames = readingFrames;
         this.selectedORF = orf;
-        this.showPopUp();
+        this.createPopUp();
     }
 
     /**
      * Methode toont een popup die informatie geeft over het ORF en een optie om
      * te BLASTen.
      */
-    public final void showPopUp() {
+    public final void createPopUp() {
         setSize(400, 270);
         setTitle("Eigenschappen ORF");
         setIconImage(new ImageIcon(getClass().getResource("/orfpred.png")).getImage());
@@ -86,8 +86,6 @@ public class ORFPopUp extends JFrame {
             });
         });
         window.add(buttonBLAST);
-
-        setVisible(true);
     }
 
 }

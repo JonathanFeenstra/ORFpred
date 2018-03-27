@@ -279,8 +279,13 @@ public class GUI implements Runnable {
         }
     }
     
+    /**
+     * Toont pop-up met info over het geselecteerde ORF.
+     * 
+     * @param orf het geselecteerde ORF.
+     */
     public void showORFPopUp(ORF orf) {
-        new ORFPopUp(guiUpdater.getShownReadingFrames(), orf);
+        new ORFPopUp(guiUpdater.getShownReadingFrames(), orf).setVisible(true);
     }
 
     /**
