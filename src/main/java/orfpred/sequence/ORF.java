@@ -6,8 +6,10 @@
  */
 package orfpred.sequence;
 
+import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.exceptions.ParserException;
 import org.biojava.nbio.core.sequence.DNASequence;
+import org.biojava.nbio.core.sequence.ProteinSequence;
 import org.biojava.nbio.core.sequence.transcription.Frame;
 
 /**
@@ -20,22 +22,42 @@ import org.biojava.nbio.core.sequence.transcription.Frame;
 public class ORF extends DNASequence {
 
     private final Frame readingFrame;
-    private final String sequence;
+    private final ProteinSequence proteinSequence;
     private final int start, stop;
+    private int databaseId;
 
     /**
-     * Constructor.
+     * Constructor zonder database ID.
      *
      * @param frame de reading frame
-     * @param seq de sequentie
+     * @param protSeq de sequentie
      * @param startPos de startpositie
      * @param stopPos de stoppositie
+     * @throws CompoundNotFoundException als karakter geen aminozuur is
      */
-    public ORF(Frame frame, String seq, int startPos, int stopPos) {
+    public ORF(Frame frame, String protSeq, int startPos, int stopPos) throws CompoundNotFoundException {
         this.readingFrame = frame;
         this.start = startPos;
         this.stop = stopPos;
-        this.sequence = seq;
+        this.proteinSequence = new ProteinSequence(protSeq);
+    }
+    
+    /**
+     * Constructor met database ID.
+     *
+     * @param dbId de database ID
+     * @param frame de reading frame
+     * @param protSeq de sequentie
+     * @param startPos de startpositie
+     * @param stopPos de stoppositie
+     * @throws CompoundNotFoundException als karakter geen aminozuur is
+     */
+    public ORF(int dbId, Frame frame, String protSeq, int startPos, int stopPos) throws CompoundNotFoundException {
+        this.databaseId = dbId;
+        this.readingFrame = frame;
+        this.start = startPos;
+        this.stop = stopPos;
+        this.proteinSequence = new ProteinSequence(protSeq);
     }
 
     /**
@@ -46,10 +68,10 @@ public class ORF extends DNASequence {
     }
 
     /**
-     * @return sequence
+     * @return proteinSequence
      */
-    public String getSequence() {
-        return sequence;
+    public ProteinSequence getProteinSequence() {
+        return proteinSequence;
     }
 
     /**
