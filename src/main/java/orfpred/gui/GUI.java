@@ -253,7 +253,6 @@ public class GUI implements Runnable {
                     DBFileChooser.setGuiUpdater(updater);
                     DBFileChooser.runFrame();
                 });
-
             } else if (evt.getSource() == dbSaveMenuItem) {
                 // TODO: Opslaan in database
             } else if (evt.getSource() == exitMenuItem) {

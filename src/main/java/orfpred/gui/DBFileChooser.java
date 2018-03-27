@@ -16,14 +16,15 @@ import java.util.HashMap;
 public class DBFileChooser extends JFrame implements ActionListener{
 
     private JList<String> fileList;
-    private JButton openButton;
+    private static String[] bestandArray;
+    private JButton openButton, deleteButton;
     private JLabel uitlegLabel;
     private static ArrayList<ArrayList<String>> bestandList = null;
     private static GUIUpdater updater;
 
     public static void runFrame() {
         getBestanden();
-        if(bestandList != null) {
+        if(bestandArray.length > 0) {
             DBFileChooser frame = new DBFileChooser();
             frame.setTitle("Kies uw bestand uit de databank");
             frame.setSize(500, 500);
@@ -43,7 +44,7 @@ public class DBFileChooser extends JFrame implements ActionListener{
         uitlegLabel = new JLabel("Kies een bestand:");
         window.add(uitlegLabel);
 
-        fileList = new JList<>();
+        fileList = new JList<>(bestandArray);
         fileList.setFont(new Font("Courier new",Font.BOLD,15));
         fileList.setPreferredSize(new Dimension(500,300));
         fileList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -52,6 +53,10 @@ public class DBFileChooser extends JFrame implements ActionListener{
         openButton = new JButton("Open bestand");
         openButton.addActionListener(this);
         window.add(openButton);
+
+        deleteButton = new JButton("Verwijder bestand");
+        deleteButton.addActionListener(this);
+        window.add(deleteButton);
 
     }
 
@@ -63,7 +68,11 @@ public class DBFileChooser extends JFrame implements ActionListener{
             for(ArrayList<String> lijst : bestandList){
                 if(lijst.get(1).equals(bestandNaam)){
                     this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-                    updater.loadDBFile(Integer.parseInt(lijst.get(0)));
+                    if(event.getSource() == openButton) {
+                        updater.loadDBFile(Integer.parseInt(lijst.get(0)));
+                    } else {
+
+                    }
                 }
             }
         }
@@ -73,6 +82,10 @@ public class DBFileChooser extends JFrame implements ActionListener{
         try {
             DatabaseLoader loader = new DatabaseLoader();
             bestandList = loader.getStoredFileNames();
+            bestandArray = new String[bestandList.size()];
+            for(int index = 0; index < bestandList.size(); index++){
+                bestandArray[index] = bestandList.get(index).get(1);
+            }
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null, "De volgende error is opgetreden: "+e.toString());
         } catch (ClassNotFoundException e){
