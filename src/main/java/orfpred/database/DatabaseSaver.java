@@ -12,6 +12,8 @@ import org.biojava.nbio.core.sequence.transcription.Frame;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import org.biojava.nbio.core.exceptions.ParserException;
 
 /**
@@ -74,7 +76,7 @@ public class DatabaseSaver {
      */
     public void saveORF(ORF orf, int sequentieID) throws SQLException {
         int id = getUniqueID("ORF");
-        String frame = parseFrameToString(orf.getReadingFrame());
+        String frame = ORF.parseFrameToString(orf.getReadingFrame());
         connector.sentInsertionQuery("ORF", "" + id + ",'" + frame
                 + "'," + orf.getStart() + "," + orf.getStop() + "," + sequentieID);
     }
@@ -148,36 +150,5 @@ public class DatabaseSaver {
             }
         }
         throw new NoSuchFieldError("Error: Searched field doesn't exist");
-    }
-
-    /**
-     * Methode om van een Frame object een frame String te maken
-     *
-     * @param frame Frame object die geparsed moet worden
-     * @return String met daarin de gewenste String van het object
-     * @throws ParserException bij onbekende frames
-     */
-    public String parseFrameToString(Frame frame) throws ParserException {
-        if (null == frame) {
-            return "-3";
-        } else {
-            switch (frame) {
-                case ONE:
-                    return "+1";
-                case TWO:
-                    return "+2";
-                case THREE:
-                    return "+3";
-                case REVERSED_ONE:
-                    return "-1";
-                case REVERSED_TWO:
-                    return "-2";
-                case REVERSED_THREE:
-                    return "-3";
-                default:
-                    break;
-            }
-        }
-        throw new ParserException("Error: Unkown frame found!");
     }
 }

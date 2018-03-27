@@ -6,6 +6,7 @@
  */
 package orfpred.database;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 /**
@@ -73,6 +74,17 @@ public class DatabaseConnector {
             statement.executeQuery("INSERT INTO " + table + " VALUES (" + values + ")");
         }
         statement.executeQuery("COMMIT");
+    }
+
+    /**
+     * Methode om entries te verwijderen uit db
+     * @param table String met de tabel naam waaruit de entry moet worden verwijderd
+     * @param conditie String met de voorwaarde waaraan de rij moet voldoen om verwijderd te moeten worden
+     * @throws SQLException
+     */
+    protected void sentDeleteQuery(String table, String conditie) throws SQLException{
+        Statement statement = dbConnection.createStatement();
+        statement.executeQuery("DELETE FROM "+table+" WHERE "+conditie);
     }
 
     /**
