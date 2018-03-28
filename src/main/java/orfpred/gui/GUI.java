@@ -56,7 +56,7 @@ public class GUI implements Runnable {
     public void run() {
         frame = new JFrame("ORFtinder - Vind hier uw ORF match!");
 
-        frame.setSize(720, 505);
+        frame.setSize(720, 545);
         frame.setResizable(false);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
