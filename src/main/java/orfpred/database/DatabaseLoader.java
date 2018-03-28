@@ -168,6 +168,12 @@ public class DatabaseLoader {
         return createdArray;
     }
 
+    /**
+     * Haalt ORF ID met bijbehorende BLAST resultaten op uit de database.
+     * 
+     * @return idList de resultaten
+     * @throws SQLException bij problemen met de connectie met de database
+     */
     public ArrayList<Integer> getORFIDMetBLAST() throws SQLException {
         ResultSet resultSet = connector.sentFeedbackQuery("SELECT ORF_ID FROM BLAST_RESULTAAT");
         ArrayList<Integer> idList = new ArrayList<>();
