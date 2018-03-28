@@ -268,6 +268,7 @@ public class GUI implements Runnable {
                     }
                 });
             } else if (evt.getSource() == zoekButton) {
+                ORFHighlighter.setUpdater(updater);
                 EventQueue.invokeLater(new ORFHighlighter(updater.getShownReadingFrames(), GUI.this));
             } else if (evt.getSource() == prokaryootMenuItem || evt.getSource() == eukaryootMenuItem) {
                 ORFHighlighter.setSearchMode(prokaryootMenuItem.isSelected());

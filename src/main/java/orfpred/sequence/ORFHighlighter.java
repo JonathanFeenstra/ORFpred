@@ -19,6 +19,7 @@ import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 import orfpred.gui.GUI;
+import orfpred.gui.GUIUpdater;
 import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.sequence.ProteinSequence;
 import org.biojava.nbio.core.sequence.transcription.Frame;
@@ -40,6 +41,7 @@ public class ORFHighlighter implements Runnable {
     private final ProteinSequence[] readingFrames;
     private final GUI targetGUI;
     private boolean[] isHighlighted;
+    private static GUIUpdater updater;
 
     /**
      * Constructor.
@@ -87,7 +89,9 @@ public class ORFHighlighter implements Runnable {
                 Matcher matcher = searchMode ? Pattern.compile("M[^X*]+").matcher(readingFrame.toString()) : Pattern.compile("[^X*]+").matcher(readingFrame.toString());
                 while (matcher.find()) {
                     if (matcher.group().length() - 2 >= minORFLength) {
-                        predictedORFs.add(new ORF(Frame.values()[frameNum], searchMode ? matcher.start() : matcher.start(), matcher.end()));
+                        predictedORFs.add(new ORF(Frame.values()[frameNum],
+                                searchMode ? matcher.start() : matcher.start(),
+                                matcher.end(),));
                     }
                 }
                 frameNum++;
@@ -218,4 +222,11 @@ public class ORFHighlighter implements Runnable {
         searchMode = sM;
     }
 
+    public static HashMap<Integer, ORF> getPositionToORF(){
+        return positionToORF;
+    }
+
+    public static void setUpdater(GUIUpdater guiUpdater){
+        updater = guiUpdater;
+    }
 }

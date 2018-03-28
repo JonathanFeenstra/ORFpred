@@ -23,6 +23,7 @@ public class ORF extends DNASequence {
     private final Frame readingFrame;
     private final int start, stop;
     private int databaseId;
+    private String bestandHerkomst, headerHerkomst;
 
     /**
      * Constructor zonder database ID.
@@ -30,12 +31,16 @@ public class ORF extends DNASequence {
      * @param frame de reading frame
      * @param startPos de startpositie
      * @param stopPos de stoppositie
+     * @param bestandHerkomst String met de naam van het bestand waaruit de header komt
+     * @param headerHerkomst String met de naam van de header van de sequentie waaruit de orf komt
      * @throws CompoundNotFoundException als karakter geen aminozuur is
      */
-    public ORF(Frame frame, int startPos, int stopPos) throws CompoundNotFoundException {
+    public ORF(Frame frame, int startPos, int stopPos, String bestandHerkomst, String headerHerkomst) throws CompoundNotFoundException {
         this.readingFrame = frame;
         this.start = startPos;
         this.stop = stopPos;
+        this.bestandHerkomst = bestandHerkomst;
+        this.headerHerkomst = headerHerkomst;
     }
 
     /**
@@ -45,13 +50,18 @@ public class ORF extends DNASequence {
      * @param frame de reading frame
      * @param startPos de startpositie
      * @param stopPos de stoppositie
+     * @param bestandHerkomst String met de naam van het bestand waaruit de header komt
+     * @param headerHerkomst String met de naam van de header van de sequentie waaruit de orf komt
      * @throws CompoundNotFoundException als karakter geen aminozuur is
      */
-    public ORF(int dbId, Frame frame, int startPos, int stopPos) throws CompoundNotFoundException {
+    public ORF(int dbId, Frame frame, int startPos, int stopPos,
+               String bestandHerkomst, String headerHerkomst) throws CompoundNotFoundException {
         this.databaseId = dbId;
         this.readingFrame = frame;
         this.start = startPos;
         this.stop = stopPos;
+        this.bestandHerkomst = bestandHerkomst;
+        this.headerHerkomst = headerHerkomst;
     }
 
     /**

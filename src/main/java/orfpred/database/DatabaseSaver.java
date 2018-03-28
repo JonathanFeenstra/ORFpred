@@ -9,12 +9,15 @@ package orfpred.database;
 import orfpred.gui.GUI;
 import orfpred.gui.GUIUpdater;
 import orfpred.sequence.ORF;
+import orfpred.sequence.ORFHighlighter;
 import org.biojava.nbio.core.sequence.DNASequence;
 import sun.dc.pr.PRError;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 /**
@@ -66,7 +69,12 @@ public class DatabaseSaver {
                 saveSequentie(header,headersAndSeq.get(header),bestandID);
             }
             if(header.equals(gui.getHeaderComboBox().getSelectedItem())){
-
+                HashSet<ORF> uniqueORF = new HashSet<>();
+                HashMap<Integer, ORF> alleORFs = ORFHighlighter.getPositionToORF();
+                for(Integer key : alleORFs.keySet()){
+                    uniqueORF.add(alleORFs.get(key));
+                }
+                if()
             }
         }
     }
