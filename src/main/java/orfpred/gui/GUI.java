@@ -54,7 +54,7 @@ public class GUI implements Runnable {
 
     @Override
     public void run() {
-        frame = new JFrame("ORFpred - Open Reading Frame predictie tool");
+        frame = new JFrame("ORFtinder - Vind hier uw ORF match!");
 
         frame.setSize(720, 505);
         frame.setResizable(false);
