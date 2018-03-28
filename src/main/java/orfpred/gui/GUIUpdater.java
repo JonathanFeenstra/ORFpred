@@ -18,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.text.*;
+import orfpred.sequence.ORFHighlighter;
 import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.sequence.DNASequence;
 import org.biojava.nbio.core.sequence.ProteinSequence;
@@ -33,9 +34,11 @@ import org.biojava.nbio.core.sequence.ProteinSequence;
 public class GUIUpdater {
 
     private final GUI targetGUI;
+    private DatabaseLoader loader;
     private LinkedHashMap<String, DNASequence> headerToSeq;
     private ProteinSequence[] shownReadingFrames;
     private String fileName;
+    private ArrayList<Integer> seqIDs;
 
     /**
      * Constructor.
@@ -60,6 +63,7 @@ public class GUIUpdater {
                     showReadingFrames(ReadingFramer.getProteinFrames(headerToSeq.entrySet().iterator().next().getValue()));
                 }
             }
+            targetGUI.setDbFileLoaded(false);
         } catch (FileNotFoundException ex) {
             targetGUI.showErrorMessage(ex, ex.getMessage());
         } catch (NoSuchElementException ex) {
@@ -71,16 +75,18 @@ public class GUIUpdater {
 
     /**
      * Procedure om bestanden uit de database in te laden.
-     * 
+     *
      * @param bestandsID het ID van het geselecteerde bestand
      */
-    public void loadDBFile(int bestandsID){
+    public void loadDBFile(int bestandsID) {
         try {
-            DatabaseLoader loader = new DatabaseLoader(this,targetGUI);
+            loader = new DatabaseLoader(this, targetGUI);
             headerToSeq = new LinkedHashMap<>();
             ArrayList<ArrayList<String>> headerAndSeqData = loader.getHeadersFromFile(bestandsID);
+            seqIDs = new ArrayList<>();
             headerAndSeqData.forEach((row) -> {
                 try {
+                    seqIDs.add(Integer.parseInt(row.get(0)));
                     headerToSeq.put(row.get(1), new DNASequence(row.get(2)));
                 } catch (CompoundNotFoundException ex) {
                     targetGUI.showErrorMessage(ex, "De volgende sequentie bevat een ongeldig karakter:\n"
@@ -88,12 +94,29 @@ public class GUIUpdater {
                 }
             });
             showHeaders(headerToSeq.keySet().toArray(new String[headerToSeq.size()]));
-            showReadingFrames(ReadingFramer.getProteinFrames(headerToSeq.values().iterator().next()));
-        } catch (SQLException | ClassNotFoundException ex){
+            showLoadedSeq();
+            targetGUI.setDbFileLoaded(true);
+        } catch (SQLException | ClassNotFoundException ex) {
             targetGUI.showErrorMessage(ex, ex.getMessage());
         } catch (NoSuchElementException ex) {
             targetGUI.showErrorMessage(ex, "Ingeladen bestand bevat geen headers.");
+        } catch (CompoundNotFoundException ex) {
+            targetGUI.showErrorMessage(ex, "Sequentie bevat ongeldig karakter.\n" + ex.getMessage());
         }
+    }
+
+    /**
+     * Toont ingeladen sequentie.
+     *
+     * @throws SQLException bij problemen met de connectie met de database
+     * @throws CompoundNotFoundException als sequentie ongeldig karakter bevat
+     */
+    public void showLoadedSeq() throws SQLException, CompoundNotFoundException {
+        DNASequence loadedSeq = headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem().toString());
+        showHeaders(headerToSeq.keySet().toArray(new String[headerToSeq.size()]));
+        showReadingFrames(ReadingFramer.getProteinFrames(loadedSeq));
+        ORFHighlighter highlighter = new ORFHighlighter(shownReadingFrames, targetGUI);
+        highlighter.highlightSavedORFs(loader.getORFFromDB(seqIDs.get(targetGUI.getHeaderComboBox().getSelectedIndex()), loadedSeq.toString()).values());
     }
 
     /**

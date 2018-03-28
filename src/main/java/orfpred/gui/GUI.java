@@ -16,8 +16,6 @@ import javax.swing.text.DefaultCaret;
 import orfpred.sequence.ORF;
 import orfpred.sequence.ReadingFramer;
 import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 
 /**
  * Class voor het weergeven van de GUI.
@@ -37,6 +35,8 @@ public class GUI implements Runnable {
     private JComboBox<String> headerComboBox;
     private JButton zoekButton;
     private JTextPane seqTextPane;
+
+    private boolean dbFileLoaded;
 
     /**
      * Lettertype voor JLabels
@@ -69,7 +69,7 @@ public class GUI implements Runnable {
         frame.setIconImage(new ImageIcon(getClass().getResource("/orfpred.png")).getImage());
 
         guiUpdater = new GUIUpdater(this);
-        GUIEventHandler eventHandler = new GUIEventHandler(guiUpdater,this);
+        GUIEventHandler eventHandler = new GUIEventHandler(guiUpdater, this);
 
         Container window = frame.getContentPane();
 
@@ -233,6 +233,16 @@ public class GUI implements Runnable {
     }
 
     /**
+     * dbFileLoaded setter.
+     *
+     * @param dbFileLoaded boolean die aangeeft of een databasebestand is
+     * ingeladen
+     */
+    public void setDbFileLoaded(boolean dbFileLoaded) {
+        this.dbFileLoaded = dbFileLoaded;
+    }
+
+    /**
      * Inner class voor het afhandelen van events in de GUI.
      */
     private class GUIEventHandler implements ActionListener, ItemListener {
@@ -258,30 +268,16 @@ public class GUI implements Runnable {
                 });
             } else if (evt.getSource() == openDBMenuItem) {
                 EventQueue.invokeLater(() -> {
-                    new DBFileChooser(updater,gui).setVisible(true);
+                    new DBFileChooser(updater, gui).setVisible(true);
                 });
             } else if (evt.getSource() == dbSaveMenuItem) {
                 try {
-                        DatabaseSaver saver = new DatabaseSaver(updater, gui);
-                        saver.saveBestandData();
+                    DatabaseSaver saver = new DatabaseSaver(updater, gui);
+                    saver.saveBestandData();
+                } catch (SQLException | CompoundNotFoundException | ClassNotFoundException ex) {
+                    showErrorMessage(ex, ex.getMessage());
+                }
 
-                } catch (SQLException e){
-                    StringWriter sw = new StringWriter();
-                    PrintWriter pw = new PrintWriter(sw);
-                    e.printStackTrace(pw);
-                    String sStackTrace = sw.toString(); // stack trace as a string
-                    System.out.println(sStackTrace);
-                } catch (CompoundNotFoundException e){
-                    StringWriter sw = new StringWriter();
-                    PrintWriter pw = new PrintWriter(sw);
-                    e.printStackTrace(pw);
-                    String sStackTrace = sw.toString(); // stack trace as a string
-                    System.out.println(sStackTrace);                } catch (ClassNotFoundException e){
-                    StringWriter sw = new StringWriter();
-                    PrintWriter pw = new PrintWriter(sw);
-                    e.printStackTrace(pw);
-                    String sStackTrace = sw.toString(); // stack trace as a string
-                    System.out.println(sStackTrace);                }
             } else if (evt.getSource() == exitMenuItem) {
                 System.exit(0);
             } else if (evt.getSource() == highlightMenuItem) {
@@ -295,10 +291,9 @@ public class GUI implements Runnable {
                     }
                 });
             } else if (evt.getSource() == zoekButton) {
-                ORFHighlighter.setUpdater(updater);
                 EventQueue.invokeLater(new ORFHighlighter(updater.getShownReadingFrames(), GUI.this));
             } else if (evt.getSource() == prokaryootMenuItem || evt.getSource() == eukaryootMenuItem) {
-                ORFHighlighter.setSearchMode(prokaryootMenuItem.isSelected());
+                ORFHighlighter.setProkaryote(prokaryootMenuItem.isSelected());
             }
         }
 
@@ -306,7 +301,15 @@ public class GUI implements Runnable {
         public void itemStateChanged(ItemEvent e) {
             if (e.getSource() == headerComboBox) {
                 EventQueue.invokeLater(() -> {
-                    updater.showReadingFrames(ReadingFramer.getProteinFrames(updater.getHeaderToSeq().get(headerComboBox.getSelectedItem().toString())));
+                    if (dbFileLoaded) {
+                        try {
+                            updater.showLoadedSeq();
+                        } catch (SQLException | CompoundNotFoundException ex) {
+                            showErrorMessage(ex, ex.getMessage());
+                        }
+                    } else {
+                        updater.showReadingFrames(ReadingFramer.getProteinFrames(updater.getHeaderToSeq().get(headerComboBox.getSelectedItem().toString())));
+                    }
                 });
             }
         }

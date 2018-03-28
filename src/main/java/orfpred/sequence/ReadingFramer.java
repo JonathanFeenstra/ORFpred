@@ -23,8 +23,9 @@ public class ReadingFramer {
      *
      * @param dnaSeq de DNA-sequentie
      * @return array van eiwit reading frames
+     * @throws NullPointerException als dnaSeq null is
      */
-    public static ProteinSequence[] getProteinFrames(DNASequence dnaSeq) {
+    public static ProteinSequence[] getProteinFrames(DNASequence dnaSeq) throws NullPointerException {
         ProteinSequence[] proteinFrames = new ProteinSequence[6];
         for (int i = 0; i <= 5; i++) {
             RNASequence rnaFrame = dnaSeq.getRNASequence(Frame.values()[i]);

@@ -11,6 +11,7 @@ import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.regex.*;
 import javax.swing.*;
@@ -36,13 +37,12 @@ public class ORFHighlighter implements Runnable {
     private static Color highlightKleur = Color.CYAN;
     private static DefaultHighlightPainter painter;
     private static HashMap<Integer, ORF> positionToORF;
-    private static boolean searchMode;
+    private static boolean isProkaryote;
     private static int minORFLength = 30;
     private final ProteinSequence[] readingFrames;
     private final GUI targetGUI;
     private boolean[] isHighlighted;
-    private static GUIUpdater updater;
-    private static JComboBox<String> comboBox;
+    private GUIUpdater updater;
 
     /**
      * Constructor.
@@ -53,7 +53,6 @@ public class ORFHighlighter implements Runnable {
     public ORFHighlighter(ProteinSequence[] rfs, GUI gui) {
         this.readingFrames = rfs;
         this.targetGUI = gui;
-        comboBox = gui.getHeaderComboBox();
         painter = new DefaultHighlightPainter(highlightKleur);
     }
 
@@ -75,6 +74,25 @@ public class ORFHighlighter implements Runnable {
         }
         addClickListener(targetGUI.getSeqTextPane());
     }
+    
+    /**
+     * Highlight opgeslagen ORF's.
+     * 
+     * @param savedORFs opgeslagen ORF's
+     */
+    public void highlightSavedORFs(Collection<ORF> savedORFs) {
+        targetGUI.getSeqTextPane().getHighlighter().removeAllHighlights();
+        isHighlighted = new boolean[targetGUI.getSeqTextPane().getText().length()];
+        positionToORF = new HashMap<>();
+        savedORFs.forEach((savedORF) -> {
+            try {
+                highlightORF(targetGUI.getSeqTextPane(), savedORF);
+            } catch (BadLocationException ex) {
+                targetGUI.showErrorMessage(ex, ex.getMessage());
+            }
+        });
+        addClickListener(targetGUI.getSeqTextPane());
+    }
 
     /**
      * Voorspelt ORF's in een set reading frames.
@@ -83,17 +101,17 @@ public class ORFHighlighter implements Runnable {
      * @return ArrayList van ORF's
      * @throws CompoundNotFoundException als karakter geen aminozuur is
      */
-    public static ArrayList<ORF> predictORFs(ProteinSequence[] readingFrames) throws CompoundNotFoundException {
+    public ArrayList<ORF> predictORFs(ProteinSequence[] readingFrames) throws CompoundNotFoundException {
         ArrayList<ORF> predictedORFs = new ArrayList<>();
         int frameNum = 0;
         if (readingFrames != null) {
             for (ProteinSequence readingFrame : readingFrames) {
-                Matcher matcher = searchMode ? Pattern.compile("M[^X*]+").matcher(readingFrame.toString()) : Pattern.compile("[^X*]+").matcher(readingFrame.toString());
+                Matcher matcher = isProkaryote ? Pattern.compile("M[^X*]+").matcher(readingFrame.toString()) : Pattern.compile("[^X*]+").matcher(readingFrame.toString());
                 while (matcher.find()) {
                     if (matcher.group().length() - 2 >= minORFLength) {
                         predictedORFs.add(new ORF(Frame.values()[frameNum],
-                                searchMode ? matcher.start() : matcher.start(),
-                                matcher.end(),updater.getFileName(),(String)comboBox.getSelectedItem()));
+                                isProkaryote ? matcher.start() : matcher.start(),
+                                matcher.end(),updater.getFileName(),(String)targetGUI.getHeaderComboBox().getSelectedItem()));
                     }
                 }
                 frameNum++;
@@ -216,19 +234,16 @@ public class ORFHighlighter implements Runnable {
     }
 
     /**
-     * searchMode setter
+     * isProkaryote setter
      *
-     * @param sM zoekmodus: true = prokaryoot, false = eukaryoot.
+     * @param prokaryote zoekmodus: true = prokaryoot, false = eukaryoot.
      */
-    public static void setSearchMode(boolean sM) {
-        searchMode = sM;
+    public static void setProkaryote(boolean prokaryote) {
+        isProkaryote = prokaryote;
     }
 
     public static HashMap<Integer, ORF> getPositionToORF(){
         return positionToORF;
     }
 
-    public static void setUpdater(GUIUpdater guiUpdater){
-        updater = guiUpdater;
-    }
 }
