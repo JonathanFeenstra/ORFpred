@@ -29,14 +29,16 @@ public class DBFileChooser extends JFrame implements ActionListener {
     private JButton openButton, deleteButton;
     private ArrayList<ArrayList<String>> bestandList = null;
     private final GUIUpdater guiUpdater;
+    private final GUI gui;
 
     /**
      * Constructor.
      *
      * @param updater de betreffende GUIUpdater
      */
-    public DBFileChooser(GUIUpdater updater) {
+    public DBFileChooser(GUIUpdater updater, GUI gui) {
         this.guiUpdater = updater;
+        this.gui = gui;
         getBestanden();
         if (bestandArray.length > 0) {
             createComponents();
@@ -102,7 +104,7 @@ public class DBFileChooser extends JFrame implements ActionListener {
      */
     public final void getBestanden() {
         try {
-            bestandList = new DatabaseLoader().getStoredFiles();
+            bestandList = new DatabaseLoader(guiUpdater,gui).getStoredFiles();
             bestandArray = new String[bestandList.size()];
             for (int index = 0; index < bestandList.size(); index++) {
                 bestandArray[index] = bestandList.get(index).get(1);

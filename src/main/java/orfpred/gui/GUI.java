@@ -64,7 +64,7 @@ public class GUI implements Runnable {
         frame.setIconImage(new ImageIcon(getClass().getResource("/orfpred.png")).getImage());
 
         guiUpdater = new GUIUpdater(this);
-        GUIEventHandler eventHandler = new GUIEventHandler(guiUpdater);
+        GUIEventHandler eventHandler = new GUIEventHandler(guiUpdater,this);
 
         Container window = frame.getContentPane();
 
@@ -233,14 +233,16 @@ public class GUI implements Runnable {
     private class GUIEventHandler implements ActionListener, ItemListener {
 
         private final GUIUpdater updater;
+        private final GUI gui;
 
         /**
          * Constructor.
          *
          * @param guiUpdater de GUIUpdater van de betreffende GUI
          */
-        public GUIEventHandler(GUIUpdater guiUpdater) {
+        public GUIEventHandler(GUIUpdater guiUpdater, GUI gui) {
             this.updater = guiUpdater;
+            this.gui = gui;
         }
 
         @Override
@@ -251,7 +253,7 @@ public class GUI implements Runnable {
                 });
             } else if (evt.getSource() == openDBMenuItem) {
                 EventQueue.invokeLater(() -> {
-                    new DBFileChooser(updater).setVisible(true);
+                    new DBFileChooser(updater,gui).setVisible(true);
                 });
             } else if (evt.getSource() == dbSaveMenuItem) {
                 // TODO: Opslaan in database

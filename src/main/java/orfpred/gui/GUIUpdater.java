@@ -76,7 +76,7 @@ public class GUIUpdater {
      */
     public void loadDBFile(int bestandsID){
         try {
-            DatabaseLoader loader = new DatabaseLoader();
+            DatabaseLoader loader = new DatabaseLoader(this,targetGUI);
             headerToSeq = new LinkedHashMap<>();
             ArrayList<ArrayList<String>> headerAndSeqData = loader.getHeadersFromFile(bestandsID);
             headerAndSeqData.forEach((row) -> {

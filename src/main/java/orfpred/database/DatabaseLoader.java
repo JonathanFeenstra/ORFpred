@@ -6,6 +6,8 @@
  */
 package orfpred.database;
 
+import orfpred.gui.GUI;
+import orfpred.gui.GUIUpdater;
 import orfpred.sequence.ORF;
 import org.biojava.nbio.core.exceptions.*;
 import org.biojava.nbio.core.sequence.transcription.Frame;
@@ -21,6 +23,8 @@ import java.util.*;
 public class DatabaseLoader {
 
     private final DatabaseConnector connector;
+    private GUIUpdater updater;
+    private GUI gui;
 
     /**
      * Constructor.
@@ -29,8 +33,9 @@ public class DatabaseLoader {
      * @throws ClassNotFoundException als de vereiste class mist
      * @throws MissingResourceException als een vereist argument mist
      */
-    public DatabaseLoader() throws SQLException, ClassNotFoundException {
+    public DatabaseLoader(GUIUpdater updater, GUI gui) throws SQLException, ClassNotFoundException {
         this.connector = new DatabaseConnector();
+        this.updater = updater;
     }
 
     /**
@@ -88,9 +93,9 @@ public class DatabaseLoader {
             Frame frame = getFrame(resultSet);
             Integer orfID = Integer.parseInt(resultSet.getString("ORF_ID"));
             if (orfIDMetBlast.contains(orfID)) {
-                orfList.put(orfID, new ORF(orfID, frame, start, end));
+                orfList.put(orfID, new ORF(orfID, frame, start, end, updater.getFileName(), (String)gui.getHeaderComboBox().getSelectedItem() ));
             } else {
-                orfList.put(orfID, new ORF(frame, start, end));
+                orfList.put(orfID, new ORF(frame, start, end, updater.getFileName(), (String)gui.getHeaderComboBox().getSelectedItem()));
             }
         }
         return orfList;

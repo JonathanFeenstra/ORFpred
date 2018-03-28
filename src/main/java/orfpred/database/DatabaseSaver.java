@@ -41,7 +41,7 @@ public class DatabaseSaver {
      */
     public DatabaseSaver(GUIUpdater updater, GUI gui) throws SQLException, ClassNotFoundException {
         this.connector = new DatabaseConnector();
-        this.loader = new DatabaseLoader();
+        this.loader = new DatabaseLoader(updater, gui);
         bestandID = -1;
         String bestandnaam = updater.getFileName();
         ArrayList<ArrayList<String>> bestaandeFiles = loader.getStoredFiles();
@@ -74,7 +74,7 @@ public class DatabaseSaver {
                 for(Integer key : alleORFs.keySet()){
                     uniqueORF.add(alleORFs.get(key));
                 }
-                if()
+                if(1==1){}
             }
         }
     }

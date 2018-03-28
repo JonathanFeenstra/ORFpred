@@ -13,7 +13,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.*;
-import javax.swing.JTextPane;
+import javax.swing.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
@@ -42,6 +42,7 @@ public class ORFHighlighter implements Runnable {
     private final GUI targetGUI;
     private boolean[] isHighlighted;
     private static GUIUpdater updater;
+    private static JComboBox<String> comboBox;
 
     /**
      * Constructor.
@@ -52,6 +53,7 @@ public class ORFHighlighter implements Runnable {
     public ORFHighlighter(ProteinSequence[] rfs, GUI gui) {
         this.readingFrames = rfs;
         this.targetGUI = gui;
+        comboBox = gui.getHeaderComboBox();
         painter = new DefaultHighlightPainter(highlightKleur);
     }
 
@@ -91,7 +93,7 @@ public class ORFHighlighter implements Runnable {
                     if (matcher.group().length() - 2 >= minORFLength) {
                         predictedORFs.add(new ORF(Frame.values()[frameNum],
                                 searchMode ? matcher.start() : matcher.start(),
-                                matcher.end(),));
+                                matcher.end(),updater.getFileName(),(String)comboBox.getSelectedItem()));
                     }
                 }
                 frameNum++;
