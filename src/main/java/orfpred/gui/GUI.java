@@ -105,12 +105,12 @@ public class GUI implements Runnable {
         JMenu toolsMenu = new JMenu("Tools"), orfSearchMenu = new JMenu("ORF zoekmodus");
         orfLengteMenuItem = new JMenuItem("Stel minimale ORF lengte in...");
         orfLengteMenuItem.addActionListener(eventHandler);
-        
+
         prokaryootMenuItem = new JRadioButtonMenuItem("Prokaryoot - start tot stop");
         prokaryootMenuItem.addActionListener(eventHandler);
         eukaryootMenuItem = new JRadioButtonMenuItem("Eukaryoot - stop tot stop", true);
         eukaryootMenuItem.addActionListener(eventHandler);
-        
+
         ButtonGroup orfSearchGroup = new ButtonGroup();
         orfSearchGroup.add(prokaryootMenuItem);
         orfSearchGroup.add(eukaryootMenuItem);
@@ -154,7 +154,7 @@ public class GUI implements Runnable {
             readingFrameLabel.setFont(new Font("Courier", Font.BOLD, 12));
         }
         readingFrameLabel.setVerticalAlignment(SwingConstants.TOP);
-        
+
         seqTextPane = new JTextPane() {
             // Zorgt ervoor dat de textpane horizontaal uitbreidt.
             @Override
@@ -227,7 +227,6 @@ public class GUI implements Runnable {
         frame.setVisible(true);
     }
 
-
     /**
      * Inner class voor het afhandelen van events in de GUI.
      */
@@ -250,7 +249,7 @@ public class GUI implements Runnable {
                 EventQueue.invokeLater(() -> {
                     updater.loadFile();
                 });
-            } else if (evt.getSource() == openDBMenuItem){
+            } else if (evt.getSource() == openDBMenuItem) {
                 EventQueue.invokeLater(() -> {
                     new DBFileChooser(updater).setVisible(true);
                 });
@@ -261,7 +260,13 @@ public class GUI implements Runnable {
             } else if (evt.getSource() == highlightMenuItem) {
                 ORFHighlighter.setHighlightKleur(JColorChooser.showDialog(GUI.this.frame, "Highlight kleur", ORFHighlighter.getHighlightKleur()));
             } else if (evt.getSource() == orfLengteMenuItem) {
-                // TODO: Toon pop-up waar ORF lengte kan worden ingesteld https://stackoverflow.com/questions/11093326/restricting-jtextfield-input-to-integers#11093360
+                EventQueue.invokeLater(() -> {
+                    try {
+                        ORFHighlighter.setMinORFLength(Integer.parseInt(JOptionPane.showInputDialog(GUI.this.frame, "Minimale ORF lengte in aminozuren:")));
+                    } catch (NumberFormatException ex) {
+                        showErrorMessage(ex, "Geen geldige lengte");
+                    }
+                });
             } else if (evt.getSource() == zoekButton) {
                 EventQueue.invokeLater(new ORFHighlighter(updater.getShownReadingFrames(), GUI.this));
             } else if (evt.getSource() == prokaryootMenuItem || evt.getSource() == eukaryootMenuItem) {
@@ -278,10 +283,10 @@ public class GUI implements Runnable {
             }
         }
     }
-    
+
     /**
      * Toont pop-up met info over het geselecteerde ORF.
-     * 
+     *
      * @param orf het geselecteerde ORF.
      */
     public void showORFPopUp(ORF orf) {
@@ -297,7 +302,7 @@ public class GUI implements Runnable {
     public void showErrorMessage(Exception ex, String msg) {
         JOptionPane.showMessageDialog(this.getFrame(), msg, ex.getClass().getSimpleName(), JOptionPane.ERROR_MESSAGE);
     }
-    
+
     /**
      * @return frame
      */

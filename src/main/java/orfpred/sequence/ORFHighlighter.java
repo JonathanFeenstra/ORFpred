@@ -9,9 +9,7 @@ package orfpred.sequence;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.*;
@@ -33,7 +31,7 @@ import org.biojava.nbio.core.sequence.transcription.Frame;
  * @version 1.0
  */
 public class ORFHighlighter implements Runnable {
-    
+
     private static Color highlightKleur = Color.CYAN;
     private static DefaultHighlightPainter painter;
     private static HashMap<Integer, ORF> positionToORF;
@@ -54,7 +52,7 @@ public class ORFHighlighter implements Runnable {
         this.targetGUI = gui;
         painter = new DefaultHighlightPainter(highlightKleur);
     }
-    
+
     @Override
     public void run() {
         targetGUI.getSeqTextPane().getHighlighter().removeAllHighlights();
@@ -200,10 +198,15 @@ public class ORFHighlighter implements Runnable {
     /**
      * minORFLength setter.
      *
-     * @param length
+     * @param length de in te stellen lengte
+     * @throws NumberFormatException als getal te laag is
      */
-    public static void setMinORFLength(int length) {
-        minORFLength = length;
+    public static void setMinORFLength(int length) throws NumberFormatException {
+        if (length > 1) {
+            minORFLength = length;
+        } else {
+            throw new NumberFormatException();
+        }
     }
 
     /**
@@ -214,5 +217,5 @@ public class ORFHighlighter implements Runnable {
     public static void setSearchMode(boolean sM) {
         searchMode = sM;
     }
-    
+
 }
