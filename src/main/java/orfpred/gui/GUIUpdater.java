@@ -81,7 +81,8 @@ public class GUIUpdater {
                 try {
                     headerToSeq.put(row.get(1), new DNASequence(row.get(2)));
                 } catch (CompoundNotFoundException ex) {
-                    targetGUI.showErrorMessage(ex, "De volgende sequentie bevat een ongeldig karakter:\n" + row.get(1));
+                    targetGUI.showErrorMessage(ex, "De volgende sequentie bevat een ongeldig karakter:\n"
+                            + row.get(1) + "\n" + ex.getMessage());
                 }
             });
             showHeaders(headerToSeq.keySet().toArray(new String[headerToSeq.size()]));
