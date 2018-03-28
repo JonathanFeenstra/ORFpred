@@ -35,6 +35,7 @@ public class GUIUpdater {
     private final GUI targetGUI;
     private LinkedHashMap<String, DNASequence> headerToSeq;
     private ProteinSequence[] shownReadingFrames;
+    private String fileName;
 
     /**
      * Constructor.
@@ -52,6 +53,7 @@ public class GUIUpdater {
         try {
             File selectedFile = FileHandler.selectFile(targetGUI.getFrame());
             if (selectedFile != null) {
+                this.fileName = selectedFile.getName();
                 headerToSeq = FileHandler.readHeaderToSeq(selectedFile);
                 if (headerToSeq != null) {
                     showHeaders(headerToSeq.keySet().toArray(new String[headerToSeq.size()]));
@@ -164,4 +166,13 @@ public class GUIUpdater {
     public ProteinSequence[] getShownReadingFrames() {
         return shownReadingFrames;
     }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
 }

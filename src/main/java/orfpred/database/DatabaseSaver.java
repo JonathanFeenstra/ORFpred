@@ -6,10 +6,16 @@
  */
 package orfpred.database;
 
+import orfpred.gui.GUI;
+import orfpred.gui.GUIUpdater;
 import orfpred.sequence.ORF;
 import org.biojava.nbio.core.sequence.DNASequence;
+import sun.dc.pr.PRError;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * Class om de ORFpredDB aan te vullen
@@ -18,7 +24,9 @@ import java.sql.SQLException;
  */
 public class DatabaseSaver {
 
-    private final DatabaseConnector connector;
+    private DatabaseConnector connector;
+    private DatabaseLoader loader;
+    private int bestandID, seqID, orfID, blastID;
 
     /**
      * Constructor voor de DatabaseSaver
@@ -28,8 +36,39 @@ public class DatabaseSaver {
      * @throws ClassNotFoundException wordt opgegooid als het programma geen
      * link heeft met de ojdbc8.jar file
      */
-    public DatabaseSaver() throws SQLException, ClassNotFoundException {
+    public DatabaseSaver(GUIUpdater updater, GUI gui) throws SQLException, ClassNotFoundException {
         this.connector = new DatabaseConnector();
+        this.loader = new DatabaseLoader();
+        bestandID = -1;
+        String bestandnaam = updater.getFileName();
+        ArrayList<ArrayList<String>> bestaandeFiles = loader.getStoredFiles();
+        for(ArrayList<String> array : bestaandeFiles){
+            if(array.get(1).equals(bestandnaam)){
+                bestandID = Integer.parseInt(array.get(0));
+            }
+        }
+        if(bestandID == -1){
+            saveBestand(bestandnaam);
+            bestandID = findID("BESTAND","BESTAND_ID",bestandnaam);
+        }
+
+        LinkedHashMap<String, DNASequence> headersAndSeq = updater.getHeaderToSeq();
+        ArrayList<ArrayList<String>> alOpgeslagenHeaders = loader.getHeadersFromFile(bestandID);
+        ArrayList<String> alleHeaders = new ArrayList<>();
+        for(ArrayList<String> headerArray : alOpgeslagenHeaders){
+            alleHeaders.add(headerArray.get(1));
+        }
+        for(String header : headersAndSeq.keySet()){
+            if(alleHeaders.contains(header)){
+                int index = alleHeaders.indexOf(header);
+                seqID = Integer.parseInt(alOpgeslagenHeaders.get(index).get(0));
+            } else {
+                saveSequentie(header,headersAndSeq.get(header),bestandID);
+            }
+            if(header.equals(gui.getHeaderComboBox().getSelectedItem())){
+
+            }
+        }
     }
 
     /**
@@ -41,6 +80,7 @@ public class DatabaseSaver {
      */
     public void saveBestand(String naamBestand) throws SQLException {
         int id = getUniqueID("BESTAND");
+
         connector.sentInsertionQuery("BESTAND", "" + id + ",'" + naamBestand + "'");
     }
 
@@ -55,9 +95,10 @@ public class DatabaseSaver {
      * SQL server
      */
     public void saveSequentie(String header, DNASequence sequentie, int bestandID) throws SQLException {
-        int id = getUniqueID("SEQUENTIE");
-        connector.sentInsertionQuery("SEQUENTIE", "" + id + ",'" + header
+        this.seqID = getUniqueID("SEQUENTIE");
+        connector.sentInsertionQuery("SEQUENTIE", "" + seqID + ",'" + header
                 + "','" + sequentie.toString() + "'," + bestandID);
+
     }
 
     /**
@@ -137,13 +178,14 @@ public class DatabaseSaver {
      * @throws NoSuchFieldError wordt opgegegooid als er geen resultaat is
      * gevonden
      */
-    public int findID(String table, String column, String search) throws SQLException, NoSuchFieldError {
+    public Integer findID(String table, String column, String search) throws SQLException {
         ResultSet resultSet = connector.sentFeedbackQuery("SELECT * FROM " + table);
         while (resultSet.next()) {
             if (resultSet.getString(column).equals(search)) {
                 return Integer.parseInt(resultSet.getString(1));
             }
         }
-        throw new NoSuchFieldError("Error: Searched field doesn't exist");
+        return null;
     }
+
 }

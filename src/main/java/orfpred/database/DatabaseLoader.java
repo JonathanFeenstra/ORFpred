@@ -41,7 +41,7 @@ public class DatabaseLoader {
      * @throws SQLException wordt opgegooid als er een exception optreed bij de
      * SQL server
      */
-    public ArrayList<ArrayList<String>> getStoredFileNames() throws SQLException {
+    public ArrayList<ArrayList<String>> getStoredFiles() throws SQLException {
 
         ResultSet resultSet = connector.sentFeedbackQuery("SELECT * FROM BESTAND");
         return parseResultSetToArray(new String[]{"BESTAND_ID", "NAAM"}, resultSet);

@@ -76,6 +76,7 @@ public class DBFileChooser extends JFrame implements ActionListener {
                 return lijst;
             }).forEachOrdered((lijst) -> {
                 if (event.getSource() == openButton) {
+                    guiUpdater.setFileName(bestandNaam);
                     guiUpdater.loadDBFile(Integer.parseInt(lijst.get(0)));
                 } else {
                     verwijderBestand(bestandNaam,lijst);
@@ -87,7 +88,7 @@ public class DBFileChooser extends JFrame implements ActionListener {
 
     public final void getBestanden() {
         try {
-            bestandList = new DatabaseLoader().getStoredFileNames();
+            bestandList = new DatabaseLoader().getStoredFiles();
             bestandArray = new String[bestandList.size()];
             for (int index = 0; index < bestandList.size(); index++) {
                 bestandArray[index] = bestandList.get(index).get(1);
