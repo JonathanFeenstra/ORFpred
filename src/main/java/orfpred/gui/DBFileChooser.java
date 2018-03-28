@@ -1,3 +1,9 @@
+/*
+ * ORFpred - © Projectgroep 9: Damian Bolwerk, Jonathan Feenstra, 
+ * Fini De Gruyter, Lotte Houwen & Alex Janse 2018.
+ * Functie: Open Reading Frames voorspellen in DNA sequenties.
+ * Release datum: 29 maart 2018
+ */
 package orfpred.gui;
 
 import orfpred.database.DatabaseDeleter;
@@ -11,6 +17,11 @@ import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Venster waarmee bestanden uit de database kunnen worden ingeladen.
+ *
+ * @author Projectgroep 9
+ */
 public class DBFileChooser extends JFrame implements ActionListener {
 
     private JList<String> fileList;
@@ -78,13 +89,16 @@ public class DBFileChooser extends JFrame implements ActionListener {
                 if (event.getSource() == openButton) {
                     guiUpdater.loadDBFile(Integer.parseInt(lijst.get(0)));
                 } else {
-                    verwijderBestand(bestandNaam,lijst);
+                    verwijderBestand(bestandNaam, lijst);
                 }
             }
             );
         }
     }
 
+    /**
+     * Laadt bestanden in uit de database.
+     */
     public final void getBestanden() {
         try {
             bestandList = new DatabaseLoader().getStoredFileNames();
@@ -99,6 +113,12 @@ public class DBFileChooser extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Verdqijdert een bestand uit de database.
+     *
+     * @param bestandNaam naam van het te verwijderen bestand
+     * @param lijst
+     */
     public void verwijderBestand(String bestandNaam, ArrayList<String> lijst) {
         try {
             if (JOptionPane.showConfirmDialog(null, "Weet u zeker dat u " + bestandNaam + " wilt verwijderen?") == JOptionPane.YES_OPTION) {
@@ -107,8 +127,8 @@ public class DBFileChooser extends JFrame implements ActionListener {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
-                    "Error: Er is een fout opgetreden bij verwijderen van het bestand: " +
-                            e.toString());
+                    "Error: Er is een fout opgetreden bij verwijderen van het bestand: "
+                    + e.toString());
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Error: Oracle driver niet gevonden.");
         }
