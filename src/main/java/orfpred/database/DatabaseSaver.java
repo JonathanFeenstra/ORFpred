@@ -8,13 +8,8 @@ package orfpred.database;
 
 import orfpred.sequence.ORF;
 import org.biojava.nbio.core.sequence.DNASequence;
-import org.biojava.nbio.core.sequence.transcription.Frame;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
-import org.biojava.nbio.core.exceptions.ParserException;
 
 /**
  * Class om de ORFpredDB aan te vullen

@@ -1,5 +1,6 @@
 package orfpred.gui;
 
+import orfpred.database.DatabaseDeleter;
 import orfpred.database.DatabaseLoader;
 
 import javax.swing.*;
@@ -77,9 +78,10 @@ public class DBFileChooser extends JFrame implements ActionListener {
                 if (event.getSource() == openButton) {
                     guiUpdater.loadDBFile(Integer.parseInt(lijst.get(0)));
                 } else {
-                    // TODO: verwijder bestand
+                    verwijderBestand(bestandNaam,lijst);
                 }
-            });
+            }
+            );
         }
     }
 
@@ -94,6 +96,21 @@ public class DBFileChooser extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "De volgende error is opgetreden: " + e.toString());
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "ORFPred kan de ojbc.jar file niet vinden.");
+        }
+    }
+
+    public void verwijderBestand(String bestandNaam, ArrayList<String> lijst) {
+        try {
+            if (JOptionPane.showConfirmDialog(null, "Weet u zeker dat u " + bestandNaam + " wilt verwijderen?") == JOptionPane.YES_OPTION) {
+                DatabaseDeleter deleter = new DatabaseDeleter(lijst.get(0));
+                JOptionPane.showMessageDialog(null, bestandNaam + " is verwijderd.");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error: Er is een fout opgetreden bij verwijderen van het bestand: " +
+                            e.toString());
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Error: Oracle driver niet gevonden.");
         }
     }
 }
