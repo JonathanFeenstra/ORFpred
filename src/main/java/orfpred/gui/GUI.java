@@ -6,13 +6,18 @@
  */
 package orfpred.gui;
 
+import orfpred.database.DatabaseSaver;
 import orfpred.sequence.ORFHighlighter;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
 import orfpred.sequence.ORF;
 import orfpred.sequence.ReadingFramer;
+import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
+import java.io.StringWriter;
+import java.io.PrintWriter;
 
 /**
  * Class voor het weergeven van de GUI.
@@ -256,7 +261,27 @@ public class GUI implements Runnable {
                     new DBFileChooser(updater,gui).setVisible(true);
                 });
             } else if (evt.getSource() == dbSaveMenuItem) {
-                // TODO: Opslaan in database
+                try {
+                        DatabaseSaver saver = new DatabaseSaver(updater, gui);
+                        saver.saveBestandData();
+
+                } catch (SQLException e){
+                    StringWriter sw = new StringWriter();
+                    PrintWriter pw = new PrintWriter(sw);
+                    e.printStackTrace(pw);
+                    String sStackTrace = sw.toString(); // stack trace as a string
+                    System.out.println(sStackTrace);
+                } catch (CompoundNotFoundException e){
+                    StringWriter sw = new StringWriter();
+                    PrintWriter pw = new PrintWriter(sw);
+                    e.printStackTrace(pw);
+                    String sStackTrace = sw.toString(); // stack trace as a string
+                    System.out.println(sStackTrace);                } catch (ClassNotFoundException e){
+                    StringWriter sw = new StringWriter();
+                    PrintWriter pw = new PrintWriter(sw);
+                    e.printStackTrace(pw);
+                    String sStackTrace = sw.toString(); // stack trace as a string
+                    System.out.println(sStackTrace);                }
             } else if (evt.getSource() == exitMenuItem) {
                 System.exit(0);
             } else if (evt.getSource() == highlightMenuItem) {

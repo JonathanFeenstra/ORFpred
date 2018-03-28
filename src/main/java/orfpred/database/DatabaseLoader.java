@@ -36,6 +36,7 @@ public class DatabaseLoader {
     public DatabaseLoader(GUIUpdater updater, GUI gui) throws SQLException, ClassNotFoundException {
         this.connector = new DatabaseConnector();
         this.updater = updater;
+        this.gui = gui;
     }
 
     /**

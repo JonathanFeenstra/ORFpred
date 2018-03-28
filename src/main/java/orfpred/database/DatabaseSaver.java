@@ -10,15 +10,13 @@ import orfpred.gui.GUI;
 import orfpred.gui.GUIUpdater;
 import orfpred.sequence.ORF;
 import orfpred.sequence.ORFHighlighter;
+import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.sequence.DNASequence;
-import sun.dc.pr.PRError;
 
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 /**
  * Class om de ORFpredDB aan te vullen
@@ -29,7 +27,12 @@ public class DatabaseSaver {
 
     private DatabaseConnector connector;
     private DatabaseLoader loader;
+    private GUIUpdater updater;
+    private GUI gui;
     private int bestandID, seqID, orfID, blastID;
+    private LinkedHashMap<String, DNASequence> headersAndSeq;
+    private ArrayList<ArrayList<String>> alOpgeslagenHeaders;
+    private ArrayList<String> alleOudeHeaders;
 
     /**
      * Constructor voor de DatabaseSaver
@@ -39,9 +42,27 @@ public class DatabaseSaver {
      * @throws ClassNotFoundException wordt opgegooid als het programma geen
      * link heeft met de ojdbc8.jar file
      */
-    public DatabaseSaver(GUIUpdater updater, GUI gui) throws SQLException, ClassNotFoundException {
+    public DatabaseSaver(GUIUpdater updater, GUI gui) throws SQLException, ClassNotFoundException, CompoundNotFoundException {
         this.connector = new DatabaseConnector();
         this.loader = new DatabaseLoader(updater, gui);
+        this.updater = updater;
+        this.gui = gui;
+
+    }
+
+    public void saveBestandData() throws SQLException, CompoundNotFoundException{
+        saveBestand();
+        findOldHeaders();
+        orfHandeler();
+    }
+
+    /**
+     * methode om bestand gegevens op te slaan in de db
+     *
+     * @throws SQLException wordt opgegooid als er een exception optreed bij de
+     * SQL server
+     */
+    private void saveBestand() throws SQLException {
         bestandID = -1;
         String bestandnaam = updater.getFileName();
         ArrayList<ArrayList<String>> bestaandeFiles = loader.getStoredFiles();
@@ -51,78 +72,47 @@ public class DatabaseSaver {
             }
         }
         if(bestandID == -1){
-            saveBestand(bestandnaam);
-            bestandID = findID("BESTAND","BESTAND_ID",bestandnaam);
+            int id = getUniqueID("BESTAND");
+            connector.sentInsertionQuery("BESTAND", "" + id + ",'" + bestandnaam + "'");
+            bestandID = findID("BESTAND","NAAM",bestandnaam);
         }
 
-        LinkedHashMap<String, DNASequence> headersAndSeq = updater.getHeaderToSeq();
-        ArrayList<ArrayList<String>> alOpgeslagenHeaders = loader.getHeadersFromFile(bestandID);
-        ArrayList<String> alleHeaders = new ArrayList<>();
-        for(ArrayList<String> headerArray : alOpgeslagenHeaders){
-            alleHeaders.add(headerArray.get(1));
-        }
-        for(String header : headersAndSeq.keySet()){
-            if(alleHeaders.contains(header)){
-                int index = alleHeaders.indexOf(header);
-                seqID = Integer.parseInt(alOpgeslagenHeaders.get(index).get(0));
-            } else {
-                saveSequentie(header,headersAndSeq.get(header),bestandID);
-            }
-            if(header.equals(gui.getHeaderComboBox().getSelectedItem())){
-                HashSet<ORF> uniqueORF = new HashSet<>();
-                HashMap<Integer, ORF> alleORFs = ORFHighlighter.getPositionToORF();
-                for(Integer key : alleORFs.keySet()){
-                    uniqueORF.add(alleORFs.get(key));
-                }
-                if(1==1){}
-            }
-        }
-    }
-
-    /**
-     * methode om bestand gegevens op te slaan in de db
-     *
-     * @param naamBestand String met de naam van het bestand
-     * @throws SQLException wordt opgegooid als er een exception optreed bij de
-     * SQL server
-     */
-    public void saveBestand(String naamBestand) throws SQLException {
-        int id = getUniqueID("BESTAND");
-
-        connector.sentInsertionQuery("BESTAND", "" + id + ",'" + naamBestand + "'");
     }
 
     /**
      * methode om de sequentie en gegevens op te slaan
      *
-     * @param header String met de header erin
-     * @param sequentie DNASequentie (van biojava) met daarin de sequentie
-     * @param bestandID int met de bestandID van het bestand die bij de
      * sequentie hoort
      * @throws SQLException wordt opgegooid als er een exception optreed bij de
      * SQL server
      */
-    public void saveSequentie(String header, DNASequence sequentie, int bestandID) throws SQLException {
-        this.seqID = getUniqueID("SEQUENTIE");
-        connector.sentInsertionQuery("SEQUENTIE", "" + seqID + ",'" + header
-                + "','" + sequentie.toString() + "'," + bestandID);
-
+    private void saveSequentie(String header, DNASequence sequentie) throws SQLException {
+        if(alleOudeHeaders.contains(header)){
+            int index = alleOudeHeaders.indexOf(header);
+            seqID = Integer.parseInt(alOpgeslagenHeaders.get(index).get(0));
+        } else {
+            this.seqID = getUniqueID("SEQUENTIE");
+            connector.sentInsertionQuery("SEQUENTIE", "" + seqID + ",'" + header
+                    + "',TO_CLOB('" + sequentie.toString().toUpperCase() + "')," + bestandID);
+        }
     }
 
     /**
      * Methode om de ORF met gegevens op te slaan
      *
-     * @param orf ORF object met daarin de gegevens
+     * @param orfList ArrayList met ORF objecten met daarin de gegevens
      * @param sequentieID int met de sequentieID van de sequentie waar de ORF
      * vandaan komt
      * @throws SQLException wordt opgegooid als er een exception optreed bij de
      * SQL server
      */
-    public void saveORF(ORF orf, int sequentieID) throws SQLException {
-        int id = getUniqueID("ORF");
-        String frame = ORF.parseFrameToString(orf.getReadingFrame());
-        connector.sentInsertionQuery("ORF", "" + id + ",'" + frame
-                + "'," + orf.getStart() + "," + orf.getStop() + "," + sequentieID);
+    private void saveORFs(ArrayList<ORF> orfList, int sequentieID) throws SQLException {
+        for(ORF orf : orfList) {
+            int id = getUniqueID("ORF");
+            String frame = ORF.parseFrameToString(orf.getReadingFrame());
+            connector.sentInsertionQuery("ORF", "" + id + ",'" + frame
+                    + "'," + orf.getStart() + "," + orf.getStop() + "," + sequentieID);
+        }
     }
 
     /**
@@ -160,7 +150,7 @@ public class DatabaseSaver {
      * @throws SQLException wordt opgegooid als er een exception optreed bij de
      * SQL server
      */
-    public int getUniqueID(String table) throws SQLException {
+    private int getUniqueID(String table) throws SQLException {
         ResultSet resultset = connector.sentFeedbackQuery("SELECT * FROM " + table);
         int maxID = 0;
         int id;
@@ -186,7 +176,7 @@ public class DatabaseSaver {
      * @throws NoSuchFieldError wordt opgegegooid als er geen resultaat is
      * gevonden
      */
-    public Integer findID(String table, String column, String search) throws SQLException {
+    private Integer findID(String table, String column, String search) throws SQLException {
         ResultSet resultSet = connector.sentFeedbackQuery("SELECT * FROM " + table);
         while (resultSet.next()) {
             if (resultSet.getString(column).equals(search)) {
@@ -196,4 +186,54 @@ public class DatabaseSaver {
         return null;
     }
 
+    private void deleteOldORFandBLAST(LinkedHashMap<String, DNASequence> headersAndSeq, String header) throws SQLException,CompoundNotFoundException{
+        HashMap<Integer, ORF> oudeORFd = loader.getORFFromDB(seqID,headersAndSeq.get(header).toString());
+        for(Integer id : oudeORFd.keySet()){
+            connector.sentDeleteQuery("BLAST_RESULTAAT","ORF_ID = "+id);
+        }
+        connector.sentDeleteQuery("ORF","SEQ_ID = "+seqID);
+    }
+
+    private void findOldHeaders() throws SQLException{
+        headersAndSeq = updater.getHeaderToSeq();
+        alOpgeslagenHeaders = loader.getHeadersFromFile(bestandID);
+        alleOudeHeaders = new ArrayList<>();
+        for(ArrayList<String> headerArray : alOpgeslagenHeaders){
+            alleOudeHeaders.add(headerArray.get(1));
+        }
+    }
+
+    private HashSet<ORF> createUniqueORFset(){
+        HashSet<ORF> uniqueORFset = new HashSet<>();
+        HashMap<Integer, ORF> alleORFs = ORFHighlighter.getPositionToORF();
+        for(Integer key : alleORFs.keySet()){
+            uniqueORFset.add(alleORFs.get(key));
+        }
+        return uniqueORFset;
+    }
+
+    private void orfHandeler() throws SQLException, CompoundNotFoundException{
+        for(String header : headersAndSeq.keySet()){
+            saveSequentie(header,headersAndSeq.get(header));
+            if(header.equals(gui.getHeaderComboBox().getSelectedItem())){
+                ArrayList<ORF> uniqueORFList = new ArrayList<>(createUniqueORFset()); // nodig aangezien er duplicaten van ORF opgeslagen zijn in de origine HashMap
+                if(uniqueORFList.size() != 0){
+                    if(uniqueORFList.get(0).getHeaderHerkomst().equals(header)){
+                        if(findID("ORF","SEQ_ID",""+seqID) != null){
+                            if(JOptionPane.showConfirmDialog(null,
+                                    "Let op! Voor deze sequentie zijn " +
+                                            "er al ORF's opgeslagen.\nWeet u " +
+                                            "zeker dat u deze wilt vervangen?")
+                                    == JOptionPane.YES_OPTION){
+                                deleteOldORFandBLAST(headersAndSeq,header);
+                                saveORFs(uniqueORFList, seqID);
+                            }
+                        } else {
+                            saveORFs(uniqueORFList,seqID);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

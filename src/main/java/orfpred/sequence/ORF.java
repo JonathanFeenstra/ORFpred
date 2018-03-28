@@ -122,4 +122,12 @@ public class ORF extends DNASequence {
     public int getDatabaseId() {
         return databaseId;
     }
+
+    public String getBestandHerkomst() {
+        return bestandHerkomst;
+    }
+
+    public String getHeaderHerkomst() {
+        return headerHerkomst;
+    }
 }

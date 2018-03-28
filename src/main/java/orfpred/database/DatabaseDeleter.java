@@ -17,8 +17,8 @@ import java.util.ArrayList;
  */
 public class DatabaseDeleter {
 
-    private final DatabaseConnector CONNECTOR = new DatabaseConnector();
-    private final String bestandID;
+    private DatabaseConnector CONNECTOR = new DatabaseConnector();
+    private String bestandID;
     private ArrayList<String> sequentieIDs, orfIDs = new ArrayList<>(), blastIDs = new ArrayList<>();
 
     /**
@@ -35,6 +35,7 @@ public class DatabaseDeleter {
         this.deleteData();
 
     }
+
 
     /**
      * Maakt arrays van ID's.
