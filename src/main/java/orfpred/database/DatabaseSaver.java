@@ -93,10 +93,11 @@ public class DatabaseSaver {
             seqID = Integer.parseInt(alOpgeslagenHeaders.get(index).get(0));
         } else {
             this.seqID = getUniqueID("SEQUENTIE");
-            connector.sentInsertionQuery("SEQUENTIE", "" + seqID + ",'" + header
-                    + "',TO_CLOB('" + sequentie.toString().toUpperCase() + "')," + bestandID);
+            connector.sentPreparedSequenceQuery("INSERT INTO SEQUENTIE VALUES("+seqID + ",'" + header
+                    + "',?,"+bestandID+")",sequentie.toString().toUpperCase());
         }
     }
+
 
     /**
      * Methode om de ORF met gegevens op te slaan

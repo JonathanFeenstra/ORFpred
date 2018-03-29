@@ -75,6 +75,12 @@ public class DatabaseConnector {
         statement.executeQuery("COMMIT");
     }
 
+    protected void sentPreparedSequenceQuery(String query, String sequence) throws SQLException{
+        PreparedStatement statement = dbConnection.prepareStatement(query);
+        statement.setString(1,sequence);
+        statement.executeQuery();
+    }
+
     /**
      * Methode om entries te verwijderen uit db
      * @param table String met de tabel naam waaruit de entry moet worden verwijderd
