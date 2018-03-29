@@ -1,12 +1,8 @@
 /*
-Datum laatste update: 31-03-17
-Projectgroep 12: Enrico Schmitz, Thomas Reinders en Rick Beeloo
-Functionaliteit: De gebruiker kan een FASTA bestand inladen. In de sequentie
-			     kunnen vervolgens ORF's gezocht worden die verder geannoteerd 
-			     kunnen worden door gebruikt te maken van een BLAST search.
-Bekende bugs:    Als de gebruiker het tijdelijke BLAST bestand verwijderd zal de
-                 data niet opgeslagen kunnen worden in de database.
-
+ * ORFpred - © Projectgroep 9: Damian Bolwerk, Jonathan Feenstra, 
+ * Fini De Gruyter, Lotte Houwen & Alex Janse 2018.
+ * Functie: Open Reading Frames voorspellen in DNA sequenties.
+ * Release datum: 29 maart 2018
  */
 package orfpred.blast;
 
@@ -32,7 +28,7 @@ import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastService;
  *
  * @author projectgroep 12
  */
-public class Blast {
+public class BLAST {
 
     //instantie variabele
     private String sequence;
@@ -41,7 +37,7 @@ public class Blast {
     private NCBIQBlastService service;
     private NCBIQBlastAlignmentProperties props;
     private NCBIQBlastOutputProperties outputProps;
-    private BlastParser parser;
+    private BLASTParser parser;
     private File XMLFile;
     private Thread t;
     private String rid;
@@ -59,7 +55,7 @@ public class Blast {
      * @param eValCutOff De E-value cut-off die gebruikt moet worden.
      * @param numberTopHits Het aantal hits dat geretouneerd moet worden.
      */
-    public Blast(String seq, String program, String db, double eValCutOff, int numberTopHits) {
+    public BLAST(String seq, String program, String db, double eValCutOff, int numberTopHits) {
         sequence = seq;
         blastProgram = program;
         blastDatabase = db;
@@ -78,7 +74,7 @@ public class Blast {
             service = new NCBIQBlastService();
             setAlignmentOptions();
             setOutputOptions();
-        } catch (ProgramException ex) {
+        } catch (BLASTException ex) {
             showError("please provide a valid datbase: \n blastn, blastp, tblastn, tblastx");
         } catch (Exception ex) {
             showError("Cannot connenct to NCBI database!");
@@ -89,9 +85,9 @@ public class Blast {
      * Deze methode is verantwoordelijk voor het instellen van de alignment
      * opties.
      *
-     * @throws ProgramException
+     * @throws BLASTException
      */
-    private void setAlignmentOptions() throws ProgramException {
+    private void setAlignmentOptions() throws BLASTException {
         props = new NCBIQBlastAlignmentProperties();
         props.setBlastProgram(getBlastProgram(blastProgram));
         props.setBlastDatabase(blastDatabase);
@@ -113,10 +109,10 @@ public class Blast {
      * @param program Een String object dat het gewenste BLAST programma bevat.
      * @return Geeft een BlastProgramEnum object terug corresponderend met de
      * ingegeven String.
-     * @throws ProgramException Gooit een exception als het String object niet
+     * @throws BLASTException Gooit een exception als het String object niet
      * kan worden omgezet naar een BlastProgramEnum object.
      */
-    private BlastProgramEnum getBlastProgram(String program) throws ProgramException {
+    private BlastProgramEnum getBlastProgram(String program) throws BLASTException {
         switch (program.toLowerCase()) {
             case "blastp":
                 return BlastProgramEnum.blastp;
@@ -127,7 +123,7 @@ public class Blast {
             case "tblastx":
                 return BlastProgramEnum.tblastx;
             default:
-                throw new ProgramException();
+                throw new BLASTException();
         }
     }
 
@@ -191,7 +187,7 @@ public class Blast {
      * aanroepen van de parse methoden in deze parser.
      */
     public void parseFile() throws FileNotFoundException, IOException {
-        parser = new BlastParser(XMLFile, maxEval);
+        parser = new BLASTParser(XMLFile, maxEval);
         System.out.println("yoyo");
         parser.parse();
         System.out.println("kek");

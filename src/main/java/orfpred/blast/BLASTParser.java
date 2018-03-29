@@ -1,18 +1,13 @@
 /*
-Datum laatste update: 31-03-17
-Projectgroep 12: Enrico Schmitz, Thomas Reinders en Rick Beeloo
-Functionaliteit: De gebruiker kan een FASTA bestand inladen. In de sequentie
-			     kunnen vervolgens ORF's gezocht worden die verder geannoteerd 
-			     kunnen worden door gebruikt te maken van een BLAST search.
-Bekende bugs:    Als de gebruiker het tijdelijke BLAST bestand verwijderd zal de
-                 data niet opgeslagen kunnen worden in de database.
-
+ * ORFpred - © Projectgroep 9: Damian Bolwerk, Jonathan Feenstra, 
+ * Fini De Gruyter, Lotte Houwen & Alex Janse 2018.
+ * Functie: Open Reading Frames voorspellen in DNA sequenties.
+ * Release datum: 29 maart 2018
  */
 package orfpred.blast;
 
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -29,7 +24,7 @@ import org.biojava.nbio.core.search.io.Hsp;
  * Deze class is verantwoordelijk voor het parse van de BLAST resultaten.
  * @author projectgroep 12
  */
-public class BlastParser {
+public class BLASTParser {
     
     //instantie variabele
     private File xmlInputFile, output ;
@@ -42,7 +37,7 @@ public class BlastParser {
      * @param FilexmlInput Het XML bestand dat ingeladen moet worden
      * @param eValCutOff De E-value cut-off.
      */
-    public BlastParser(File FilexmlInput, double eValCutOff) {
+    public BLASTParser(File FilexmlInput, double eValCutOff) {
        xmlInputFile = FilexmlInput;
        maxEValue = eValCutOff;
     }

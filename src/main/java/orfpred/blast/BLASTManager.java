@@ -1,12 +1,8 @@
 /*
-Datum laatste update: 31-03-17
-Projectgroep 12: Enrico Schmitz, Thomas Reinders en Rick Beeloo
-Functionaliteit: De gebruiker kan een FASTA bestand inladen. In de sequentie
-			     kunnen vervolgens ORF's gezocht worden die verder geannoteerd 
-			     kunnen worden door gebruikt te maken van een BLAST search.
-Bekende bugs:    Als de gebruiker het tijdelijke BLAST bestand verwijderd zal de
-                 data niet opgeslagen kunnen worden in de database.
-
+ * ORFpred - © Projectgroep 9: Damian Bolwerk, Jonathan Feenstra, 
+ * Fini De Gruyter, Lotte Houwen & Alex Janse 2018.
+ * Functie: Open Reading Frames voorspellen in DNA sequenties.
+ * Release datum: 29 maart 2018
  */
 package orfpred.blast;
 
@@ -33,11 +29,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author projectgroep 12
  */
-public class BlastJobManager {
+public class BLASTManager {
 
     //class variabele
     private static JTable outputTable;
-    private static ArrayList<BlastJob> jobs;
+    private static ArrayList<BLASTSearch> jobs;
     private static ArrayList<Boolean> finished;
     private static HashMap<String, Integer> rowManager;
     private static int row;
@@ -102,11 +98,11 @@ public class BlastJobManager {
      * @param BlastObj Het Blast object dat toegevoegd moet worden aan de tabel.
      * @param ID Het ID dat gebruikt moet worden om de BLAST job te
      * identificeren.
-     * @throws JobAlreadyInQueue Gooit een exception als deze Job al in de tabel
+     * @throws QueueException Gooit een exception als deze Job al in de tabel
      * staat.
      */
-    public static void addJob(Blast BlastObj, String ID) throws JobAlreadyInQueue {
-        BlastJob job = new BlastJob(BlastObj, ID);
+    public static void addJob(BLAST BlastObj, String ID) throws QueueException {
+        BLASTSearch job = new BLASTSearch(BlastObj, ID);
         System.out.println("hey");
         if (!jobs.contains(job)) {
             System.out.println("hi");
@@ -115,7 +111,7 @@ public class BlastJobManager {
             rowManager.put(job.getID(), row++);
             showUnFinishedJob(job);
         } else {
-            throw new JobAlreadyInQueue();
+            throw new QueueException();
         }
     }
 
@@ -137,7 +133,7 @@ public class BlastJobManager {
      */
     public static void checkIfJobIsDone() {
         for (int i = 0; i < jobs.size(); i++) {
-            BlastJob job = jobs.get(i);
+            BLASTSearch job = jobs.get(i);
             if (job.checkStatus() == false && finished.get(i) == false) {
                 finished.set(i, true);
               //  showFinishedJob(job);
@@ -149,7 +145,7 @@ public class BlastJobManager {
      * @return retouneert een ArrayList met alle Jobs die op dit moment in de
      * wachtrij staan.
      */
-    public static ArrayList<BlastJob> getCurrectJobs() {
+    public static ArrayList<BLASTSearch> getCurrectJobs() {
         return jobs;
     }
 
@@ -158,7 +154,7 @@ public class BlastJobManager {
      *
      * @param job
      */
-    private static void showUnFinishedJob(BlastJob job) {
+    private static void showUnFinishedJob(BLASTSearch job) {
         DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
         model.addRow(new Object[]{job.getID(), "NOT FINISHED YET"});
     }
