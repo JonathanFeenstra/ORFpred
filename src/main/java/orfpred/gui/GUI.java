@@ -4,6 +4,11 @@
  * Functie: Open Reading Frames voorspellen in DNA sequenties.
  * Release datum: 29 maart 2018
  */
+
+/*
+ * OPMERKING: Voor aanpassingen en veranderingen ten aanzien van het Ontwerp
+ * van de applicatie, zie de README.
+ */
 package orfpred.gui;
 
 import orfpred.database.DatabaseSaver;

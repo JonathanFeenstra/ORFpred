@@ -12,7 +12,9 @@ import java.util.Objects;
  * Deze class dient als wrapper voor een Blast object naardat deze als request
  * is verstuurd naar de NCBI server.
  *
- * @author projectogroep 12
+ * @author Projectgroep 9
+ * @since JDK 1.8
+ * @version 1.0
  */
 public class BLASTSearch {
 

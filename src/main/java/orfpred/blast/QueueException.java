@@ -9,6 +9,8 @@ package orfpred.blast;
 /**
  * Deze exception wordt gegooid als de gebruiker een BLAST probeerd uit te voeren en deze
  * opdracht al in de rij staat. 
- * @author projectgroep 12
+ * @author Projectgroep 9
+ * @since JDK 1.8
+ * @version 1.0
  */
 public class QueueException extends Exception{}

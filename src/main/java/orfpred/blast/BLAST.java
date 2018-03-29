@@ -26,14 +26,16 @@ import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastService;
  * Deze class is verantwoordelijk voor het uitvoeren van BLAST searches tegen de
  * NCBI database.
  *
- * @author projectgroep 12
+ * @author Projectgroep 9
+ * @since JDK 1.8
+ * @version 1.0
  */
 public class BLAST {
 
     //instantie variabele
-    private String sequence;
-    private String blastProgram;
-    private String blastDatabase;
+    private final String sequence;
+    private final String blastProgram;
+    private final String blastDatabase;
     private NCBIQBlastService service;
     private NCBIQBlastAlignmentProperties props;
     private NCBIQBlastOutputProperties outputProps;
@@ -41,19 +43,19 @@ public class BLAST {
     private File XMLFile;
     private Thread t;
     private String rid;
-    private double maxEval;
-    private int top;
+    private final double maxEval;
+    private final int top;
     private  FileWriter writer;
     private BufferedReader reader;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param seq De sequentie die geBLAST moet worden.
-     * @param program Het BLAST programma dat gebruikt moet worden.
-     * @param db De database waartegen geBLAST moet worden
-     * @param eValCutOff De E-value cut-off die gebruikt moet worden.
-     * @param numberTopHits Het aantal hits dat geretouneerd moet worden.
+     * @param seq sequentie voor de BLAST.
+     * @param program BLAST algoritme dat gebruikt wordt.
+     * @param db gebruikte database
+     * @param eValCutOff e-value cut-off.
+     * @param numberTopHits hoeveelheid hits dat teruggestuurd wordt.
      */
     public BLAST(String seq, String program, String db, double eValCutOff, int numberTopHits) {
         sequence = seq;

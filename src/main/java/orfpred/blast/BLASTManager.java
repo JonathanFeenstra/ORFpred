@@ -27,7 +27,9 @@ import javax.swing.table.DefaultTableModel;
  * bij of er BLAST jobs klaar zijn en als de BLAST job klaar is wordt de data
  * opgelsagen in de database.
  *
- * @author projectgroep 12
+ * @author Projectgroep 9
+ * @since JDK 1.8
+ * @version 1.0
  */
 public class BLASTManager {
 

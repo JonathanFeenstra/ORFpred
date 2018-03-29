@@ -22,7 +22,9 @@ import org.biojava.nbio.core.search.io.Hsp;
 
 /**
  * Deze class is verantwoordelijk voor het parse van de BLAST resultaten.
- * @author projectgroep 12
+ * @author Projectgroep 9
+ * @since JDK 1.8
+ * @version 1.0
  */
 public class BLASTParser {
     

@@ -9,6 +9,8 @@ package orfpred.blast;
 /**
  * Deze exceptie wordt gegeooid als de gebruiker een blast programma ingeeft anders dan
  * blastn, blastp, tblastn, tblastx.
- * @author projectgroep 12
+ * @author Projectgroep 9
+ * @since JDK 1.8
+ * @version 1.0
  */
 public class BLASTException extends Exception {}

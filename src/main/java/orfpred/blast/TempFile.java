@@ -15,7 +15,9 @@ import java.io.InputStreamReader;
 
 /**
  * Deze class kan gebruikt worden voor het maken van een tijdelijk bestand (in de Temp map).
- * @author projectgroep 12
+ * @author Projectgroep 9
+ * @since JDK 1.8
+ * @version 1.0
  */
 public class TempFile {
 
