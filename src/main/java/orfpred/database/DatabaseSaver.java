@@ -197,6 +197,11 @@ public class DatabaseSaver {
         return null;
     }
 
+    /**
+     * Methode om de oude orfs te verwijderen
+     * @throws SQLException
+     * @throws CompoundNotFoundException
+     */
     private void deleteOldORFandBLAST() throws SQLException, CompoundNotFoundException {
         HashMap<Integer, ORF> oudeORFd = loader.getORFFromDB(seqID);
         for (Integer id : oudeORFd.keySet()) {
@@ -205,6 +210,10 @@ public class DatabaseSaver {
         connector.sentDeleteQuery("ORF", "SEQ_ID = " + seqID);
     }
 
+    /**
+     * Methode om de headers uit het headertoseq file te kunnen vergelijken met de nieuwe headers
+     * @throws SQLException
+     */
     private void findOldHeaders() throws SQLException {
         headersAndSeq = updater.getHeaderToSeq();
         alOpgeslagenHeaders = loader.getHeadersFromFile(bestandID);
@@ -214,6 +223,11 @@ public class DatabaseSaver {
         });
     }
 
+    /**
+     * Aangezien er duplicaten in de oorsprongelijke object zitten z
+     * orgt deze methode ervoor dat alleen de unieke overblijven
+     * @return
+     */
     private HashSet<ORF> createUniqueORFset() {
         HashSet<ORF> uniqueORFset = new HashSet<>();
         HashMap<Integer, ORF> alleORFs = ORFHighlighter.getPositionToORF();
@@ -223,6 +237,11 @@ public class DatabaseSaver {
         return uniqueORFset;
     }
 
+    /**
+     * Methode die regelt dat de orf's bij de juiste headers worden opgeslagen
+     * @throws SQLException
+     * @throws CompoundNotFoundException
+     */
     private void orfHandler() throws SQLException, CompoundNotFoundException {
         for (String header : headersAndSeq.keySet()) {
             currentHeader = header;
@@ -250,6 +269,10 @@ public class DatabaseSaver {
         }
     }
 
+    /**
+     * methode om de blast resultaten op te slaan
+     * @param ORFid
+     */
     private void blastHandler(int ORFid){
         for(BLAST blast : blastTable.getCurrectBLASTs()){
             if(blast.getOrf().getHeaderHerkomst().equals(currentHeader)){
@@ -261,6 +284,13 @@ public class DatabaseSaver {
                         for (Object o : arrayList){
                             System.out.println((String)o);
                         }
+                        saveBLASTResults((String)arrayList.get(0),
+                                (float)arrayList.get(0),
+                                (float)arrayList.get(0),
+                                (String)arrayList.get(0),
+                                (float)arrayList.get(0),
+                                (float)arrayList.get(0),
+                                (int)arrayList.get(0),orfID);
                     }
                     int i = 1;
                 } catch (Exception e){
