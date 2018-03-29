@@ -33,7 +33,7 @@ public class BLASTTable extends JTable {
 
     private ArrayList<BLAST> blasts;
     private ArrayList<Boolean> finished;
-    private HashMap<Integer, Integer> rowManager;
+    private HashMap<String, Integer> rowManager;
     private int row;
     
     private static final String URL_PREFIX = "https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Get&RID=";
