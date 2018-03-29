@@ -85,21 +85,21 @@ public class DatabaseLoader {
      */
     public HashMap<Integer, ORF> getORFFromDB(int seqID) throws SQLException, CompoundNotFoundException {
         HashMap<Integer, ORF> orfList = new HashMap<>();
-        ResultSet resultSet = connector.sentFeedbackQuery("SELECT ORF_ID, FRAME, "
-                + "START_POS, END_POS FROM ORF WHERE SEQ_ID = " + seqID);
-        ArrayList<Integer> orfIDMetBlast = getORFIDMetBLAST();
-        while (resultSet.next()) {
-            int start = Integer.parseInt(resultSet.getString("START_POS")),
-                    end = Integer.parseInt(resultSet.getString("END_POS"));
-            Frame frame = getFrame(resultSet);
-            Integer orfID = Integer.parseInt(resultSet.getString("ORF_ID"));
-            if (orfIDMetBlast.contains(orfID)) {
-                orfList.put(orfID, new ORF(orfID, frame, start, end, updater.getFileName(), (String)gui.getHeaderComboBox().getSelectedItem() ));
-            } else {
-                orfList.put(orfID, new ORF(frame, start, end, updater.getFileName(), (String)gui.getHeaderComboBox().getSelectedItem()));
+        try (ResultSet resultSet = connector.sentFeedbackQuery("SELECT ORF_ID, FRAME, "
+                + "START_POS, END_POS FROM ORF WHERE SEQ_ID = " + seqID)) {
+            ArrayList<Integer> orfIDMetBlast = getORFIDMetBLAST();
+            while (resultSet.next()) {
+                int start = Integer.parseInt(resultSet.getString("START_POS")),
+                        end = Integer.parseInt(resultSet.getString("END_POS"));
+                Frame frame = getFrame(resultSet);
+                Integer orfID = Integer.parseInt(resultSet.getString("ORF_ID"));
+                if (orfIDMetBlast.contains(orfID)) {
+                    orfList.put(orfID, new ORF(orfID, frame, start, end, updater.getFileName(), (String)gui.getHeaderComboBox().getSelectedItem() ));
+                } else {
+                    orfList.put(orfID, new ORF(frame, start, end, updater.getHeaderToSeq().get(gui.getHeaderComboBox().getSelectedItem().toString()).toString(), updater.getFileName(), (String)gui.getHeaderComboBox().getSelectedItem()));
+                }
             }
         }
-        resultSet.close();
         return orfList;
     }
 
@@ -183,12 +183,13 @@ public class DatabaseLoader {
      * @throws SQLException bij problemen met de connectie met de database
      */
     public ArrayList<Integer> getORFIDMetBLAST() throws SQLException {
-        ResultSet resultSet = connector.sentFeedbackQuery("SELECT ORF_ID FROM BLAST_RESULTAAT");
-        ArrayList<Integer> idList = new ArrayList<>();
-        while (resultSet.next()) {
-            idList.add(Integer.parseInt(resultSet.getString(1)));
+        ArrayList<Integer> idList;
+        try (ResultSet resultSet = connector.sentFeedbackQuery("SELECT ORF_ID FROM BLAST_RESULTAAT")) {
+            idList = new ArrayList<>();
+            while (resultSet.next()) {
+                idList.add(Integer.parseInt(resultSet.getString(1)));
+            }
         }
-        resultSet.close();
         return idList;
     }
 }
