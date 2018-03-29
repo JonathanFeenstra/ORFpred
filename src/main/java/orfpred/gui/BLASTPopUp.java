@@ -8,9 +8,7 @@ package orfpred.gui;
 
 import orfpred.sequence.ORF;
 import java.awt.event.ActionEvent;
-import java.text.ParseException;
 import javax.swing.*;
-import orfpred.blast.BLAST;
 import orfpred.blast.BLASTTable;
 
 /**
@@ -70,15 +68,7 @@ public class BLASTPopUp extends javax.swing.JFrame {
 
         BLASTButton.setFont(GUI.LABEL_FONT);
         BLASTButton.addActionListener((ActionEvent e) -> {
-            try {
-                blastTable.addBLAST(new BLAST(selectedORF.toString(), algoritmeComboBox.getSelectedItem().toString(), databaseComboBox.getSelectedItem().toString(), Double.parseDouble(evalueTekstField.getText()), 20, 0));
-            } catch (NumberFormatException ex) {
-                // TODO: catch
-            } catch (ParseException ex) {
-                // TODO: catch
-            } catch (Exception ex) {
-                // TODO: catch
-            }
+            //blastTable.addBLAST(new BLAST());
         });
         
         //<editor-fold defaultstate="collapsed" desc="Layout">

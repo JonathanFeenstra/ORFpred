@@ -14,6 +14,7 @@ import orfpred.file.FileHandler;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 import javax.swing.DefaultComboBoxModel;
