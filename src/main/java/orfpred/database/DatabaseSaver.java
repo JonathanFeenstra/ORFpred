@@ -6,6 +6,8 @@
  */
 package orfpred.database;
 
+import orfpred.blast.BLAST;
+import orfpred.blast.BLASTTable;
 import orfpred.gui.GUI;
 import orfpred.gui.GUIUpdater;
 import orfpred.sequence.ORF;
@@ -33,6 +35,8 @@ public class DatabaseSaver {
     private LinkedHashMap<String, DNASequence> headersAndSeq;
     private ArrayList<ArrayList<String>> alOpgeslagenHeaders;
     private ArrayList<String> alleOudeHeaders;
+    private BLASTTable blastTable;
+    private String currentHeader;
 
     /**
      * Constructor voor de DatabaseSaver
@@ -47,6 +51,7 @@ public class DatabaseSaver {
         this.loader = new DatabaseLoader(updater, gui);
         this.updater = updater;
         this.gui = gui;
+        this.blastTable = gui.getBlastTable();
 
     }
 
@@ -114,6 +119,7 @@ public class DatabaseSaver {
             String frame = ORF.parseFrameToString(orf.getReadingFrame());
             connector.sentInsertionQuery("ORF", "" + id + ",'" + frame
                     + "'," + orf.getStart() + "," + orf.getStop() + "," + sequentieID);
+            blastHandler(id);
         }
     }
 
@@ -218,6 +224,7 @@ public class DatabaseSaver {
 
     private void orfHandler() throws SQLException, CompoundNotFoundException {
         for (String header : headersAndSeq.keySet()) {
+            currentHeader = header;
             saveSequentie(header, headersAndSeq.get(header));
             if (header.equals(gui.getHeaderComboBox().getSelectedItem())) {
                 ArrayList<ORF> uniqueORFList = new ArrayList<>(createUniqueORFset()); // nodig aangezien er duplicaten van ORF opgeslagen zijn in de origine HashMap
@@ -238,11 +245,15 @@ public class DatabaseSaver {
                     }
                 }
             }
-            blastHandler(header);
+
         }
     }
 
-    private void blastHandler(String header){
-        gui.getHeaderComboBox().getItemCount();
+    private void blastHandler(int ORFid){
+        for(BLAST blast : blastTable.getCurrectBLASTs()){
+            if(blast.getOrf().getHeaderHerkomst().equals(currentHeader)){
+                //saveBLASTResults();
+            }
+        }
     }
 }
