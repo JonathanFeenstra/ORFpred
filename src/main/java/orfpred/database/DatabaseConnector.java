@@ -38,7 +38,7 @@ public class DatabaseConnector {
      * @throws SQLException bij problemen met de toegang tot de database
      * @throws java.lang.ClassNotFoundException
      */
-    protected final void connect() throws SQLException, ClassNotFoundException {
+    final void connect() throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         this.dbConnection = DriverManager.getConnection(URL, USER, PASSWORD);
     }
@@ -51,7 +51,7 @@ public class DatabaseConnector {
      * @throws SQLException wordt opgegooid als er een exception optreed bij de
      * SQL server
      */
-    protected ResultSet sentFeedbackQuery(String query) throws SQLException {
+    ResultSet sentFeedbackQuery(String query) throws SQLException {
         Statement statement = dbConnection.createStatement();
         return statement.executeQuery(query);
     }
@@ -65,7 +65,7 @@ public class DatabaseConnector {
      * @throws SQLException wordt opgegooid als er een exception optreed bij de
      * SQL server
      */
-    protected void sentInsertionQuery(String table, String values) throws SQLException {
+    void sentInsertionQuery(String table, String values) throws SQLException {
         Statement statement = dbConnection.createStatement();
         if (values.endsWith(")")) {
             statement.executeQuery("INSERT INTO " + table + " VALUES " + values);
@@ -75,7 +75,13 @@ public class DatabaseConnector {
         statement.executeQuery("COMMIT");
     }
 
-    protected void sentPreparedSequenceQuery(String query, String sequence) throws SQLException{
+    /**
+     * Methode om sequenties te kunnen op slaan die anders te lang zouden zijden voor de gewone Statement
+     * @param query String met de query
+     * @param sequence String met sequentie die in de statement wordt toegevoegd
+     * @throws SQLException wordt opgegooid als er een exception optreed bij de SQL server
+     */
+    void sentPreparedSequenceQuery(String query, String sequence) throws SQLException{
         PreparedStatement statement = dbConnection.prepareStatement(query);
         statement.setString(1,sequence);
         statement.executeQuery();
@@ -87,7 +93,7 @@ public class DatabaseConnector {
      * @param conditie String met de voorwaarde waaraan de rij moet voldoen om verwijderd te moeten worden
      * @throws SQLException
      */
-    protected void sentDeleteQuery(String table, String conditie) throws SQLException{
+    void sentDeleteQuery(String table, String conditie) throws SQLException{
         Statement statement = dbConnection.createStatement();
         statement.executeQuery("DELETE FROM "+table+" WHERE "+conditie);
     }
