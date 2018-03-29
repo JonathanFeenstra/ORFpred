@@ -29,6 +29,7 @@ public class BLASTPopUp extends javax.swing.JFrame {
     private JButton BLASTButton;
     private JComboBox<String> algoritmeComboBox, databaseComboBox;
     private JTextField evalueTekstField;
+
     private static HashMap<Integer, Integer> versionControl = new HashMap<>();
 
 
@@ -80,7 +81,7 @@ public class BLASTPopUp extends javax.swing.JFrame {
                         algoritmeComboBox.getSelectedItem().toString(),
                         databaseComboBox.getSelectedItem().toString(),
                         Double.parseDouble(evalueTekstField.getText()),
-                        20, getVersion()));
+                        20, getVersion(),selectedORF));
             } catch (NumberFormatException ex) {
                 // TODO: catch
             } catch (ParseException ex) {

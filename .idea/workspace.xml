@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf2129c2-df4f-46be-a1b8-076721fbd842" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/orfpred/blast/BLAST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/orfpred/blast/BLAST.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/orfpred/gui/BLASTPopUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/orfpred/gui/BLASTPopUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/orfpred/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/orfpred/gui/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/orfpred/gui/ORFPopUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/orfpred/gui/ORFPopUp.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,8 +33,13 @@
       <file leaf-file-name="BLAST.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLAST.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2484">
-              <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+            <state relative-caret-position="3256">
+              <caret line="212" column="64" selection-start-line="212" selection-start-column="64" selection-end-line="212" selection-end-column="64" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#6833#6834#0" expanded="true" />
+                <element signature="e#6859#6860#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -49,11 +53,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BLASTPopUp.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BLASTPopUp.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/BLASTPopUp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="144" column="51" lean-forward="true" selection-start-line="144" selection-start-column="51" selection-end-line="144" selection-end-column="51" />
+            <state relative-caret-position="186">
+              <caret line="83" column="52" selection-start-line="83" selection-start-column="52" selection-end-line="83" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ORF.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/sequence/ORF.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2240">
+              <caret line="130" lean-forward="true" selection-start-line="130" selection-end-line="130" />
             </state>
           </provider>
         </entry>
@@ -73,17 +86,17 @@
       <file leaf-file-name="ORFPopUp.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/ORFPopUp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-664">
-              <caret line="33" column="26" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+            <state relative-caret-position="420">
+              <caret line="91" column="59" selection-start-line="91" selection-start-column="59" selection-end-line="91" selection-end-column="59" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BLASTTable.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BLASTTable.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLASTTable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
+            <state relative-caret-position="566">
+              <caret line="46" column="35" lean-forward="true" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -118,8 +131,8 @@
       <find>Syste</find>
       <find>System</find>
       <find>blast</find>
-      <find>blastpop</find>
       <find>blastpo</find>
+      <find>blastpop</find>
     </findStrings>
     <replaceStrings>
       <replace>nDBM</replace>
@@ -143,9 +156,10 @@
         <option value="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java" />
         <option value="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java" />
-        <option value="$PROJECT_DIR$/src/main/java/orfpred/blast/BLAST.java" />
-        <option value="$PROJECT_DIR$/src/main/java/orfpred/gui/ORFPopUp.java" />
         <option value="$PROJECT_DIR$/src/main/java/orfpred/gui/GUI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/orfpred/blast/BLASTTable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/orfpred/gui/ORFPopUp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/orfpred/blast/BLAST.java" />
         <option value="$PROJECT_DIR$/src/main/java/orfpred/gui/BLASTPopUp.java" />
       </list>
     </option>
@@ -234,7 +248,25 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="orfpred" type="462c0819:PsiDirectoryNode" />
+              <item name="file" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ORFpred" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ORFpred" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="orfpred" type="462c0819:PsiDirectoryNode" />
               <item name="gui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ORFpred" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ORFpred" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="orfpred" type="462c0819:PsiDirectoryNode" />
+              <item name="sequence" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -441,7 +473,7 @@
       <workItem from="1522324544594" duration="245000" />
       <workItem from="1522343129644" duration="16000" />
       <workItem from="1522347647024" duration="519000" />
-      <workItem from="1522349517701" duration="1653000" />
+      <workItem from="1522349517701" duration="3112000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;connectie met db is mogelijk&quot;">
       <created>1521808266033</created>
@@ -555,15 +587,28 @@
       <option name="project" value="LOCAL" />
       <updated>1522264043271</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="voor gezorgd dat er unieke ids zijn voor blast objecten">
+      <created>1522351291260</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1522351291260</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Rowmanger aangepast">
+      <created>1522351507292</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1522351507292</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78738000" />
+    <option name="totallyTimeSpent" value="80197000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -578,8 +623,9 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20052083" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20052083" />
       <window_info anchor="right" id="Database" order="3" weight="0.3296875" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32831737" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -592,7 +638,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32930845" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.32831737" />
     </layout>
     <layout-to-restore>
@@ -646,7 +691,9 @@
     <MESSAGE value="Aan de saver class gewerkt, nogmaals" />
     <MESSAGE value="ORF atributen toegevoegd voor orf saver" />
     <MESSAGE value="Saver lukt alleen grote seq lukt niet" />
-    <option name="LAST_COMMIT_MESSAGE" value="Saver lukt alleen grote seq lukt niet" />
+    <MESSAGE value="voor gezorgd dat er unieke ids zijn voor blast objecten" />
+    <MESSAGE value="Rowmanger aangepast" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rowmanger aangepast" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -864,19 +911,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/sequence/ORF.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2220">
-          <caret line="130" column="8" selection-start-line="130" selection-start-column="8" selection-end-line="130" selection-end-column="30" />
-          <folding>
-            <element signature="e#3858#3859#0" expanded="true" />
-            <element signature="e#3896#3897#0" expanded="true" />
-            <element signature="e#3937#3938#0" expanded="true" />
-            <element signature="e#3974#3975#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/sequence/ORFHighlighter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1880">
@@ -937,20 +971,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLASTParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="31" column="20" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLASTTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -961,24 +981,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLAST.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLASTParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2484">
-          <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+        <state relative-caret-position="260">
+          <caret line="31" column="20" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/ORFPopUp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-664">
-          <caret line="33" column="26" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+        <state relative-caret-position="420">
+          <caret line="91" column="59" selection-start-line="91" selection-start-column="59" selection-end-line="91" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/sequence/ORF.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2240">
+          <caret line="130" lean-forward="true" selection-start-line="130" selection-end-line="130" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLAST.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3256">
+          <caret line="212" column="64" selection-start-line="212" selection-start-column="64" selection-end-line="212" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6833#6834#0" expanded="true" />
+            <element signature="e#6859#6860#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/BLASTPopUp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="144" column="51" lean-forward="true" selection-start-line="144" selection-start-column="51" selection-end-line="144" selection-end-column="51" />
+        <state relative-caret-position="186">
+          <caret line="83" column="52" selection-start-line="83" selection-start-column="52" selection-end-line="83" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLASTTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="566">
+          <caret line="46" column="35" lean-forward="true" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
         </state>
       </provider>
     </entry>

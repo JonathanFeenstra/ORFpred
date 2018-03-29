@@ -16,6 +16,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.Objects;
+
+import orfpred.sequence.ORF;
 import org.biojava.nbio.ws.alignment.qblast.BlastProgramEnum;
 import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastAlignmentProperties;
 import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastOutputProperties;
@@ -35,6 +37,7 @@ public class BLAST {
     private final String database;
     private final double evalueThreshold;
     private final int hitThreshold;
+    private final ORF orf;
     private final String resultID;
     private final NCBIQBlastService service;
     private NCBIQBlastAlignmentProperties alignProperties;
@@ -55,16 +58,17 @@ public class BLAST {
      * @param db gebruikte database
      * @param eValCutOff e-value cut-off.
      * @param hits hoeveelheid hits dat teruggestuurd wordt.
-     * @param id de database ID voor de resultaten
+     * @param orf ORF die bij de blast hoort
      * @throws ParseException als programma ongeldig is
      */
-    public BLAST(String seq, String blastProgram, String db, double eValCutOff, int hits, String id) throws ParseException {
+    public BLAST(String seq, String blastProgram, String db, double eValCutOff, int hits, String resultID, ORF orf) throws ParseException {
         this.sequence = seq;
         this.program = blastProgram;
         this.database = db;
         this.evalueThreshold = eValCutOff;
         this.hitThreshold = hits;
-        this.resultID = id;
+        this.resultID = resultID;
+        this.orf = orf;
         this.service = new NCBIQBlastService();
         setAlignmentOptions();
         setOutputOptions();
@@ -197,12 +201,16 @@ public class BLAST {
         return resultID;
     }
 
+    public ORF getOrf() {
+        return orf;
+    }
+
     //Overrides zorgen ervoor dat BLAST's op de juiste manier worden vergeleken.
     @Override
     public boolean equals(Object o) {
         if (o instanceof BLAST) {
             BLAST that = (BLAST) o;
-            return that.getResultID() == this.getResultID();
+            return that.getResultID().equals(this.getResultID());
         }
         return false;
     }
