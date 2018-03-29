@@ -111,8 +111,8 @@ public class ORFHighlighter implements Runnable {
                 while (matcher.find()) {
                     if (matcher.group().length() - 2 >= minORFLength) {
                         predictedORFs.add(new ORF(Frame.values()[frameNum],
-                                isProkaryote ? matcher.start() : matcher.start(),
-                                matcher.end(), updater.getFileName(), (String) targetGUI.getHeaderComboBox().getSelectedItem()));
+                                matcher.start(), matcher.end(), updater.getHeaderToSeq().get(targetGUI.getHeaderComboBox().getSelectedItem().toString()).toString().toUpperCase(), updater.getFileName(),
+                                (String) targetGUI.getHeaderComboBox().getSelectedItem()));
                     }
                 }
                 frameNum++;

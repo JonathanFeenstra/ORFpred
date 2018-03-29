@@ -54,16 +54,16 @@ public class BLAST {
      * @param blastProgram BLAST algoritme dat gebruikt wordt.
      * @param db gebruikte database
      * @param eValCutOff e-value cut-off.
-     * @param numberTopHits hoeveelheid hits dat teruggestuurd wordt.
+     * @param hits hoeveelheid hits dat teruggestuurd wordt.
      * @param id de database ID voor de resultaten
      * @throws ParseException als programma ongeldig is
      */
-    public BLAST(String seq, String blastProgram, String db, double eValCutOff, int numberTopHits, int id) throws ParseException {
+    public BLAST(String seq, String blastProgram, String db, double eValCutOff, int hits, int id) throws ParseException {
         this.sequence = seq;
         this.program = blastProgram;
         this.database = db;
         this.evalueThreshold = eValCutOff;
-        this.hitThreshold = numberTopHits;
+        this.hitThreshold = hits;
         this.resultID = id;
         this.service = new NCBIQBlastService();
         setAlignmentOptions();
