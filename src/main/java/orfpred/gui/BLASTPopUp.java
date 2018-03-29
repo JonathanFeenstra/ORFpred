@@ -30,14 +30,14 @@ public class BLASTPopUp extends javax.swing.JFrame {
     private JComboBox<String> algoritmeComboBox, databaseComboBox;
     private JTextField evalueTekstField;
 
-    private static HashMap<Integer, Integer> versionControl = new HashMap<>();
-
+    private HashMap<Integer, Integer> versionControl = new HashMap<>();
 
     /**
      * Constructor.
      *
      * @param orf het geselecteerde ORF
      * @param table de BLAST resultaten tabel
+     * @param gui de parent GUI
      */
     public BLASTPopUp(ORF orf, BLASTTable table, GUI gui) {
         this.selectedORF = orf;
@@ -81,16 +81,16 @@ public class BLASTPopUp extends javax.swing.JFrame {
                         algoritmeComboBox.getSelectedItem().toString(),
                         databaseComboBox.getSelectedItem().toString(),
                         Double.parseDouble(evalueTekstField.getText()),
-                        20, getVersion(),selectedORF));
+                        20, getVersion(), selectedORF));
             } catch (NumberFormatException ex) {
-                // TODO: catch
+                gui.showErrorMessage(ex, "Evalue is geen getal.");
             } catch (ParseException ex) {
-                // TODO: catch
+                gui.showErrorMessage(ex, "Programma ongeldig.");
             } catch (Exception ex) {
-                // TODO: catch
+                gui.showErrorMessage(ex, ex.getMessage());
             }
         });
-        
+
         //<editor-fold defaultstate="collapsed" desc="Layout">
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,26 +133,27 @@ public class BLASTPopUp extends javax.swing.JFrame {
                                 .addComponent(BLASTButton)
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-    //</editor-fold>
+        //</editor-fold>
 
         pack();
     }
 
     /**
-     * Methode om een unieke id te maken waarbij de herkomst en versie aan af te leiden zijn.
+     * Methode om een unieke id te maken waarbij de herkomst en versie aan af te
+     * leiden zijn.
+     *
      * @return Unieke id
      */
-    private String getVersion(){
+    private String getVersion() {
         Integer headerIndex = gui.getHeaderComboBox().getSelectedIndex(),
                 versie = 0;
-        if(versionControl.keySet().contains(headerIndex)){
-            versie = versionControl.get(headerIndex)+1;
-            versionControl.put(headerIndex,versie);
-
+        if (versionControl.keySet().contains(headerIndex)) {
+            versie = versionControl.get(headerIndex) + 1;
+            versionControl.put(headerIndex, versie);
         } else {
-            versionControl.put(headerIndex,versie);
+            versionControl.put(headerIndex, versie);
         }
-        return ""+headerIndex+"-"+versie;
+        return "" + headerIndex + "-" + versie;
     }
 
 }

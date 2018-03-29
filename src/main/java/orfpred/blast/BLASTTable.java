@@ -31,18 +31,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BLASTTable extends JTable {
 
-    private ArrayList<BLAST> blasts;
-    private ArrayList<Boolean> finished;
-    private HashMap<String, Integer> rowManager;
+    private final ArrayList<BLAST> blasts;
+    private final ArrayList<Boolean> finished;
+    private final HashMap<String, Integer> rowManager;
     private int row;
-    
+
     private static final String URL_PREFIX = "https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Get&RID=";
 
     /**
-     * Deze methode ontvangt een referentie JTable waarin alle BLAST jobs komen
-     * te staan.
+     * Constructor.
      */
-    public void setOutputTable() {
+    public BLASTTable() {
+        setModel(new DefaultTableModel(
+                new Object[][]{},
+                new String[]{"ORF ID", "Resultaat"}));
         finished = new ArrayList<>();
         blasts = new ArrayList<>();
         rowManager = new HashMap<>();
