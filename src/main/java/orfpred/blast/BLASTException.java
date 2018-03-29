@@ -7,8 +7,8 @@
 package orfpred.blast;
 
 /**
- * Deze exceptie wordt gegeooid als de gebruiker een blast programma ingeeft anders dan
- * blastn, blastp, tblastn, tblastx.
+ * Wordt getoond (exceptie) wanneer het BLAST algoritme niet klopt (alles 
+ * behalve blastn, blastp, tblastn, tblastx).
  * @author Projectgroep 9
  * @since JDK 1.8
  * @version 1.0

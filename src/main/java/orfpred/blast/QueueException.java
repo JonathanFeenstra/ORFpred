@@ -7,8 +7,7 @@
 package orfpred.blast;
 
 /**
- * Deze exception wordt gegooid als de gebruiker een BLAST probeerd uit te voeren en deze
- * opdracht al in de rij staat. 
+ * Wordt getoond wanneer een BLAST uitgevoerd wordt, terwijl deze al in wachtrij staat. 
  * @author Projectgroep 9
  * @since JDK 1.8
  * @version 1.0

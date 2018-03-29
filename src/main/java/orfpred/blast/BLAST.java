@@ -14,9 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import org.biojava.nbio.core.search.io.Hit;
 import org.biojava.nbio.ws.alignment.qblast.BlastProgramEnum;
 import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastAlignmentProperties;
 import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastOutputProperties;
@@ -144,7 +142,6 @@ public class BLAST {
                 //stuur een BLAST request en sla het ID op.
                 rid = service.sendAlignmentRequest(sequence, props);
                 while (!service.isReady(rid)) {
-                          System.out.println("hoi");
                     Thread.sleep(5000);
                 }
                 readResults(rid);
@@ -176,9 +173,7 @@ public class BLAST {
      * @throws Exception Gooi een exception als er een onbekende fout optreed.
      */
     private void readResults(String rid) throws IOException, Exception {
-        System.out.println("hello");
         InputStream inStream = service.getAlignmentResults(rid, outputProps);
-        System.out.println("ik ben hier");
         TempFile file = new TempFile(inStream);
         XMLFile = file.getFile();
         parseFile();
@@ -187,18 +182,15 @@ public class BLAST {
     /**
      * Deze methode zorgt voor het instantiëren van de BLAST parser en het
      * aanroepen van de parse methoden in deze parser.
+     * @throws java.io.FileNotFoundException
      */
     public void parseFile() throws FileNotFoundException, IOException {
         parser = new BLASTParser(XMLFile, maxEval);
-        System.out.println("yoyo");
         parser.parse();
-        System.out.println("kek");
          InputStream targetStream = new FileInputStream(XMLFile);
         reader = new BufferedReader(new InputStreamReader(targetStream));
         String line;
-        System.out.println("ik ben hier2");
         while ((line = reader.readLine()) != null) {
-            System.out.println(line);
             writer.write(line + System.getProperty("line.separator"));
         }  
         //XMLFile.delete(); 
