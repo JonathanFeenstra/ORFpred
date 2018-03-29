@@ -27,7 +27,7 @@ orfpred.sequence (Sequence)<br>
 (package "Frame" is er niet meer, maar verwerkt in orfpred.file) <br>
 - Classes binnen packages:<br>
 Hieronder een overzicht van de huidige structuur. Deze is op sommigen punten anders dan de UML class diagram.<br>
-<u>orfpred.blast</u><br>
+<b>orfpred.blast</b><br>
    -BLASTInputForm<br>
    -Blast<br>
    -BlastJob<br>
@@ -36,21 +36,21 @@ Hieronder een overzicht van de huidige structuur. Deze is op sommigen punten and
    -JobAlreadyInQueue<br>
    -ProgramException<br>
    -TempFile<br>
-<u>orfpred.database</u><br>
+<b>orfpred.database</b><br>
    -DatabaseConnector<br>
    -DatabaseDeleter<br>
    -DatabaseLoader<br>
    -DatabaseSaver<br>
-<u>orfpred.file</u><br>
+<b>orfpred.file</b><br>
    -FileHandler<br>
    -FileType<br>
-<u>orfpred.gui</u><br>
+<b>orfpred.gui</b><br>
    -BLASTPopUp<br>
    -DBFileChooser<br>
    -GUI<br>
    -GUIUpdater<br>
    -ORFPopUp<br>
-<u>orfpred.sequence</u><br>
+<b>orfpred.sequence</b><br>
    -ORF<br>
    -ORFHighlighter<br>
    -ReadingFramer<br>
