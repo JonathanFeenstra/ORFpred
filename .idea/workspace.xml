@@ -2,41 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf2129c2-df4f-46be-a1b8-076721fbd842" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_core_2_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_core_2_5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_slf4j_impl_2_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_slf4j_impl_2_5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_biojava_biojava_core_4_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_biojava_biojava_core_4_2_11.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_biojava_biojava_ws_4_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_biojava_biojava_ws_4_2_11.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_10.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_14.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ORFpred.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ORFpred.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/blast/Blast.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/blast/BlastJob.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/blast/BlastJobManager$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/blast/BlastJobManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/blast/BlastParser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/blast/Blast_file.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/blast/JobAlreadyInQueue.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/blast/ProgramException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/blast/TempFile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/database/DatabaseConnector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/database/DatabaseDeleter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/database/DatabaseLoader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/database/DatabaseSaver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/file/FileHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/file/FileType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/gui/BLASTPopUp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/gui/DBFileChooser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/gui/GUI$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/gui/GUI$GUIEventHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/gui/GUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/gui/GUIUpdater.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/gui/ORFPopUp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/sequence/ORF$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/sequence/ORF.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/sequence/ORFHighlighter$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/sequence/ORFHighlighter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/orfpred/sequence/ReadingFramer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -62,44 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/GUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2660">
-              <caret line="279" selection-start-line="279" selection-end-line="279" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/file/FileHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBFileChooser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/DBFileChooser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1840">
-              <caret line="106" column="59" selection-start-line="106" selection-start-column="59" selection-end-line="106" selection-end-column="59" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DatabaseLoader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-700">
-              <caret line="123" column="22" lean-forward="true" selection-start-line="123" selection-start-column="22" selection-end-line="123" selection-end-column="22" />
+            <state relative-caret-position="2220">
+              <caret line="123" column="22" selection-start-line="123" selection-start-column="22" selection-end-line="123" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -107,10 +41,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseConnector.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DatabaseConnector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
+            <state relative-caret-position="700">
               <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
             </state>
           </provider>
@@ -128,46 +62,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseSaver.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DatabaseSaver.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3260">
-              <caret line="178" column="11" selection-start-line="178" selection-start-column="4" selection-end-line="178" selection-end-column="11" />
+            <state relative-caret-position="194">
+              <caret line="245" column="47" selection-start-line="245" selection-start-column="47" selection-end-line="245" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GUIUpdater.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/GUIUpdater.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="59" selection-start-line="59" selection-end-line="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ORFHighlighter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/sequence/ORFHighlighter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1880">
-              <caret line="116" column="17" selection-start-line="116" selection-start-column="17" selection-end-line="116" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ORF.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/sequence/ORF.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2220">
-              <caret line="130" column="8" selection-start-line="130" selection-start-column="8" selection-end-line="130" selection-end-column="30" />
-              <folding>
-                <element signature="e#3858#3859#0" expanded="true" />
-                <element signature="e#3896#3897#0" expanded="true" />
-                <element signature="e#3937#3938#0" expanded="true" />
-                <element signature="e#3974#3975#0" expanded="true" />
+                <element signature="e#9788#9789#0" expanded="true" />
+                <element signature="e#9826#9827#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -215,8 +118,8 @@
         <option value="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseDeleter.java" />
         <option value="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/orfpred/gui/GUI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java" />
         <option value="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java" />
+        <option value="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java" />
       </list>
     </option>
   </component>
@@ -246,6 +149,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -286,15 +192,21 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="orfpred" type="462c0819:PsiDirectoryNode" />
+              <item name="blast" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ORFpred" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ORFpred" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="orfpred" type="462c0819:PsiDirectoryNode" />
               <item name="database" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -491,6 +403,8 @@
       <workItem from="1522313270765" duration="13000" />
       <workItem from="1522313459030" duration="144000" />
       <workItem from="1522324544594" duration="245000" />
+      <workItem from="1522343129644" duration="16000" />
+      <workItem from="1522347647024" duration="519000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;connectie met db is mogelijk&quot;">
       <created>1521808266033</created>
@@ -608,13 +522,15 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76550000" />
+    <option name="totallyTimeSpent" value="77085000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32831737" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
@@ -626,17 +542,16 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20052083" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20052083" />
       <window_info anchor="right" id="Database" order="3" weight="0.3296875" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3994528" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32831737" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -647,19 +562,19 @@
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32930845" />
       <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17864583" />
+      <window_info anchor="right" id="SciView" order="9" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="SciView" order="9" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32930845" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32930845" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17864583" />
       <window_info anchor="right" id="Database" order="5" weight="0.3296875" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="bottom" id="Terminal" order="10" />
@@ -700,25 +615,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java</url>
-          <line>76</line>
-          <properties />
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java</url>
-          <line>75</line>
-          <properties />
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/orfpred/gui/GUIUpdater.java</url>
           <line>59</line>
           <properties />
           <option name="timeStamp" value="53" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java</url>
+          <line>245</line>
+          <properties />
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="54" />
+      <option name="time" value="55" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -735,6 +644,8 @@
           <caret line="152" column="5" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#9788#9789#0" expanded="true" />
+            <element signature="e#9826#9827#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1007,8 +918,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2660">
-          <caret line="279" selection-start-line="279" selection-end-line="279" />
+        <state relative-caret-position="2580">
+          <caret line="283" selection-start-line="283" selection-end-line="283" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1025,20 +936,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3260">
-          <caret line="178" column="11" selection-start-line="178" selection-start-column="4" selection-end-line="178" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-700">
-          <caret line="123" column="22" lean-forward="true" selection-start-line="123" selection-start-column="22" selection-end-line="123" selection-end-column="22" />
+        <state relative-caret-position="2220">
+          <caret line="123" column="22" selection-start-line="123" selection-start-column="22" selection-end-line="123" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1047,8 +948,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseConnector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
+        <state relative-caret-position="700">
           <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="245" column="47" selection-start-line="245" selection-start-column="47" selection-end-line="245" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#9788#9789#0" expanded="true" />
+            <element signature="e#9826#9827#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
