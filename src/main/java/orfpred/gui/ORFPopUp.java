@@ -39,7 +39,6 @@ public class ORFPopUp extends JFrame {
      * @param readingFrames de ingeladen reading frames
      * @param orf het aangeklikte ORF
      * @param table de BLAST resultaten tabel
-     * @param gui de parent GUI
      */
     public ORFPopUp(ProteinSequence[] readingFrames, ORF orf, BLASTTable table, GUI gui) {
         this.shownReadingFrames = readingFrames;
@@ -91,7 +90,6 @@ public class ORFPopUp extends JFrame {
         buttonBLAST.addActionListener((ActionEvent e) -> {
             EventQueue.invokeLater(() -> {
                 new BLASTPopUp(selectedORF, blastTable, gui).setVisible(true);
-                dispose();
             });
         });
         window.add(buttonBLAST);

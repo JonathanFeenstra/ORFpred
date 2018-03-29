@@ -9,9 +9,7 @@ package orfpred.gui;
 import orfpred.sequence.ORF;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import javax.swing.*;
 import orfpred.blast.BLAST;
 import orfpred.blast.BLASTTable;
@@ -33,8 +31,6 @@ public class BLASTPopUp extends javax.swing.JFrame {
     private JTextField evalueTekstField;
 
     private HashMap<Integer, Integer> versionControl = new HashMap<>();
-    
-    private static final HashSet<String> NUCLEOTIDE_PROGRAMS = new HashSet<>(Arrays.asList(new String[] {"blastn", "blastx", "tblastx"})); 
 
     /**
      * Constructor.
@@ -81,15 +77,11 @@ public class BLASTPopUp extends javax.swing.JFrame {
         BLASTButton.setFont(GUI.LABEL_FONT);
         BLASTButton.addActionListener((ActionEvent e) -> {
             try {
-                BLAST selectedBLAST = new BLAST((NUCLEOTIDE_PROGRAMS.contains(algoritmeComboBox.getSelectedItem().toString())) ? 
-                        selectedORF.toString() : gui.getGUIUpdater().getShownReadingFrames()[selectedORF.getReadingFrame().ordinal()].toString().substring(selectedORF.getStart(), selectedORF.getStop()),
+                blastTable.addBLAST(new BLAST(selectedORF.toString(),
                         algoritmeComboBox.getSelectedItem().toString(),
                         databaseComboBox.getSelectedItem().toString(),
                         Double.parseDouble(evalueTekstField.getText()),
-                        20, getVersion(), selectedORF);
-                selectedBLAST.sendRequest();
-                blastTable.addBLAST(selectedBLAST);
-                dispose();
+                        20, getVersion(), selectedORF));
             } catch (NumberFormatException ex) {
                 gui.showErrorMessage(ex, "Evalue is geen getal.");
             } catch (ParseException ex) {
