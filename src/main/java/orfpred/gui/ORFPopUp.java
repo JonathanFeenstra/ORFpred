@@ -56,27 +56,27 @@ public class ORFPopUp extends JFrame {
         Container window = getContentPane();
         window.setLayout(new FlowLayout());
 
-        JLabel selectedORFLabel = new JLabel("Eiwitsequentie van het geselecteerde ORF: ");
+        JLabel selectedORFLabel = new JLabel("Eiwitsequentie:");
         selectedORFLabel.setFont(GUI.LABEL_FONT);
         window.add(selectedORFLabel);
 
         JTextArea seqArea = new JTextArea(shownReadingFrames[selectedORF.getReadingFrame().ordinal()].toString().substring(selectedORF.getStart(), selectedORF.getStop()));
-        seqArea.setPreferredSize(new Dimension(330, 150));
+        seqArea.setPreferredSize(new Dimension(350, 150));
         seqArea.setLineWrap(true);
 
         JScrollPane seqScrollPane = new JScrollPane(seqArea);
         window.add(seqScrollPane);
 
-        JLabel startLabel = new JLabel("Startpositie ORF: " + Integer.toString(selectedORF.getStart()) + "     ");
+        JLabel startLabel = new JLabel("Startpositie: " + Integer.toString(selectedORF.getStart()) + "    ");
         window.add(startLabel);
 
-        JLabel eindLabel = new JLabel("Eindpositie ORF: " + Integer.toString(selectedORF.getStop()) + "     ");
+        JLabel eindLabel = new JLabel("Eindpositie: " + Integer.toString(selectedORF.getStop()) + "    ");
         window.add(eindLabel);
 
-        JLabel lengteLabel = new JLabel("Lengte ORF: " + Integer.toString(selectedORF.getStop() - selectedORF.getStart()) + "     ");
+        JLabel lengteLabel = new JLabel("Lengte: " + Integer.toString(selectedORF.getStop() - selectedORF.getStart()) + "    ");
         window.add(lengteLabel);
 
-        JLabel frameLabel = new JLabel("Het ORF is gevonden in frame: " + ORF.parseFrameToString(selectedORF.getReadingFrame()) + "     ");
+        JLabel frameLabel = new JLabel("Frame: " + ORF.parseFrameToString(selectedORF.getReadingFrame()) + "    ");
         window.add(frameLabel);
 
         JButton buttonBLAST = new JButton("BLAST ORF");

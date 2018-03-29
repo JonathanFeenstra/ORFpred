@@ -42,7 +42,7 @@ public class ORFHighlighter implements Runnable {
     private final ProteinSequence[] readingFrames;
     private final GUI targetGUI;
     private boolean[] isHighlighted;
-    private GUIUpdater updater;
+    private final GUIUpdater updater;
 
     /**
      * Constructor.
@@ -53,6 +53,7 @@ public class ORFHighlighter implements Runnable {
     public ORFHighlighter(ProteinSequence[] rfs, GUI gui) {
         this.readingFrames = rfs;
         this.targetGUI = gui;
+        this.updater = targetGUI.getGUIUpdater();
         painter = new DefaultHighlightPainter(highlightKleur);
     }
 
@@ -74,10 +75,10 @@ public class ORFHighlighter implements Runnable {
         }
         addClickListener(targetGUI.getSeqTextPane());
     }
-    
+
     /**
      * Highlight opgeslagen ORF's.
-     * 
+     *
      * @param savedORFs opgeslagen ORF's
      */
     public void highlightSavedORFs(Collection<ORF> savedORFs) {
@@ -111,7 +112,7 @@ public class ORFHighlighter implements Runnable {
                     if (matcher.group().length() - 2 >= minORFLength) {
                         predictedORFs.add(new ORF(Frame.values()[frameNum],
                                 isProkaryote ? matcher.start() : matcher.start(),
-                                matcher.end(),updater.getFileName(),(String)targetGUI.getHeaderComboBox().getSelectedItem()));
+                                matcher.end(), updater.getFileName(), (String) targetGUI.getHeaderComboBox().getSelectedItem()));
                     }
                 }
                 frameNum++;
@@ -242,7 +243,7 @@ public class ORFHighlighter implements Runnable {
         isProkaryote = prokaryote;
     }
 
-    public static HashMap<Integer, ORF> getPositionToORF(){
+    public static HashMap<Integer, ORF> getPositionToORF() {
         return positionToORF;
     }
 

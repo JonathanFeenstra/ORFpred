@@ -335,6 +335,13 @@ public class GUI implements Runnable {
     }
 
     /**
+     * @return de bijbehorende GUIUpdater
+     */
+    public GUIUpdater getGUIUpdater() {
+        return guiUpdater;
+    }
+
+    /**
      * @return frame
      */
     public JFrame getFrame() {
