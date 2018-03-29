@@ -94,7 +94,7 @@ public class BLASTTable extends JTable {
      * @param blast Het Blast object dat toegevoegd moet worden aan de tabel.
      * @throws Exception Gooit een exception als deze Job al in de tabel staat.
      */
-    public void addJob(BLAST blast) throws Exception {
+    public void addBLAST(BLAST blast) throws Exception {
         if (!blasts.contains(blast)) {
             blasts.add(blast);
             finished.add(false);
@@ -145,7 +145,7 @@ public class BLASTTable extends JTable {
      */
     private void showUnfinishedBLASTs(BLAST blast) {
         DefaultTableModel model = (DefaultTableModel) getModel();
-        model.addRow(new Object[]{blast.getResultID(), "NOT FINISHED YET"});
+        model.addRow(new Object[]{blast.getResultID(), "Bezig met BLAST..."});
     }
 
     /**

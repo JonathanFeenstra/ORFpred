@@ -9,6 +9,7 @@ package orfpred.gui;
 import orfpred.sequence.ORF;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
+import orfpred.blast.BLASTTable;
 
 /**
  * Deze class toont een popup waarin de parameters voor het BLASTen ingesteld
@@ -19,6 +20,7 @@ import javax.swing.*;
 public class BLASTPopUp extends javax.swing.JFrame {
 
     private final ORF selectedORF;
+    private final BLASTTable blastTable;
 
     private JButton BLASTButton;
     private JComboBox<String> algoritmeComboBox, databaseComboBox;
@@ -28,9 +30,11 @@ public class BLASTPopUp extends javax.swing.JFrame {
      * Constructor.
      *
      * @param orf het geselecteerde ORF
+     * @param table de BLAST resultaten tabel
      */
-    public BLASTPopUp(ORF orf) {
+    public BLASTPopUp(ORF orf, BLASTTable table) {
         this.selectedORF = orf;
+        this.blastTable = table;
         initComponents();
     }
 
@@ -64,7 +68,7 @@ public class BLASTPopUp extends javax.swing.JFrame {
 
         BLASTButton.setFont(GUI.LABEL_FONT);
         BLASTButton.addActionListener((ActionEvent e) -> {
-            // TODO: BLASTEN
+            //blastTable.addBLAST(new BLAST());
         });
         
         //<editor-fold defaultstate="collapsed" desc="Layout">

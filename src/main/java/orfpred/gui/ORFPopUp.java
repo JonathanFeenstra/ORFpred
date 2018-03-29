@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import orfpred.blast.BLASTTable;
 import orfpred.sequence.ORF;
 import org.biojava.nbio.core.sequence.ProteinSequence;
 
@@ -29,16 +30,19 @@ public class ORFPopUp extends JFrame {
 
     private final ProteinSequence[] shownReadingFrames;
     private final ORF selectedORF;
+    private final BLASTTable blastTable;
 
     /**
      * Constructor.
      *
      * @param readingFrames de ingeladen reading frames
      * @param orf het aangeklikte ORF
+     * @param table de BLAST resultaten tabel
      */
-    public ORFPopUp(ProteinSequence[] readingFrames, ORF orf) {
+    public ORFPopUp(ProteinSequence[] readingFrames, ORF orf, BLASTTable table) {
         this.shownReadingFrames = readingFrames;
         this.selectedORF = orf;
+        this.blastTable = table;
         this.createPopUp();
     }
 
@@ -82,7 +86,7 @@ public class ORFPopUp extends JFrame {
         JButton buttonBLAST = new JButton("BLAST ORF");
         buttonBLAST.addActionListener((ActionEvent e) -> {
             EventQueue.invokeLater(() -> {
-                new BLASTPopUp(selectedORF).setVisible(true);
+                new BLASTPopUp(selectedORF, blastTable).setVisible(true);
             });
         });
         window.add(buttonBLAST);

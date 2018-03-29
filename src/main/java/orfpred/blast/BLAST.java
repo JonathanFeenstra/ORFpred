@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
+import java.util.Objects;
 import org.biojava.nbio.ws.alignment.qblast.BlastProgramEnum;
 import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastAlignmentProperties;
 import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastOutputProperties;
@@ -119,7 +120,6 @@ public class BLAST {
      */
     public void sendRequest() {
         thread = new Thread(() -> {
-            requestId = null;
             try {
                 requestId = service.sendAlignmentRequest(sequence, alignProperties);
                 while (!service.isReady(requestId)) {
@@ -195,5 +195,20 @@ public class BLAST {
      */
     public int getResultID() {
         return resultID;
+    }
+
+    //Overrides zorgen ervoor dat BLAST's op de juiste manier worden vergeleken.
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof BLAST) {
+            BLAST that = (BLAST) o;
+            return that.getResultID() == this.getResultID();
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return 37 * 3 + Objects.hashCode(this.getResultID());
     }
 }
