@@ -99,6 +99,7 @@ public class DatabaseLoader {
                 orfList.put(orfID, new ORF(frame, start, end, updater.getFileName(), (String)gui.getHeaderComboBox().getSelectedItem()));
             }
         }
+        resultSet.close();
         return orfList;
     }
 
@@ -171,6 +172,7 @@ public class DatabaseLoader {
             }
             counter++;
         }
+        resultSet.close();
         return createdArray;
     }
 
@@ -186,6 +188,7 @@ public class DatabaseLoader {
         while (resultSet.next()) {
             idList.add(Integer.parseInt(resultSet.getString(1)));
         }
+        resultSet.close();
         return idList;
     }
 }

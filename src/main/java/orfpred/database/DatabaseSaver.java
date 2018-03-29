@@ -162,6 +162,7 @@ public class DatabaseSaver {
                 maxID = id;
             }
         }
+        resultset.close();
         return maxID + 1;
     }
 
@@ -185,6 +186,7 @@ public class DatabaseSaver {
                 return Integer.parseInt(resultSet.getString(1));
             }
         }
+        resultSet.close();
         return null;
     }
 

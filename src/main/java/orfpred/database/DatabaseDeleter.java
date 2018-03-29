@@ -79,6 +79,7 @@ public class DatabaseDeleter {
         while (resultSet.next()) {
             foundIDs.add(resultSet.getString(1));
         }
+        resultSet.close();
         return foundIDs;
     }
 
