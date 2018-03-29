@@ -31,6 +31,7 @@ public class ORFPopUp extends JFrame {
     private final ProteinSequence[] shownReadingFrames;
     private final ORF selectedORF;
     private final BLASTTable blastTable;
+    private final GUI gui;
 
     /**
      * Constructor.
@@ -39,11 +40,13 @@ public class ORFPopUp extends JFrame {
      * @param orf het aangeklikte ORF
      * @param table de BLAST resultaten tabel
      */
-    public ORFPopUp(ProteinSequence[] readingFrames, ORF orf, BLASTTable table) {
+    public ORFPopUp(ProteinSequence[] readingFrames, ORF orf, BLASTTable table, GUI gui) {
         this.shownReadingFrames = readingFrames;
         this.selectedORF = orf;
         this.blastTable = table;
+        this.gui = gui;
         this.createPopUp();
+
     }
 
     /**
@@ -86,7 +89,7 @@ public class ORFPopUp extends JFrame {
         JButton buttonBLAST = new JButton("BLAST ORF");
         buttonBLAST.addActionListener((ActionEvent e) -> {
             EventQueue.invokeLater(() -> {
-                new BLASTPopUp(selectedORF, blastTable).setVisible(true);
+                new BLASTPopUp(selectedORF, blastTable, gui).setVisible(true);
             });
         });
         window.add(buttonBLAST);

@@ -35,7 +35,7 @@ public class BLAST {
     private final String database;
     private final double evalueThreshold;
     private final int hitThreshold;
-    private final int resultID;
+    private final String resultID;
     private final NCBIQBlastService service;
     private NCBIQBlastAlignmentProperties alignProperties;
     private NCBIQBlastOutputProperties outputProperties;
@@ -58,7 +58,7 @@ public class BLAST {
      * @param id de database ID voor de resultaten
      * @throws ParseException als programma ongeldig is
      */
-    public BLAST(String seq, String blastProgram, String db, double eValCutOff, int hits, int id) throws ParseException {
+    public BLAST(String seq, String blastProgram, String db, double eValCutOff, int hits, String id) throws ParseException {
         this.sequence = seq;
         this.program = blastProgram;
         this.database = db;
@@ -193,7 +193,7 @@ public class BLAST {
     /**
      * @return resultID
      */
-    public int getResultID() {
+    public String getResultID() {
         return resultID;
     }
 

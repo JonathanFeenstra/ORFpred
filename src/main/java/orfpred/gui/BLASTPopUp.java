@@ -9,6 +9,7 @@ package orfpred.gui;
 import orfpred.sequence.ORF;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
+import java.util.HashMap;
 import javax.swing.*;
 import orfpred.blast.BLAST;
 import orfpred.blast.BLASTTable;
@@ -23,10 +24,13 @@ public class BLASTPopUp extends javax.swing.JFrame {
 
     private final ORF selectedORF;
     private final BLASTTable blastTable;
+    private final GUI gui;
 
     private JButton BLASTButton;
     private JComboBox<String> algoritmeComboBox, databaseComboBox;
     private JTextField evalueTekstField;
+    private static HashMap<Integer, Integer> versionControl = new HashMap<>();
+
 
     /**
      * Constructor.
@@ -34,9 +38,10 @@ public class BLASTPopUp extends javax.swing.JFrame {
      * @param orf het geselecteerde ORF
      * @param table de BLAST resultaten tabel
      */
-    public BLASTPopUp(ORF orf, BLASTTable table) {
+    public BLASTPopUp(ORF orf, BLASTTable table, GUI gui) {
         this.selectedORF = orf;
         this.blastTable = table;
+        this.gui = gui;
         initComponents();
     }
 
@@ -71,7 +76,11 @@ public class BLASTPopUp extends javax.swing.JFrame {
         BLASTButton.setFont(GUI.LABEL_FONT);
         BLASTButton.addActionListener((ActionEvent e) -> {
             try {
-                blastTable.addBLAST(new BLAST(selectedORF.toString(), algoritmeComboBox.getSelectedItem().toString(), databaseComboBox.getSelectedItem().toString(), Double.parseDouble(evalueTekstField.getText()), 20, 0));
+                blastTable.addBLAST(new BLAST(selectedORF.toString(),
+                        algoritmeComboBox.getSelectedItem().toString(),
+                        databaseComboBox.getSelectedItem().toString(),
+                        Double.parseDouble(evalueTekstField.getText()),
+                        20, getVersion()));
             } catch (NumberFormatException ex) {
                 // TODO: catch
             } catch (ParseException ex) {
@@ -126,6 +135,23 @@ public class BLASTPopUp extends javax.swing.JFrame {
     //</editor-fold>
 
         pack();
+    }
+
+    /**
+     * Methode om een unieke id te maken waarbij de herkomst en versie aan af te leiden zijn.
+     * @return Unieke id
+     */
+    private String getVersion(){
+        Integer headerIndex = gui.getHeaderComboBox().getSelectedIndex(),
+                versie = 0;
+        if(versionControl.keySet().contains(headerIndex)){
+            versie = versionControl.get(headerIndex)+1;
+            versionControl.put(headerIndex,versie);
+
+        } else {
+            versionControl.put(headerIndex,versie);
+        }
+        return ""+headerIndex+"-"+versie;
     }
 
 }

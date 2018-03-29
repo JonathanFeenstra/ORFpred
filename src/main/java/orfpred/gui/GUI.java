@@ -330,7 +330,7 @@ public class GUI implements Runnable {
      * @param orf het geselecteerde ORF.
      */
     public void showORFPopUp(ORF orf) {
-        new ORFPopUp(guiUpdater.getShownReadingFrames(), orf, blastTable).setVisible(true);
+        new ORFPopUp(guiUpdater.getShownReadingFrames(), orf, blastTable, this).setVisible(true);
     }
 
     /**
