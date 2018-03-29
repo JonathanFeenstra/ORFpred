@@ -28,13 +28,9 @@ orfpred.sequence (Sequence)<br>
 - Classes binnen packages:<br>
 Hieronder een overzicht van de huidige structuur. Deze is op sommigen punten anders dan de UML class diagram.<br>
 <b>orfpred.blast</b><br>
-   -BLASTInputForm<br>
-   -Blast<br>
-   -BlastJob<br>
-   -BlastJobManager<br>
-   -BlastParser<br>
-   -JobAlreadyInQueue<br>
-   -ProgramException<br>
+   -BLAST<br>
+   -BLASTTable<br>
+   -BLASTParser<br>
    -TempFile<br>
 <b>orfpred.database</b><br>
    -DatabaseConnector<br>
