@@ -30,7 +30,7 @@ public class BLASTParser {
     private File output;
     private final double maxEValue;
     private List<Result> results;
-    private ArrayList<Hit> hits;
+    private ArrayList<ArrayList<Object>> hitsData;
 
     /**
      * Constructor
@@ -52,9 +52,7 @@ public class BLASTParser {
      */
     public void parse() throws IOException, ParseException {
         BlastXMLParser parser = new BlastXMLParser();
-        System.out.println("1");
         parser.setFile(xmlInputFile);
-        System.out.println("2");
         results = parser.createObjects(maxEValue);
         for (int i = 0; i < results.size(); i++) {
             System.out.println(results.get(i));
@@ -69,23 +67,23 @@ public class BLASTParser {
             System.out.println(results.get(i).getReference());
             System.out.println(results.get(i).getVersion());
             ArrayList<Hit> hitList = getTopHits(results.get(i));
-            extractHitData(hitList);
+            hitsData.addAll(extractHitData(hitList));
         }
 
     }
 
-    private static ArrayList<Object> extractHitData(ArrayList<Hit> hitList) {
+    private static ArrayList<ArrayList<Object>> extractHitData(ArrayList<Hit> hitList) {
         Object[] data;
-        ArrayList< Object> dataList = new ArrayList<>();
+        ArrayList<ArrayList< Object>> dataList = new ArrayList<>();
         Hit hit;
         for (int i = 0; i < hitList.size(); i++) {
             hit = hitList.get(i);
             if (hit.iterator().hasNext()) {
                 Hsp specs = hit.iterator().next();
-                data = new Object[]{specs.getHspBitScore(), specs.getHspEvalue(),
-                    specs.getHspHseq(), specs.getHspIdentity(), specs.getHspPositive(),
+                data = new Object[]{hit.getHitDef(), specs.getHspBitScore(), specs.getHspEvalue(),
+                    specs.getHspHseq(),specs.getHspQueryFrom(),specs.getHspQueryTo(), specs.getHspIdentity(), specs.getHspPositive(),
                     specs.getHspGaps(), hit.getHitAccession()};
-                dataList.add(data);
+                dataList.get(i).add(data);
 
             }
         }
@@ -108,5 +106,9 @@ public class BLASTParser {
             hitList.add(hit);
         }
         return hitList;
+    }
+
+    public ArrayList<ArrayList<Object>> getHitsData() {
+        return hitsData;
     }
 }

@@ -194,6 +194,10 @@ public class BLAST {
         return sequence;
     }
 
+    public BLASTParser getParser() {
+        return parser;
+    }
+
     /**
      * @return resultID
      */

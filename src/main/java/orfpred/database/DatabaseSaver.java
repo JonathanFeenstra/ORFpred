@@ -7,6 +7,7 @@
 package orfpred.database;
 
 import orfpred.blast.BLAST;
+import orfpred.blast.BLASTParser;
 import orfpred.blast.BLASTTable;
 import orfpred.gui.GUI;
 import orfpred.gui.GUIUpdater;
@@ -252,7 +253,19 @@ public class DatabaseSaver {
     private void blastHandler(int ORFid){
         for(BLAST blast : blastTable.getCurrectBLASTs()){
             if(blast.getOrf().getHeaderHerkomst().equals(currentHeader)){
-                //saveBLASTResults();
+                try {
+                    blast.parseFile();
+                    BLASTParser parser = blast.getParser();
+                    ArrayList<ArrayList<Object>> list = parser.getHitsData();
+                    for(ArrayList arrayList : list){
+                        for (Object o : arrayList){
+                            System.out.println((String)o);
+                        }
+                    }
+                    int i = 1;
+                } catch (Exception e){
+                    System.out.println(e.toString());
+                }
             }
         }
     }
