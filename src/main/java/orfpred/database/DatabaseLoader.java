@@ -23,12 +23,14 @@ import java.util.*;
 public class DatabaseLoader {
 
     private final DatabaseConnector connector;
-    private GUIUpdater updater;
-    private GUI gui;
+    private final GUIUpdater updater;
+    private final GUI gui;
 
     /**
      * Constructor.
      *
+     * @param updater de betreffende GUIUpdater
+     * @param gui de betreffende GUI
      * @throws SQLException bij problemen met de connectie
      * @throws ClassNotFoundException als de vereiste class mist
      * @throws MissingResourceException als een vereist argument mist
@@ -75,15 +77,13 @@ public class DatabaseLoader {
      *
      * @param seqID int met de sequentie ID waarvan de ORF's moet worden
      * opgehaald
-     * @param seq String met daarin de sequentie waaruit de orf sequentie moet
-     * worden gehaald voor het ORF object
      * @return Een HashMap met als key de ORF ID en als value een ORF object
      * @throws SQLException wordt opgegooid als er een exception optreed bij de
      * SQL server
      * @throws CompoundNotFoundException als karakter geen aminozuur/nucleotide
      * is
      */
-    public HashMap<Integer, ORF> getORFFromDB(int seqID, String seq) throws SQLException, CompoundNotFoundException {
+    public HashMap<Integer, ORF> getORFFromDB(int seqID) throws SQLException, CompoundNotFoundException {
         HashMap<Integer, ORF> orfList = new HashMap<>();
         ResultSet resultSet = connector.sentFeedbackQuery("SELECT ORF_ID, FRAME, "
                 + "START_POS, END_POS FROM ORF WHERE SEQ_ID = " + seqID);

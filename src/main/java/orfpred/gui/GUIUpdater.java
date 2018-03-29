@@ -14,6 +14,7 @@ import orfpred.file.FileHandler;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 import javax.swing.DefaultComboBoxModel;
@@ -113,10 +114,9 @@ public class GUIUpdater {
      */
     public void showLoadedSeq() throws SQLException, CompoundNotFoundException {
         DNASequence loadedSeq = headerToSeq.get(targetGUI.getHeaderComboBox().getSelectedItem().toString());
-        showHeaders(headerToSeq.keySet().toArray(new String[headerToSeq.size()]));
         showReadingFrames(ReadingFramer.getProteinFrames(loadedSeq));
         ORFHighlighter highlighter = new ORFHighlighter(shownReadingFrames, targetGUI);
-        highlighter.highlightSavedORFs(loader.getORFFromDB(seqIDs.get(targetGUI.getHeaderComboBox().getSelectedIndex()), loadedSeq.toString()).values());
+        highlighter.highlightSavedORFs(loader.getORFFromDB(seqIDs.get(targetGUI.getHeaderComboBox().getSelectedIndex())).values());
     }
 
     /**

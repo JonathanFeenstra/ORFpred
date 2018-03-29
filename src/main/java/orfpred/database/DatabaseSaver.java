@@ -50,7 +50,7 @@ public class DatabaseSaver {
 
     }
 
-    public void saveBestandData() throws SQLException, CompoundNotFoundException{
+    public void saveBestandData() throws SQLException, CompoundNotFoundException {
         saveBestand();
         findOldHeaders();
         orfHandeler();
@@ -66,15 +66,15 @@ public class DatabaseSaver {
         bestandID = -1;
         String bestandnaam = updater.getFileName();
         ArrayList<ArrayList<String>> bestaandeFiles = loader.getStoredFiles();
-        for(ArrayList<String> array : bestaandeFiles){
-            if(array.get(1).equals(bestandnaam)){
+        for (ArrayList<String> array : bestaandeFiles) {
+            if (array.get(1).equals(bestandnaam)) {
                 bestandID = Integer.parseInt(array.get(0));
             }
         }
-        if(bestandID == -1){
+        if (bestandID == -1) {
             int id = getUniqueID("BESTAND");
             connector.sentInsertionQuery("BESTAND", "" + id + ",'" + bestandnaam + "'");
-            bestandID = findID("BESTAND","NAAM",bestandnaam);
+            bestandID = findID("BESTAND", "NAAM", bestandnaam);
         }
 
     }
@@ -83,11 +83,12 @@ public class DatabaseSaver {
      * methode om de sequentie en gegevens op te slaan
      *
      * sequentie hoort
+     *
      * @throws SQLException wordt opgegooid als er een exception optreed bij de
      * SQL server
      */
     private void saveSequentie(String header, DNASequence sequentie) throws SQLException {
-        if(alleOudeHeaders.contains(header)){
+        if (alleOudeHeaders.contains(header)) {
             int index = alleOudeHeaders.indexOf(header);
             seqID = Integer.parseInt(alOpgeslagenHeaders.get(index).get(0));
         } else {
@@ -107,7 +108,7 @@ public class DatabaseSaver {
      * SQL server
      */
     private void saveORFs(ArrayList<ORF> orfList, int sequentieID) throws SQLException {
-        for(ORF orf : orfList) {
+        for (ORF orf : orfList) {
             int id = getUniqueID("ORF");
             String frame = ORF.parseFrameToString(orf.getReadingFrame());
             connector.sentInsertionQuery("ORF", "" + id + ",'" + frame
@@ -186,50 +187,50 @@ public class DatabaseSaver {
         return null;
     }
 
-    private void deleteOldORFandBLAST(LinkedHashMap<String, DNASequence> headersAndSeq, String header) throws SQLException,CompoundNotFoundException{
-        HashMap<Integer, ORF> oudeORFd = loader.getORFFromDB(seqID,headersAndSeq.get(header).toString());
-        for(Integer id : oudeORFd.keySet()){
-            connector.sentDeleteQuery("BLAST_RESULTAAT","ORF_ID = "+id);
+    private void deleteOldORFandBLAST() throws SQLException, CompoundNotFoundException {
+        HashMap<Integer, ORF> oudeORFd = loader.getORFFromDB(seqID);
+        for (Integer id : oudeORFd.keySet()) {
+            connector.sentDeleteQuery("BLAST_RESULTAAT", "ORF_ID = " + id);
         }
-        connector.sentDeleteQuery("ORF","SEQ_ID = "+seqID);
+        connector.sentDeleteQuery("ORF", "SEQ_ID = " + seqID);
     }
 
-    private void findOldHeaders() throws SQLException{
+    private void findOldHeaders() throws SQLException {
         headersAndSeq = updater.getHeaderToSeq();
         alOpgeslagenHeaders = loader.getHeadersFromFile(bestandID);
         alleOudeHeaders = new ArrayList<>();
-        for(ArrayList<String> headerArray : alOpgeslagenHeaders){
+        alOpgeslagenHeaders.forEach((headerArray) -> {
             alleOudeHeaders.add(headerArray.get(1));
-        }
+        });
     }
 
-    private HashSet<ORF> createUniqueORFset(){
+    private HashSet<ORF> createUniqueORFset() {
         HashSet<ORF> uniqueORFset = new HashSet<>();
         HashMap<Integer, ORF> alleORFs = ORFHighlighter.getPositionToORF();
-        for(Integer key : alleORFs.keySet()){
+        alleORFs.keySet().forEach((key) -> {
             uniqueORFset.add(alleORFs.get(key));
-        }
+        });
         return uniqueORFset;
     }
 
-    private void orfHandeler() throws SQLException, CompoundNotFoundException{
-        for(String header : headersAndSeq.keySet()){
-            saveSequentie(header,headersAndSeq.get(header));
-            if(header.equals(gui.getHeaderComboBox().getSelectedItem())){
+    private void orfHandeler() throws SQLException, CompoundNotFoundException {
+        for (String header : headersAndSeq.keySet()) {
+            saveSequentie(header, headersAndSeq.get(header));
+            if (header.equals(gui.getHeaderComboBox().getSelectedItem())) {
                 ArrayList<ORF> uniqueORFList = new ArrayList<>(createUniqueORFset()); // nodig aangezien er duplicaten van ORF opgeslagen zijn in de origine HashMap
-                if(uniqueORFList.size() != 0){
-                    if(uniqueORFList.get(0).getHeaderHerkomst().equals(header)){
-                        if(findID("ORF","SEQ_ID",""+seqID) != null){
-                            if(JOptionPane.showConfirmDialog(null,
-                                    "Let op! Voor deze sequentie zijn " +
-                                            "er al ORF's opgeslagen.\nWeet u " +
-                                            "zeker dat u deze wilt vervangen?")
-                                    == JOptionPane.YES_OPTION){
-                                deleteOldORFandBLAST(headersAndSeq,header);
+                if (!uniqueORFList.isEmpty()) {
+                    if (uniqueORFList.get(0).getHeaderHerkomst().equals(header)) {
+                        if (findID("ORF", "SEQ_ID", "" + seqID) != null) {
+                            if (JOptionPane.showConfirmDialog(null,
+                                    "Let op! Voor deze sequentie zijn "
+                                    + "er al ORF's opgeslagen.\nWeet u "
+                                    + "zeker dat u deze wilt vervangen?")
+                                    == JOptionPane.YES_OPTION) {
+                                deleteOldORFandBLAST();
                                 saveORFs(uniqueORFList, seqID);
                             }
                         } else {
-                            saveORFs(uniqueORFList,seqID);
+                            saveORFs(uniqueORFList, seqID);
                         }
                     }
                 }
