@@ -120,7 +120,7 @@ public class DatabaseSaver {
             String frame = ORF.parseFrameToString(orf.getReadingFrame());
             connector.sentInsertionQuery("ORF", "" + id + ",'" + frame
                     + "'," + orf.getStart() + "," + orf.getStop() + "," + sequentieID);
-            blastHandler(id);
+            //blastHandler(id);
         }
     }
 
@@ -270,33 +270,35 @@ public class DatabaseSaver {
     }
 
     /**
+     * @deprecated is niet gelukt om op een juiste manier te blasten en gegevens op te halen om op te slaan
      * methode om de blast resultaten op te slaan
      * @param ORFid
      */
     private void blastHandler(int ORFid){
-        for(BLAST blast : blastTable.getCurrectBLASTs()){
-            if(blast.getOrf().getHeaderHerkomst().equals(currentHeader)){
-                try {
-                    blast.parseFile();
-                    BLASTParser parser = blast.getParser();
-                    ArrayList<ArrayList<Object>> list = parser.getHitsData();
-                    for(ArrayList arrayList : list){
-                        for (Object o : arrayList){
-                            System.out.println((String)o);
-                        }
-                        saveBLASTResults((String)arrayList.get(0),
-                                (float)arrayList.get(0),
-                                (float)arrayList.get(0),
-                                (String)arrayList.get(0),
-                                (float)arrayList.get(0),
-                                (float)arrayList.get(0),
-                                (int)arrayList.get(0),orfID);
-                    }
-                    int i = 1;
-                } catch (Exception e){
-                    System.out.println(e.toString());
-                }
-            }
-        }
+//        for(BLAST blast : blastTable.getCurrectBLASTs()){
+//            if(blast.getOrf().getHeaderHerkomst().equals(currentHeader)){
+//                try {
+//                    blast.parseFile();
+//                    BLASTParser parser = blast.getParser();
+//                    ArrayList<ArrayList<Object>> list = parser.getHitsData();
+//                    for(ArrayList arrayList : list){
+//                        for (Object o : arrayList){
+//                            System.out.println((String)o);
+//                        }
+//                        int i = 1;
+////                        saveBLASTResults((String)arrayList.get(0),
+////                                (float)arrayList.get(0),
+////                                (float)arrayList.get(0),
+////                                (String)arrayList.get(0),
+////                                (float)arrayList.get(0),
+////                                (float)arrayList.get(0),
+////                                (int)arrayList.get(0),orfID);
+//                    }
+//
+//                } catch (Exception e){
+//                    System.out.println(e.toString());
+//                }
+//            }
+//        }
     }
 }

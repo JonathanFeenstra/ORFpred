@@ -55,16 +55,16 @@ public class BLASTParser {
         parser.setFile(xmlInputFile);
         results = parser.createObjects(maxEValue);
         for (int i = 0; i < results.size(); i++) {
-            System.out.println(results.get(i));
-            System.out.println(results.get(i).getDbFile());
-            System.out.println(results.get(i).getHitCounter());
-            System.out.println(results.get(i).getProgram());
-            System.out.println(results.get(i).getQueryDef());
-            System.out.println(results.get(i).getQueryID());
-            System.out.println(results.get(i).getQueryID());
-            System.out.println(results.get(i).getQueryLength());
-            System.out.println(results.get(i).getQuerySequence());
-            System.out.println(results.get(i).getReference());
+//            System.out.println(results.get(i));
+//            System.out.println(results.get(i).getDbFile());
+//            System.out.println(results.get(i).getHitCounter());
+//            System.out.println(results.get(i).getProgram());
+//            System.out.println(results.get(i).getQueryDef());
+//            System.out.println(results.get(i).getQueryID());
+//            System.out.println(results.get(i).getQueryID());
+//            System.out.println(results.get(i).getQueryLength());
+//            System.out.println(results.get(i).getQuerySequence());
+//            System.out.println(results.get(i).getReference());
             System.out.println(results.get(i).getVersion());
             ArrayList<Hit> hitList = getTopHits(results.get(i));
             hitsData.addAll(extractHitData(hitList));

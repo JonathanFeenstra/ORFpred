@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf2129c2-df4f-46be-a1b8-076721fbd842" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/orfpred/blast/BLAST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/orfpred/blast/BLAST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/orfpred/blast/BLASTParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/orfpred/blast/BLASTParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java" afterDir="false" />
     </list>
@@ -33,8 +33,8 @@
       <file leaf-file-name="BLAST.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLAST.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="197" column="8" selection-start-line="197" selection-start-column="8" selection-end-line="197" selection-end-column="22" />
+            <state relative-caret-position="-2331">
+              <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#6738#6739#0" expanded="true" />
@@ -46,54 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BLASTParser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLASTParser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="566">
-              <caret line="111" column="8" selection-start-line="111" selection-start-column="8" selection-end-line="111" selection-end-column="24" />
-              <folding>
-                <element signature="e#3915#3916#0" expanded="true" />
-                <element signature="e#3946#3947#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BLASTPopUp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/BLASTPopUp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1440">
-              <caret line="83" column="52" selection-start-line="83" selection-start-column="52" selection-end-line="83" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ORF.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/sequence/ORF.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2240">
-              <caret line="130" selection-start-line="130" selection-end-line="130" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/GUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3560">
-              <caret line="332" column="78" selection-start-line="332" selection-start-column="78" selection-end-line="332" selection-end-column="78" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ORFPopUp.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/ORFPopUp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1560">
-              <caret line="91" column="59" selection-start-line="91" selection-start-column="59" selection-end-line="91" selection-end-column="59" />
+            <state relative-caret-position="248">
+              <caret line="92" column="59" selection-start-line="92" selection-start-column="59" selection-end-line="92" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -102,7 +59,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLASTTable.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="560">
-              <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
+              <caret line="48" column="35" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
               <folding>
                 <element signature="e#1856#2442#0" expanded="true" />
                 <element signature="e#2441#2442#0" expanded="true" />
@@ -123,11 +80,20 @@
       <file leaf-file-name="DatabaseSaver.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="626">
-              <caret line="264" column="30" selection-start-line="264" selection-start-column="30" selection-end-line="264" selection-end-column="30" />
+            <state relative-caret-position="174">
+              <caret line="275" column="21" selection-start-line="275" selection-start-column="21" selection-end-line="275" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GUIUpdater.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/GUIUpdater.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="348">
+              <caret line="58" column="54" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -155,6 +121,7 @@
       <find>blast</find>
       <find>blastpo</find>
       <find>blastpop</find>
+      <find>url</find>
     </findStrings>
     <replaceStrings>
       <replace>nDBM</replace>
@@ -625,11 +592,18 @@
       <option name="project" value="LOCAL" />
       <updated>1522351507292</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="saver aangepast">
+      <created>1522357832552</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1522357832552</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82372000" />
+    <option name="totallyTimeSpent" value="85235000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -637,33 +611,55 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32831737" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50208336" side_tool="true" weight="0.32930845" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32968536" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49791667" weight="0.32831737" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20703125" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20703125" />
       <window_info anchor="right" id="Database" order="3" weight="0.3296875" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3994528" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info id="Designer" order="2" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.32831737" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20703125" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49791667" weight="0.32831737" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Database" order="3" weight="0.3296875" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50208336" side_tool="true" weight="0.32930845" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="4" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32831737" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
@@ -671,29 +667,29 @@
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32930845" />
       <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="right" id="SciView" order="9" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32930845" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17864583" />
       <window_info anchor="right" id="Database" order="5" weight="0.3296875" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39956093" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info id="Capture Tool" order="2" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Messages" order="8" weight="0.32930845" />
       <window_info anchor="right" id="Maven Projects" order="4" />
-      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17864583" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -718,25 +714,50 @@
     <MESSAGE value="Saver lukt alleen grote seq lukt niet" />
     <MESSAGE value="voor gezorgd dat er unieke ids zijn voor blast objecten" />
     <MESSAGE value="Rowmanger aangepast" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rowmanger aangepast" />
+    <MESSAGE value="saver aangepast" />
+    <option name="LAST_COMMIT_MESSAGE" value="saver aangepast" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/orfpred/gui/GUIUpdater.java</url>
-          <line>58</line>
+          <url>file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java</url>
+          <line>286</line>
           <properties />
-          <option name="timeStamp" value="53" />
+          <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java</url>
-          <line>264</line>
+          <line>284</line>
           <properties />
-          <option name="timeStamp" value="55" />
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java</url>
+          <line>297</line>
+          <properties />
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java</url>
+          <line>281</line>
+          <properties />
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java</url>
+          <line>280</line>
+          <properties />
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java</url>
+          <line>279</line>
+          <properties />
+          <option name="timeStamp" value="63" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="56" />
+      <option name="time" value="64" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -929,13 +950,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/GUIUpdater.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseDeleter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="620">
@@ -972,43 +986,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/ORFPopUp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1560">
-          <caret line="91" column="59" selection-start-line="91" selection-start-column="59" selection-end-line="91" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/sequence/ORF.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2240">
-          <caret line="130" selection-start-line="130" selection-end-line="130" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/BLASTPopUp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1440">
-          <caret line="83" column="52" selection-start-line="83" selection-start-column="52" selection-end-line="83" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/biojava/biojava-core/4.2.11/biojava-core-4.2.11-sources.jar!/org/biojava/nbio/core/search/io/Hit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="37" column="22" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/biojava/biojava-core/4.2.11/biojava-core-4.2.11-sources.jar!/org/biojava/nbio/core/search/io/Hsp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
+        <state relative-caret-position="248">
+          <caret line="92" column="59" selection-start-line="92" selection-start-column="59" selection-end-line="92" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLASTTable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
-          <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
+          <caret line="48" column="35" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
           <folding>
             <element signature="e#1856#2442#0" expanded="true" />
             <element signature="e#2441#2442#0" expanded="true" />
@@ -1023,10 +1009,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/sequence/ORF.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2240">
+          <caret line="130" selection-start-line="130" selection-end-line="130" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/BLASTPopUp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="88" column="52" selection-start-line="88" selection-start-column="52" selection-end-line="88" selection-end-column="52" />
+          <folding>
+            <element signature="e#3896#3950#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/biojava/biojava-core/4.2.11/biojava-core-4.2.11-sources.jar!/org/biojava/nbio/core/search/io/Hsp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="72" column="42" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/biojava/biojava-core/4.2.11/biojava-core-4.2.11-sources.jar!/org/biojava/nbio/core/search/io/Hit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="37" column="22" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLASTParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="77" column="9" lean-forward="true" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
+          <folding>
+            <element signature="e#3915#3916#0" expanded="true" />
+            <element signature="e#3946#3947#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLAST.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="197" column="8" selection-start-line="197" selection-start-column="8" selection-end-line="197" selection-end-column="22" />
+        <state relative-caret-position="-2331">
+          <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#6738#6739#0" expanded="true" />
@@ -1037,21 +1065,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/blast/BLASTParser.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/gui/GUIUpdater.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="111" column="8" selection-start-line="111" selection-start-column="8" selection-end-line="111" selection-end-column="24" />
-          <folding>
-            <element signature="e#3915#3916#0" expanded="true" />
-            <element signature="e#3946#3947#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="348">
+          <caret line="58" column="54" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orfpred/database/DatabaseSaver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="626">
-          <caret line="264" column="30" selection-start-line="264" selection-start-column="30" selection-end-line="264" selection-end-column="30" />
+        <state relative-caret-position="174">
+          <caret line="275" column="21" selection-start-line="275" selection-start-column="21" selection-end-line="275" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
