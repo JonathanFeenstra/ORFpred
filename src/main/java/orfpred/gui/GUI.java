@@ -280,13 +280,11 @@ public class GUI implements Runnable {
                     new DBFileChooser(updater, gui).setVisible(true);
                 });
             } else if (evt.getSource() == dbSaveMenuItem) {
-                if(!gui.getHeaderComboBox().getSelectedItem().equals("Open een bestand...")){
-                    try {
-                        DatabaseSaver saver = new DatabaseSaver(updater, gui);
-                        saver.saveBestandData();
-                    } catch (SQLException | CompoundNotFoundException | ClassNotFoundException ex) {
-                        showErrorMessage(ex, ex.getMessage());
-                    }
+                try {
+                    DatabaseSaver saver = new DatabaseSaver(updater, gui);
+                    saver.saveBestandData();
+                } catch (SQLException | CompoundNotFoundException | ClassNotFoundException ex) {
+                    showErrorMessage(ex, ex.getMessage());
                 }
 
             } else if (evt.getSource() == exitMenuItem) {
