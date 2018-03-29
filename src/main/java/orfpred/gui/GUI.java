@@ -18,6 +18,7 @@ import java.awt.event.*;
 import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
+import orfpred.blast.BLASTTable;
 import orfpred.sequence.ORF;
 import orfpred.sequence.ReadingFramer;
 import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
@@ -33,6 +34,7 @@ public class GUI implements Runnable {
 
     private JFrame frame;
     private GUIUpdater guiUpdater;
+    private BLASTTable blastTable;
 
     private JMenuItem openMenuItem, openDBMenuItem, dbSaveMenuItem, exitMenuItem,
             highlightMenuItem, orfLengteMenuItem, prokaryootMenuItem,
@@ -188,10 +190,12 @@ public class GUI implements Runnable {
 
         JLabel blastLabel = new JLabel("BLAST resultaten");
         blastLabel.setFont(LABEL_FONT);
-        JScrollPane blastScrollPane = new JScrollPane();
+        
+        blastTable = new BLASTTable();
+        JScrollPane blastScrollPane = new JScrollPane(blastTable);
         //</editor-fold>
 
-        //<editor-fold defaultstate="collapsed" desc="Layout, overgenomen uit GUI builder">
+        //<editor-fold defaultstate="collapsed" desc="Layout">
         mainPanelLayout.setHorizontalGroup(
                 mainPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()

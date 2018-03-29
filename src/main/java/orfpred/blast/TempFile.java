@@ -21,12 +21,10 @@ import java.io.InputStreamReader;
  */
 public class TempFile {
 
-    //class variabele
     private static final String SUFFIX = ".XML";
     private static int numb = 0;
 
-    //instatie variabele
-    private InputStream inStream;
+    private final InputStream inStream;
     private File tempFile;
     private  FileWriter writer;
     private BufferedReader reader;

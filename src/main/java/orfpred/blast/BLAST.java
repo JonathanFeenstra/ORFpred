@@ -14,15 +14,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import javax.swing.JOptionPane;
+import java.text.ParseException;
 import org.biojava.nbio.ws.alignment.qblast.BlastProgramEnum;
 import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastAlignmentProperties;
 import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastOutputProperties;
 import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastService;
 
 /**
- * Deze class is verantwoordelijk voor het uitvoeren van BLAST searches tegen de
- * NCBI database.
+ * Deze class is verantwoordelijk voor het uitvoeren van BLAST searches.
  *
  * @author Projectgroep 9
  * @since JDK 1.8
@@ -30,89 +29,75 @@ import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastService;
  */
 public class BLAST {
 
-    //instantie variabele
     private final String sequence;
-    private final String blastProgram;
-    private final String blastDatabase;
-    private NCBIQBlastService service;
-    private NCBIQBlastAlignmentProperties props;
-    private NCBIQBlastOutputProperties outputProps;
+    private final String program;
+    private final String database;
+    private final double evalueThreshold;
+    private final int hitThreshold;
+    private final int resultID;
+    private final NCBIQBlastService service;
+    private NCBIQBlastAlignmentProperties alignProperties;
+    private NCBIQBlastOutputProperties outputProperties;
     private BLASTParser parser;
     private File XMLFile;
-    private Thread t;
-    private String rid;
-    private final double maxEval;
-    private final int top;
-    private  FileWriter writer;
+    private Thread thread;
+    private String requestId;
+
+    private FileWriter writer;
     private BufferedReader reader;
 
     /**
      * Constructor.
      *
      * @param seq sequentie voor de BLAST.
-     * @param program BLAST algoritme dat gebruikt wordt.
+     * @param blastProgram BLAST algoritme dat gebruikt wordt.
      * @param db gebruikte database
      * @param eValCutOff e-value cut-off.
      * @param numberTopHits hoeveelheid hits dat teruggestuurd wordt.
+     * @param id de database ID voor de resultaten
+     * @throws ParseException als programma ongeldig is
      */
-    public BLAST(String seq, String program, String db, double eValCutOff, int numberTopHits) {
-        sequence = seq;
-        blastProgram = program;
-        blastDatabase = db;
-        maxEval = eValCutOff;
-        top = numberTopHits;
-        setServices();
-    }
-
-    /**
-     * Deze methode zorgt voor het opstellen van de alignment opties (database
-     * en BLAST programma) en het instellen van het maximaal aantal alignments
-     * dat gemaakt moet worden.
-     */
-    private void setServices() {
-        try {
-            service = new NCBIQBlastService();
-            setAlignmentOptions();
-            setOutputOptions();
-        } catch (BLASTException ex) {
-            showError("please provide a valid datbase: \n blastn, blastp, tblastn, tblastx");
-        } catch (Exception ex) {
-            showError("Cannot connenct to NCBI database!");
-        }
+    public BLAST(String seq, String blastProgram, String db, double eValCutOff, int numberTopHits, int id) throws ParseException {
+        this.sequence = seq;
+        this.program = blastProgram;
+        this.database = db;
+        this.evalueThreshold = eValCutOff;
+        this.hitThreshold = numberTopHits;
+        this.resultID = id;
+        this.service = new NCBIQBlastService();
+        setAlignmentOptions();
+        setOutputOptions();
     }
 
     /**
      * Deze methode is verantwoordelijk voor het instellen van de alignment
      * opties.
      *
-     * @throws BLASTException
+     * @throws ParseException als programma ongeldig is
      */
-    private void setAlignmentOptions() throws BLASTException {
-        props = new NCBIQBlastAlignmentProperties();
-        props.setBlastProgram(getBlastProgram(blastProgram));
-        props.setBlastDatabase(blastDatabase);
+    private void setAlignmentOptions() throws ParseException {
+        alignProperties = new NCBIQBlastAlignmentProperties();
+        alignProperties.setBlastProgram(parseBlastProgram(program));
+        alignProperties.setBlastDatabase(database);
     }
 
     /**
      * Deze methode is verantwoordelijk voor het instellen van de output opties.
      */
-    private void setOutputOptions() throws Exception {
-        outputProps = new NCBIQBlastOutputProperties();
-        outputProps.setAlignmentNumber(100); //this is used as default
-         
+    private void setOutputOptions() {
+        outputProperties = new NCBIQBlastOutputProperties();
+        outputProperties.setAlignmentNumber(100);
     }
 
     /**
      * Deze methode zet een BLAST programma als String om naar een BlastProgram
      * object die gebruikt kan worden door de biojava BLAST service.
      *
-     * @param program Een String object dat het gewenste BLAST programma bevat.
-     * @return Geeft een BlastProgramEnum object terug corresponderend met de
-     * ingegeven String.
-     * @throws BLASTException Gooit een exception als het String object niet
-     * kan worden omgezet naar een BlastProgramEnum object.
+     * @param program het gewenste BLAST programma
+     * @return BlastProgramEnum object corresponderend met de ingegeven String
+     * @throws ParseException als programma ongeldig is
      */
-    private BlastProgramEnum getBlastProgram(String program) throws BLASTException {
+    private BlastProgramEnum parseBlastProgram(String program) throws ParseException {
         switch (program.toLowerCase()) {
             case "blastp":
                 return BlastProgramEnum.blastp;
@@ -123,7 +108,7 @@ public class BLAST {
             case "tblastx":
                 return BlastProgramEnum.tblastx;
             default:
-                throw new BLASTException();
+                throw new ParseException("Ongeldig BLAST programma: " + program, 0);
         }
     }
 
@@ -131,36 +116,31 @@ public class BLAST {
      * Deze methode start een nieuwe Thread waarin een request wordt gestuurd
      * naar de NCBI server. Deze thread blijft "levend" zolang de BLAST server
      * nog geen resultaat heeft geretouneerd.
-     *
-     * @throws Exception Gooit een Exception als er geen verbinding gemaakt kan
-     * worden met de NCBI server.
      */
-    public  void sendRequest() throws Exception {
-        t = new Thread(() -> {
+    public void sendRequest() {
+        thread = new Thread(() -> {
+            requestId = null;
             try {
-                rid = null;
-                //stuur een BLAST request en sla het ID op.
-                rid = service.sendAlignmentRequest(sequence, props);
-                while (!service.isReady(rid)) {
+                requestId = service.sendAlignmentRequest(sequence, alignProperties);
+                while (!service.isReady(requestId)) {
                     Thread.sleep(5000);
                 }
-                readResults(rid);
+                readResults(requestId);
             } catch (Exception ex) {
-                System.out.println(ex);
-               // showError("Cannot connect to NCBI server");
+                System.err.println(ex.getMessage());
             }
         });
-        t.start();
+        thread.start();
     }
 
     /**
      * Deze methode controleerd of de request Thread de data van de BLAST server
      * heeft ontvangen of niet.
      *
-     * @return Retouneert of de thread nog actief is als Boolean
+     * @return of de thread nog actief is als boolean
      */
     public boolean checkStatus() {
-        return (t.isAlive());
+        return (thread.isAlive());
     }
 
     /**
@@ -173,7 +153,7 @@ public class BLAST {
      * @throws Exception Gooi een exception als er een onbekende fout optreed.
      */
     private void readResults(String rid) throws IOException, Exception {
-        InputStream inStream = service.getAlignmentResults(rid, outputProps);
+        InputStream inStream = service.getAlignmentResults(rid, outputProperties);
         TempFile file = new TempFile(inStream);
         XMLFile = file.getFile();
         parseFile();
@@ -182,27 +162,20 @@ public class BLAST {
     /**
      * Deze methode zorgt voor het instantiëren van de BLAST parser en het
      * aanroepen van de parse methoden in deze parser.
-     * @throws java.io.FileNotFoundException
+     *
+     * @throws FileNotFoundException
+     * @throws ParseException
      */
-    public void parseFile() throws FileNotFoundException, IOException {
-        parser = new BLASTParser(XMLFile, maxEval);
+    public void parseFile() throws FileNotFoundException, IOException, ParseException {
+        parser = new BLASTParser(XMLFile, evalueThreshold);
         parser.parse();
-         InputStream targetStream = new FileInputStream(XMLFile);
+        InputStream targetStream = new FileInputStream(XMLFile);
         reader = new BufferedReader(new InputStreamReader(targetStream));
         String line;
         while ((line = reader.readLine()) != null) {
             writer.write(line + System.getProperty("line.separator"));
-        }  
-        //XMLFile.delete(); 
+        }
     }
-
-    /**
-     * Deze methode retouneert de gevonden top x BLAST hits. Waarbij x een
-     * meegegeven getal is bij instantiatie van deze class.
-     *
-     * @return Retouneert een ArrayList met daarin de top x Hit objecten.
-     */
-    
 
     /**
      * Deze methode retouneert het BLAST job ID geretouneert door de NCBI server
@@ -210,19 +183,17 @@ public class BLAST {
      * @return BLAST job ID geretouneert door de NCBI server.
      */
     public String getBlastJobID() {
-        return rid;
+        return requestId;
     }
-    public String getSequence(){
+
+    public String getSequence() {
         return sequence;
     }
 
     /**
-     * Deze methode laat een Error pop-up zien met daarin het meegegeven
-     * bericht.
-     *
-     * @param mssg Het bericht dat weergegeven moet worden in de pop-up.
+     * @return resultID
      */
-    private void showError(String mssg) {
-        JOptionPane.showMessageDialog(null, mssg, "ERROR", JOptionPane.ERROR_MESSAGE);
+    public int getResultID() {
+        return resultID;
     }
 }
