@@ -53,7 +53,7 @@ public class DatabaseSaver {
     public void saveBestandData() throws SQLException, CompoundNotFoundException {
         saveBestand();
         findOldHeaders();
-        orfHandeler();
+        orfHandler();
     }
 
     /**
@@ -216,13 +216,13 @@ public class DatabaseSaver {
         return uniqueORFset;
     }
 
-    private void orfHandeler() throws SQLException, CompoundNotFoundException {
+    private void orfHandler() throws SQLException, CompoundNotFoundException {
         for (String header : headersAndSeq.keySet()) {
             saveSequentie(header, headersAndSeq.get(header));
             if (header.equals(gui.getHeaderComboBox().getSelectedItem())) {
                 ArrayList<ORF> uniqueORFList = new ArrayList<>(createUniqueORFset()); // nodig aangezien er duplicaten van ORF opgeslagen zijn in de origine HashMap
                 if (!uniqueORFList.isEmpty()) {
-                    if (uniqueORFList.get(0).getHeaderHerkomst().equals(header)) {
+                    if (uniqueORFList.get(0).getHeaderHerkomst().equals(header)) {    // Twee losse if statements gemaakt aangezien hij beide statements gaat testen ondanks de && expressie
                         if (findID("ORF", "SEQ_ID", "" + seqID) != null) {
                             if (JOptionPane.showConfirmDialog(null,
                                     "Let op! Voor deze sequentie zijn "
@@ -238,6 +238,11 @@ public class DatabaseSaver {
                     }
                 }
             }
+            blastHandler(header);
         }
+    }
+
+    private void blastHandler(String header){
+        gui.getHeaderComboBox().getItemCount();
     }
 }
