@@ -8,11 +8,15 @@
     <packaging>jar</packaging>
     <dependencies>
          
-        <dependency>
-            <groupId>org.biojava</groupId>
-            <artifactId>biojava-core</artifactId>
-            <version>4.0.0</version>
-        </dependency>
+       <!-- https://mvnrepository.com/artifact/org.biojava/biojava-core -->
+<dependency>
+    <groupId>org.biojava</groupId>
+    <artifactId>biojava-core</artifactId>
+    <version>4.2.11</version>
+</dependency>
+
+
+
         <dependency>
             <groupId>org.biojava</groupId>
             <artifactId>biojava-sequencing</artifactId>
@@ -21,7 +25,7 @@
         <dependency>
             <groupId>org.biojava</groupId>
             <artifactId>biojava-ws</artifactId>
-            <version>4.0.0</version>
+            <version>4.2.11</version>
         </dependency>
     </dependencies>
 
