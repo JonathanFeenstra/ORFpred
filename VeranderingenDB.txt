@@ -1,0 +1,7 @@
+BLAST_RESULTAAT:
+Bitscore: NUMBER(10) --> NUMBER(10,1) omdat bitscores 1 decimaal heeft
+Query, identity, positives NUMBER(3) --> NUMBER(5,2) omdat er percentages in moeten en 100,00% 5 getallen bevat en twee decimalen
+Gaps NUMER(2) --> INTEGER want voor de zekerheid als er veel gaps zijn
+
+ORF:
+Frame NUMBER(1) --> VARCHAR2(2) omdat het makkelijker is voor de app 
